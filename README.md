@@ -17,7 +17,8 @@ It's a static web app with no build step, no accounts, no API keys and no paid s
 |---|---|
 | Exam version | SY0-701 (identified from the notes' title, copyright and intro pages) |
 | Domain 1: General Security Concepts | **Built:** 18 topics, 78 activities, lessons, glossary |
-| Domains 2–5 | Mapped to sections and PDF pages, shown as **Not built yet** |
+| Domain 2: Threats, Vulnerabilities, and Mitigations | **Built:** 38 topics, 139 activities, lessons, glossary |
+| Domains 3–5 | Mapped to sections and PDF pages, shown as **Not built yet** |
 
 See `CONTENT_MAP.md`, or the in-app **Coverage checklist**, for page-by-page status and flagged unclear spots.
 

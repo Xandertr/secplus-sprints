@@ -1,7 +1,7 @@
 # Content files
 
 Load order (see `index.html`): `map.js` → `notes.js` → `glossary.js` → `domainN.js`.
-To add a domain, create `content/domain2.js` with the same shape as `domain1.js` and add a `<script>` tag for it in `index.html`.
+To add a domain, create `content/domainN.js` (for example `domain3.js`) with the same shape as `domain1.js` and `domain2.js` and add a `<script>` tag for it in `index.html`.
 The library switches that domain from "Not built yet" to "Built" automatically.
 
 ## Topic

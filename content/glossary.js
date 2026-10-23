@@ -1,7 +1,7 @@
 /*
  * Glossary - plain-English definitions in original wording.
  * pages = PDF page numbers in the course notes. domain = which domain the term was taken from.
- * Currently covers Domain 1 (PDF 10-26). Add terms for other domains as they are built.
+ * Currently covers Domains 1-2 (PDF 10-51). Add terms for other domains as they are built.
  */
 window.SECPLUS = window.SECPLUS || {};
 window.SECPLUS.glossary = [
@@ -87,5 +87,58 @@ window.SECPLUS.glossary = [
   { term: "Wildcard certificate", domain: "d1", pages: [25], def: "A certificate for every server name in a domain, such as *.example.com.", ex: "" },
   { term: "CRL", domain: "d1", pages: [25], def: "Certificate revocation list: the CA's list of revoked certificates.", ex: "" },
   { term: "OCSP", domain: "d1", pages: [26], def: "Online Certificate Status Protocol: a real-time check of one certificate's revocation status.", ex: "" },
-  { term: "OCSP stapling", domain: "d1", pages: [26], def: "The server attaches a CA-signed status to the TLS handshake, so clients don't each ask the CA.", ex: "" }
+  { term: "OCSP stapling", domain: "d1", pages: [26], def: "The server attaches a CA-signed status to the TLS handshake, so clients don't each ask the CA.", ex: "" },
+  { term: "Threat actor", domain: "d2", pages: [27], def: "The person or group responsible for an event that harms another entity's safety. Also called a malicious actor.", ex: "" },
+  { term: "Advanced Persistent Threat (APT)", domain: "d2", pages: [27], def: "A long-running, well-resourced, highly skilled attack campaign, commonly run by a nation state.", ex: "" },
+  { term: "Hacktivist", domain: "d2", pages: [27], def: "A hacker driven by a cause such as philosophy, revenge or disruption.", ex: "Defacing a site or leaking documents in protest." },
+  { term: "Insider threat", domain: "d2", pages: [27], def: "An attacker inside the organization who uses its own resources and knowledge against it.", ex: "" },
+  { term: "Shadow IT", domain: "d2", pages: [27], def: "People building their own infrastructure to work around the IT department.", ex: "A team's unmanaged CI server in a personal cloud account." },
+  { term: "Threat vector", domain: "d2", pages: [28], def: "The path an attacker uses to gain access or infect a target. Also called an attack vector.", ex: "" },
+  { term: "Vishing", domain: "d2", pages: [28,  29], def: "Phishing by phone call or voicemail, often with caller ID spoofing.", ex: "" },
+  { term: "Smishing", domain: "d2", pages: [29], def: "Phishing by SMS text message.", ex: "" },
+  { term: "Business email compromise (BEC)", domain: "d2", pages: [29], def: "Abusing trust in email, often with spoofed addresses, to commit financial fraud.", ex: "A fake 'our bank details changed' email from a supplier." },
+  { term: "Typosquatting", domain: "d2", pages: [29,  42], def: "Registering a lookalike or misspelled domain to catch mistyped or careless visitors. A form of URL hijacking.", ex: "" },
+  { term: "Pretexting", domain: "d2", pages: [29,  30], def: "Lying to get information, with the attacker playing a character in a story they made up.", ex: "" },
+  { term: "Watering hole attack", domain: "d2", pages: [30], def: "Infecting a third-party site that the target group regularly visits.", ex: "" },
+  { term: "Memory injection", domain: "d2", pages: [31], def: "Adding code to a running process's memory so it hides there and gets that process's rights.", ex: "" },
+  { term: "DLL injection", domain: "d2", pages: [31], def: "Making a process load a malicious Windows library so the attacker's code runs inside it.", ex: "" },
+  { term: "Buffer overflow", domain: "d2", pages: [32], def: "Writing more data than a buffer holds, so it spills into neighboring memory. Prevented by bounds checking.", ex: "" },
+  { term: "TOCTOU", domain: "d2", pages: [32], def: "Time-of-check to time-of-use: a race condition where something changes between checking and using a value.", ex: "A coupon applied six times by parallel requests." },
+  { term: "SQL injection (SQLi)", domain: "d2", pages: [34], def: "Adding your own SQL to an application's database query through its input.", ex: "name=x' OR '1'='1" },
+  { term: "Cross-site scripting (XSS)", domain: "d2", pages: [34], def: "Getting a site to run attacker script in other users' browsers. Reflected needs a crafted link. Stored is saved on the site.", ex: "" },
+  { term: "End of service life (EOSL)", domain: "d2", pages: [35], def: "A product is no longer sold or supported, so there are no more security patches.", ex: "" },
+  { term: "VM escape", domain: "d2", pages: [36], def: "Breaking out of a virtual machine to reach the host, and from there other VMs.", ex: "" },
+  { term: "Jailbreaking / rooting", domain: "d2", pages: [38], def: "Gaining OS-level access on iOS (jailbreaking) or Android (rooting), which bypasses security features and MDM.", ex: "" },
+  { term: "Sideloading", domain: "d2", pages: [38], def: "Installing an app manually without using an app store.", ex: "" },
+  { term: "Zero-day", domain: "d2", pages: [38], def: "A vulnerability the vendor doesn't know about yet, so no patch or mitigation exists.", ex: "" },
+  { term: "CVE", domain: "d2", pages: [38], def: "Common Vulnerabilities and Exposures: the public list of known vulnerabilities.", ex: "" },
+  { term: "Ransomware", domain: "d2", pages: [39], def: "Malware that encrypts your data files and demands payment for the decryption key.", ex: "" },
+  { term: "Fileless virus", domain: "d2", pages: [39,  40], def: "Malware that runs only in memory and is never saved as a file, which helps it avoid anti-virus.", ex: "" },
+  { term: "Worm", domain: "d2", pages: [39], def: "Malware that spreads over the network by itself, with no user action.", ex: "" },
+  { term: "Bloatware", domain: "d2", pages: [40], def: "Unwanted apps preinstalled by the manufacturer.", ex: "" },
+  { term: "Logic bomb", domain: "d2", pages: [41], def: "Malicious code that waits for a trigger, such as a date or a user event.", ex: "" },
+  { term: "Rootkit", domain: "d2", pages: [41], def: "Malware that modifies core system files or the kernel so it's invisible to the OS and anti-virus.", ex: "" },
+  { term: "RFID cloning", domain: "d2", pages: [41], def: "Copying an access badge or key fob onto another card.", ex: "" },
+  { term: "DDoS reflection and amplification", domain: "d2", pages: [42], def: "Bouncing small requests off services with little authentication (NTP, DNS, ICMP) to flood a victim with much larger traffic.", ex: "" },
+  { term: "DNS poisoning", domain: "d2", pages: [42], def: "Changing name resolution answers via the DNS server, the client's hosts file or fake on-path responses.", ex: "" },
+  { term: "Domain hijacking", domain: "d2", pages: [42], def: "Taking over a domain's registration to control where its traffic goes.", ex: "" },
+  { term: "Deauthentication attack", domain: "d2", pages: [43], def: "Forged wireless management frames that keep disconnecting users. 802.11w protects against it.", ex: "" },
+  { term: "On-path attack", domain: "d2", pages: [43], def: "Secretly redirecting, watching and forwarding traffic. Formerly called man-in-the-middle.", ex: "ARP poisoning on a local subnet." },
+  { term: "Replay attack", domain: "d2", pages: [44], def: "Capturing network data and sending it again later to impersonate someone.", ex: "" },
+  { term: "Pass the hash", domain: "d2", pages: [44], def: "Logging in with a captured password hash instead of the password.", ex: "" },
+  { term: "Session hijacking", domain: "d2", pages: [44], def: "Stealing a session ID (often from a cookie) to use someone's authenticated session. Also called sidejacking.", ex: "" },
+  { term: "Privilege escalation", domain: "d2", pages: [46], def: "Gaining higher access by exploiting a bug or design flaw. Horizontal escalation reaches another user's resources.", ex: "" },
+  { term: "Cross-site request forgery (CSRF)", domain: "d2", pages: [46], def: "Making a logged-in user's browser send a request the site trusts. Stopped by anti-forgery tokens.", ex: "" },
+  { term: "Directory traversal", domain: "d2", pages: [46], def: "Reading files outside the web server's folder, for example with ../ sequences.", ex: "" },
+  { term: "Birthday attack", domain: "d2", pages: [47], def: "Brute-forcing a hash collision. Defended by a larger hash output.", ex: "" },
+  { term: "Downgrade attack", domain: "d2", pages: [47], def: "Forcing systems to use weaker security, as POODLE did with SSL 3.0.", ex: "" },
+  { term: "SSL stripping", domain: "d2", pages: [47], def: "An on-path attacker uses HTTPS to the server but plain HTTP to the victim.", ex: "" },
+  { term: "Password spraying", domain: "d2", pages: [48], def: "Trying a few common passwords across many accounts to avoid lockouts.", ex: "" },
+  { term: "Indicator of compromise (IOC)", domain: "d2", pages: [48], def: "An event that indicates an intrusion with high confidence.", ex: "Impossible travel in the auth logs." },
+  { term: "Impossible travel", domain: "d2", pages: [49], def: "Logins from places too far apart for the time between them.", ex: "" },
+  { term: "Access control list (ACL)", domain: "d2", pages: [49], def: "A list of rules allowing or denying access by source, destination, port, user, app and more.", ex: "" },
+  { term: "Least privilege", domain: "d2", pages: [50], def: "Giving only the exact rights needed for the task.", ex: "" },
+  { term: "Configuration enforcement", domain: "d2", pages: [50], def: "Checking each device's posture when it connects and quarantining any that don't comply.", ex: "" },
+  { term: "EDR", domain: "d2", pages: [51], def: "Endpoint detection and response: detects threats with behavior and ML, investigates root cause, and responds automatically.", ex: "" },
+  { term: "HIPS", domain: "d2", pages: [51], def: "Host-based intrusion prevention system: recognizes and blocks known attacks on a host.", ex: "" }
 ];

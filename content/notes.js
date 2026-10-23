@@ -24,7 +24,7 @@ window.SECPLUS.source = {
     "107": "Back cover (image)"
   },
   // Pages read in detail, including rendered diagram images, to write built content.
-  deepRead: { d1: [10, 26] },
+  deepRead: { d1: [10, 26], d2: [27, 51] },
   flags: [
     { pages: [5, 8], text: "Domain names differ inside the notes. The table of contents says '4.0 - Operations and Incident Response' and '5.0 - Governance, Risk, and Compliance'. The introduction (PDF p.8) says 'Security Operations' and 'Security Program Management and Oversight'. This app uses the introduction's names." },
     { pages: [8], text: "Domain weights (12/22/18/28/20%) come from the introduction. The notes point to CompTIA's official objectives for the full list. The app hasn't checked against that external document." },
@@ -32,6 +32,14 @@ window.SECPLUS.source = {
     { pages: [15], text: "Under 'Policy Administrator' there's a stray fragment ('address, etc.') that seems to belong to the adaptive identity bullet on PDF p.14 (IP address, etc.). It looks like a layout glitch, so the app doesn't treat it as a separate fact." },
     { pages: [24], text: "Blockchain has only a few bullets. The step-by-step process is in a six-panel diagram, so the order activity paraphrases the diagram, which was viewed as an image." },
     { pages: [12, 15, 19, 21, 22, 23, 26], text: "These Domain 1 pages contain diagrams. Their labels were read from the text layer, and pages 15, 22, 23 and 24 were also checked as rendered images." },
-    { pages: [27, 105], text: "Domains 2-5: text was extracted and mapped to sections, but not yet read in detail or turned into lessons. The headings listed in the coverage view were extracted automatically and may miss diagram-only content." }
+    { pages: [31, 32, 35, 40, 44, 46, 47], text: "These Domain 2 pages contain diagrams (misinformation process, DLL injection, buffer overflow, XSS, fileless virus, worm, pass the hash, session hijacking, CSRF, SSL stripping). Labels were read from the text layer, and pages 31, 40, 46 and 48 were also checked as rendered images." },
+    { pages: [32], text: "Race condition example: the notes give the 'expected outcome' of two $50 transfers as 'A has $50, B has $150 (or A has $0 and B has $200)', which reads like one transfer vs. two. The bad outcome (A $50, B $200) depends on the stated assumption that deposits are immediate and withdrawals aren't. The order activity follows the notes' steps." },
+    { pages: [32], text: "Race condition page uses a two-column layout that extracts out of order (Mars rover Spirit and Tesla Pwn2Own bullets interleave). The lesson pairs them by meaning, not by extracted line order." },
+    { pages: [36], text: "Cloud vulnerabilities quotes two statistics (76% not using MFA on management consoles, 63% of production code unpatched for CVSS 7.0+) without naming a source or year. The app mentions them only as the notes' figures and doesn't quiz on the numbers." },
+    { pages: [45], text: "Application Attacks (PDF 45-46) repeats the injection, SQL injection, buffer overflow and replay attack bullets from earlier sections word for word. The app covers each once in its own topic and doesn't duplicate questions." },
+    { pages: [48], text: "Password Attacks: 'A hash example' (SHA-256) and the brute force bullet 'The hash:' have no hash value shown in the text layer or the rendered page. The app doesn't invent an example hash." },
+    { pages: [50], text: "Mitigation Techniques says auto-update is 'not always the best option' without saying why. The recall card offers a likely reason from the OS vulnerabilities page (patches can break things) and says so." },
+    { pages: [51], text: "PDF 51 holds the end of 2.5 Hardening Techniques and the start of 3.1 Cloud Infrastructures. Domain 2 activities only use its 2.5 content." },
+    { pages: [52, 105], text: "Domains 3-5: text was extracted and mapped to sections, but not yet read in detail or turned into lessons. The headings listed in the coverage view were extracted automatically and may miss diagram-only content." }
   ]
 };

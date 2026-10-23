@@ -423,10 +423,21 @@
     return html;
   }
 
+  // Built domains, for wording like "Domains 1-2" and their combined exam weight.
+  function builtDomains() { return idx.domains.filter(function (d) { return d.built; }); }
+  function builtCount() { return builtDomains().length; }
+  function builtWeight() { return builtDomains().reduce(function (n, d) { return n + d.weight; }, 0); }
+  function builtDomainsText() {
+    const n = builtDomains().map(function (d) { return parseInt(d.number, 10); });
+    if (n.length === 1) return "Domain " + n[0];
+    const contiguous = n.every(function (x, i) { return i === 0 || x === n[i - 1] + 1; });
+    return "Domains " + (contiguous ? n[0] + "–" + n[n.length - 1] : n.join(", "));
+  }
+
   // ------------------------------------------------------------ glossary
   function viewGlossary() {
     return '<section class="stack"><h1 class="h1">Glossary</h1>' +
-      '<p class="muted">Plain-English definitions. Currently covers Domain 1. More terms arrive as domains are built.</p>' +
+      '<p class="muted">Plain-English definitions. Currently covers ' + builtDomainsText() + '. More terms arrive as domains are built.</p>' +
       '<label class="search"><span class="sr">Search the glossary</span><input type="search" id="gq" placeholder="Search terms, e.g. salt, OCSP, PEP" value="' + esc(ui.glossaryQuery) + '" data-fk="gq" autocomplete="off"></label>' +
       '<div id="gresults" aria-live="polite"></div></section>';
   }
@@ -453,7 +464,7 @@
     const st = E.overallStats(state, idx, t);
     const firsts = st.firstCorrect + st.firstHinted + st.firstWrong;
     let html = '<section class="stack"><h1 class="h1">Progress</h1>';
-    html += '<div class="card notice"><strong>This isn\'t a readiness score.</strong> Only Domain 1 (about 12% of the exam) is built so far. ' +
+    html += '<div class="card notice"><strong>This isn\'t a readiness score.</strong> Only ' + builtDomainsText() + ' (about ' + builtWeight() + '% of the exam) ' + (builtCount() === 1 ? 'is' : 'are') + ' built so far. ' +
       'Readiness needs all five domains, retention over weeks, and full-length timed practice. XP measures effort, not mastery.</div>';
     html += '<div class="card"><h2 class="h2">Overall</h2><dl class="stats">' +
       stat("XP (effort)", st.xp) +

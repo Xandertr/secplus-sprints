@@ -27,48 +27,48 @@ Page numbers are PDF pages, with printed page numbers in brackets (printed = PDF
 | 1.4 | Blockchain Technology | 24 | ✅ built | 3 |
 | 1.4 | Certificates | 25, 26 | ✅ built | 6 |
 
-## 2.0 Threats, Vulnerabilities, and Mitigations (22%), PDF 27–51 [18–42]: not built yet
+## 2.0 Threats, Vulnerabilities, and Mitigations (22%), PDF 27–51 [18–42]: BUILT
 
 | Obj. | Section | PDF pages | Status | Activities |
 |---|---|---|---|---|
-| 2.1 | Threat Actors | 27, 28 | ⬜ not built yet | – |
-| 2.2 | Common Threat Vectors | 28, 29 | ⬜ not built yet | – |
-| 2.2 | Phishing | 29 | ⬜ not built yet | – |
-| 2.2 | Impersonation | 30 | ⬜ not built yet | – |
-| 2.2 | Watering Hole Attacks | 30 | ⬜ not built yet | – |
-| 2.2 | Other Social Engineering Attacks | 31 | ⬜ not built yet | – |
-| 2.3 | Memory Injections | 31 | ⬜ not built yet | – |
-| 2.3 | Buffer Overflows | 32 | ⬜ not built yet | – |
-| 2.3 | Race Conditions | 32 | ⬜ not built yet | – |
-| 2.3 | Malicious Updates | 33 | ⬜ not built yet | – |
-| 2.3 | Operating System Vulnerabilities | 33 | ⬜ not built yet | – |
-| 2.3 | SQL Injection | 34 | ⬜ not built yet | – |
-| 2.3 | Cross-site Scripting | 34, 35 | ⬜ not built yet | – |
-| 2.3 | Hardware Vulnerabilities | 35 | ⬜ not built yet | – |
-| 2.3 | Virtualization Vulnerabilities | 36 | ⬜ not built yet | – |
-| 2.3 | Cloud-specific Vulnerabilities | 36 | ⬜ not built yet | – |
-| 2.3 | Supply Chain Vulnerabilities | 37 | ⬜ not built yet | – |
-| 2.3 | Misconfiguration Vulnerabilities | 37, 38 | ⬜ not built yet | – |
-| 2.3 | Mobile Device Vulnerabilities | 38 | ⬜ not built yet | – |
-| 2.3 | Zero-day Vulnerabilities | 38 | ⬜ not built yet | – |
-| 2.4 | An Overview of Malware | 39 | ⬜ not built yet | – |
-| 2.4 | Viruses and Worms | 39, 40 | ⬜ not built yet | – |
-| 2.4 | Spyware and Bloatware | 40 | ⬜ not built yet | – |
-| 2.4 | Other Malware Types | 41 | ⬜ not built yet | – |
-| 2.4 | Physical Attacks | 41 | ⬜ not built yet | – |
-| 2.4 | Denial of Service | 42 | ⬜ not built yet | – |
-| 2.4 | DNS Attacks | 42 | ⬜ not built yet | – |
-| 2.4 | Wireless Attacks | 43 | ⬜ not built yet | – |
-| 2.4 | On-path Attacks | 43 | ⬜ not built yet | – |
-| 2.4 | Replay Attacks | 44, 45 | ⬜ not built yet | – |
-| 2.4 | Malicious Code | 45 | ⬜ not built yet | – |
-| 2.4 | Application Attacks | 45, 46 | ⬜ not built yet | – |
-| 2.4 | Cryptographic Attacks | 47 | ⬜ not built yet | – |
-| 2.4 | Password Attacks | 48 | ⬜ not built yet | – |
-| 2.4 | Indicators of Compromise | 48, 49 | ⬜ not built yet | – |
-| 2.5 | Segmentation and Access Control | 49 | ⬜ not built yet | – |
-| 2.5 | Mitigation Techniques | 50 | ⬜ not built yet | – |
-| 2.5 | Hardening Techniques | 50, 51 | ⬜ not built yet | – |
+| 2.1 | Threat Actors | 27, 28 | ✅ built | 5 |
+| 2.2 | Common Threat Vectors | 28, 29 | ✅ built | 5 |
+| 2.2 | Phishing | 29 | ✅ built | 4 |
+| 2.2 | Impersonation | 30 | ✅ built | 4 |
+| 2.2 | Watering Hole Attacks | 30 | ✅ built | 4 |
+| 2.2 | Other Social Engineering Attacks | 31 | ✅ built | 4 |
+| 2.3 | Memory Injections | 31 | ✅ built | 3 |
+| 2.3 | Buffer Overflows | 32 | ✅ built | 3 |
+| 2.3 | Race Conditions | 32 | ✅ built | 3 |
+| 2.3 | Malicious Updates | 33 | ✅ built | 3 |
+| 2.3 | Operating System Vulnerabilities | 33 | ✅ built | 3 |
+| 2.3 | SQL Injection | 34 | ✅ built | 3 |
+| 2.3 | Cross-site Scripting | 34, 35 | ✅ built | 4 |
+| 2.3 | Hardware Vulnerabilities | 35 | ✅ built | 3 |
+| 2.3 | Virtualization Vulnerabilities | 36 | ✅ built | 4 |
+| 2.3 | Cloud-specific Vulnerabilities | 36 | ✅ built | 3 |
+| 2.3 | Supply Chain Vulnerabilities | 37 | ✅ built | 4 |
+| 2.3 | Misconfiguration Vulnerabilities | 37, 38 | ✅ built | 4 |
+| 2.3 | Mobile Device Vulnerabilities | 38 | ✅ built | 3 |
+| 2.3 | Zero-day Vulnerabilities | 38 | ✅ built | 3 |
+| 2.4 | An Overview of Malware | 39 | ✅ built | 4 |
+| 2.4 | Viruses and Worms | 39, 40 | ✅ built | 4 |
+| 2.4 | Spyware and Bloatware | 40 | ✅ built | 3 |
+| 2.4 | Other Malware Types | 41 | ✅ built | 4 |
+| 2.4 | Physical Attacks | 41 | ✅ built | 3 |
+| 2.4 | Denial of Service | 42 | ✅ built | 4 |
+| 2.4 | DNS Attacks | 42 | ✅ built | 4 |
+| 2.4 | Wireless Attacks | 43 | ✅ built | 3 |
+| 2.4 | On-path Attacks | 43 | ✅ built | 3 |
+| 2.4 | Replay Attacks | 44, 45 | ✅ built | 4 |
+| 2.4 | Malicious Code | 45 | ✅ built | 3 |
+| 2.4 | Application Attacks | 45, 46 | ✅ built | 5 |
+| 2.4 | Cryptographic Attacks | 47 | ✅ built | 3 |
+| 2.4 | Password Attacks | 48 | ✅ built | 3 |
+| 2.4 | Indicators of Compromise | 48, 49 | ✅ built | 4 |
+| 2.5 | Segmentation and Access Control | 49 | ✅ built | 4 |
+| 2.5 | Mitigation Techniques | 50 | ✅ built | 4 |
+| 2.5 | Hardening Techniques | 50, 51 | ✅ built | 5 |
 
 ## 3.0 Security Architecture (18%), PDF 51–67 [42–58]: not built yet
 
@@ -149,7 +149,7 @@ Page numbers are PDF pages, with printed page numbers in brackets (printed = PDF
 | 5.6 | Security Awareness | 104 | ⬜ not built yet | – |
 | 5.6 | User Training | 105 | ⬜ not built yet | – |
 
-**Sections built: 18 of 120.** Activities: 78. Glossary terms: 83.
+**Sections built: 56 of 120.** Activities: 217. Glossary terms: 136.
 
 ## Flags and unclear material
 
@@ -159,4 +159,12 @@ Page numbers are PDF pages, with printed page numbers in brackets (printed = PDF
 - Under 'Policy Administrator' there's a stray fragment ('address, etc.') that seems to belong to the adaptive identity bullet on PDF p.14 (IP address, etc.). It looks like a layout glitch, so the app doesn't treat it as a separate fact. (PDF 15)
 - Blockchain has only a few bullets. The step-by-step process is in a six-panel diagram, so the order activity paraphrases the diagram, which was viewed as an image. (PDF 24)
 - These Domain 1 pages contain diagrams. Their labels were read from the text layer, and pages 15, 22, 23 and 24 were also checked as rendered images. (PDF 12, 15, 19, 21, 22, 23, 26)
-- Domains 2-5: text was extracted and mapped to sections, but not yet read in detail or turned into lessons. The headings listed in the coverage view were extracted automatically and may miss diagram-only content. (PDF 27, 105)
+- These Domain 2 pages contain diagrams (misinformation process, DLL injection, buffer overflow, XSS, fileless virus, worm, pass the hash, session hijacking, CSRF, SSL stripping). Labels were read from the text layer, and pages 31, 40, 46 and 48 were also checked as rendered images. (PDF 31, 32, 35, 40, 44, 46, 47)
+- Race condition example: the notes give the 'expected outcome' of two $50 transfers as 'A has $50, B has $150 (or A has $0 and B has $200)', which reads like one transfer vs. two. The bad outcome (A $50, B $200) depends on the stated assumption that deposits are immediate and withdrawals aren't. The order activity follows the notes' steps. (PDF 32)
+- Race condition page uses a two-column layout that extracts out of order (Mars rover Spirit and Tesla Pwn2Own bullets interleave). The lesson pairs them by meaning, not by extracted line order. (PDF 32)
+- Cloud vulnerabilities quotes two statistics (76% not using MFA on management consoles, 63% of production code unpatched for CVSS 7.0+) without naming a source or year. The app mentions them only as the notes' figures and doesn't quiz on the numbers. (PDF 36)
+- Application Attacks (PDF 45-46) repeats the injection, SQL injection, buffer overflow and replay attack bullets from earlier sections word for word. The app covers each once in its own topic and doesn't duplicate questions. (PDF 45)
+- Password Attacks: 'A hash example' (SHA-256) and the brute force bullet 'The hash:' have no hash value shown in the text layer or the rendered page. The app doesn't invent an example hash. (PDF 48)
+- Mitigation Techniques says auto-update is 'not always the best option' without saying why. The recall card offers a likely reason from the OS vulnerabilities page (patches can break things) and says so. (PDF 50)
+- PDF 51 holds the end of 2.5 Hardening Techniques and the start of 3.1 Cloud Infrastructures. Domain 2 activities only use its 2.5 content. (PDF 51)
+- Domains 3-5: text was extracted and mapped to sections, but not yet read in detail or turned into lessons. The headings listed in the coverage view were extracted automatically and may miss diagram-only content. (PDF 52, 105)
