@@ -1,0 +1,12 @@
+{
+  "name": "secplus-sprints",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Personal ADHD-friendly Security+ SY0-701 study app (static, no build step).",
+  "scripts": {
+    "test": "node --test tests/validate-content.test.js tests/engine.test.js",
+    "serve": "python3 -m http.server 8765 --bind 127.0.0.1",
+    "e2e": "node tests/e2e.js http://127.0.0.1:8765/index.html /tmp"
+  },
+  "devDependencies": { "playwright": "^1.56.1" }
+}
