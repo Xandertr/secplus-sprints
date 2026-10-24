@@ -365,7 +365,23 @@
       if (reviews.length < size) reviews = reviews.concat(weakestItems(state, idx, reviews).slice(0, size - reviews.length));
     } else {
       let topicOrder;
-      if (mode === "topic" && opts.topicId) {
+      if (mode === "domain" && opts.domainId) {
+        // one domain: its topics in course order, plus its due and weakest items
+        const inDomain = function (id) { return idx.topicById[idx.activities[id].topicId].domainId === opts.domainId; };
+        topicOrder = idx.topics.filter(function (t) { return t.domainId === opts.domainId; });
+        const domainDue = due.filter(inDomain);
+        const reviewSlots = domainDue.length ? Math.max(1, Math.floor(size / 2)) : 0;
+        reviews = domainDue.slice(0, reviewSlots);
+        for (let i = 0; i < topicOrder.length && fresh.length < size - reviews.length; i++) {
+          const newOnes = nextNewActivities(state, topicOrder[i]).map(function (a) { return a.id; });
+          fresh = fresh.concat(newOnes.slice(0, size - reviews.length - fresh.length));
+        }
+        if (reviews.length + fresh.length < size) reviews = reviews.concat(domainDue.slice(reviews.length, reviews.length + size - reviews.length - fresh.length));
+        if (reviews.length + fresh.length < size) {
+          const extra = weakestItems(state, idx, fresh.concat(reviews)).filter(inDomain);
+          reviews = reviews.concat(extra.slice(0, size - fresh.length - reviews.length));
+        }
+      } else if (mode === "topic" && opts.topicId) {
         const t = idx.topicById[opts.topicId];
         topicOrder = t ? [t] : [];
         const topicDue = due.filter(function (id) { return idx.activities[id].topicId === opts.topicId; });
@@ -424,7 +440,7 @@
     if (!steps.length) return null;
     state.session = {
       id: "s" + now.toString(36),
-      mode: mode, size: size, topicId: (opts && opts.topicId) || null,
+      mode: mode, size: size, topicId: (opts && opts.topicId) || null, domainId: (opts && opts.domainId) || null,
       steps: steps, index: 0, startedAt: now, updatedAt: now,
       xp: 0, results: [], done: false,
       current: null

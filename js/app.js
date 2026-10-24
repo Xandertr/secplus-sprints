@@ -76,7 +76,7 @@
     const focusKey = document.activeElement && document.activeElement.getAttribute && document.activeElement.getAttribute("data-fk");
     let html;
     switch (r.name) {
-      case "library": html = viewLibrary(); break;
+      case "library": html = viewLibrary(r.arg); break;
       case "topic": html = viewTopic(r.arg); break;
       case "sprint": html = viewSprint(); break;
       case "glossary": html = viewGlossary(); break;
@@ -92,6 +92,10 @@
     if (!el) el = app.querySelector("[data-autofocus]");
     if (el) el.focus({ preventScroll: false });
     if (r.name === "glossary") renderGlossaryResults();
+    if (r.name === "library" && r.arg) {
+      const d = document.getElementById("dom-" + r.arg);
+      if (d) d.scrollIntoView({ block: "start" });
+    }
   }
 
   function applyTheme() {
@@ -130,6 +134,7 @@
     html += '<button class="btn tile" data-action="review" data-fk="review"><strong>Review</strong><span>' +
       (st.due ? plural(st.due, "item") + " due" : st.attempted ? "Nothing due. Practice weak spots" : "Nothing to review yet") + '</span></button>';
     html += '</div>';
+    html += '<a class="btn big" href="#/library" data-fk="pick-chapter">Pick a chapter to study</a>';
 
     if (ui.flash) html += '<p class="ok" role="status">' + esc(ui.flash) + '</p>';
     html += '<button class="btn ghost big" data-action="recommend" data-fk="recommend">What should I study next?</button>';
@@ -154,14 +159,23 @@
   }
 
   // ------------------------------------------------------------ library & topic
-  function viewLibrary() {
+  function viewLibrary(openId) {
     const t = now();
-    let html = '<section class="stack"><h1 class="h1">Topics</h1>' +
-      '<p class="lead">Organized like the course notes. Page numbers point to the PDF so you can look things up.</p>';
+    let html = '<section class="stack"><h1 class="h1">Chapters</h1>' +
+      '<p class="lead">Pick any domain or chapter and study just that. Page numbers point to the PDF so you can look things up.</p>';
+    html += '<nav class="jump" aria-label="Jump to a domain"><span class="tiny muted">Jump to domain</span>' + idx.domains.map(function (d) {
+      return '<a class="btn small' + (d.id === openId ? " primary" : "") + '" href="#/library/' + esc(d.id) + '" data-fk="jump-' + esc(d.id) + '" aria-label="Domain ' + esc(d.number) + ' ' + esc(d.title) + '">' + esc(d.number.replace(".0", "")) + '</a>';
+    }).join("") + '</nav>';
     idx.domains.forEach(function (d) {
-      html += '<details class="card domain"' + (d.built ? " open" : "") + '><summary><span class="dtitle">' + esc(d.number + " " + d.title) + '</span>' +
-        '<span class="chip ' + (d.built ? "ok" : "todo") + '">' + (d.built ? "Built" : "Not built yet") + '</span>' +
-        '<span class="tiny muted block">' + d.weight + '% of exam · ' + esc(pageRef(range(d.pdfRange))) + '</span></summary>';
+      const dp = { attempted: 0, total: 0, due: 0 };
+      d.topics.forEach(function (tp) { const p = E.topicProgress(state, tp, t); dp.attempted += p.attempted; dp.total += p.total; dp.due += p.due; });
+      html += '<details class="card domain" id="dom-' + esc(d.id) + '"' + (d.id === openId ? " open" : "") + '><summary><span class="dtitle">' + esc(d.number + " " + d.title) + '</span>' +
+        '<span class="tiny muted block">' + d.weight + '% of exam · ' + plural(d.topics.length, "chapter") + ' · ' + dp.attempted + '/' + dp.total + ' tried' + (dp.due ? ' · ' + dp.due + ' due' : "") + ' · ' + esc(pageRef(range(d.pdfRange))) + '</span></summary>';
+      if (d.built) {
+        html += '<div class="domainstudy"><p class="tiny muted">Study this whole domain, in course order, with its reviews mixed in:</p><div class="btnrow">' + [1, 3, 5].map(function (n) {
+          return '<button class="btn small' + (n === 3 ? " primary" : "") + '" data-action="start-domain" data-domain="' + esc(d.id) + '" data-n="' + n + '" data-fk="sd-' + esc(d.id) + '-' + n + '">' + plural(n, "question") + '</button>';
+        }).join("") + '</div><p class="tiny muted">Or tap a chapter for its mini-lesson and practice:</p></div>';
+      }
       html += '<ul class="list">';
       if (d.built) {
         d.topics.forEach(function (tp) {
@@ -193,7 +207,7 @@
     const p = E.topicProgress(state, tp, now());
     const formats = {};
     tp.activities.forEach(function (a) { formats[a.format] = (formats[a.format] || 0) + 1; });
-    let html = '<section class="stack"><a class="back" href="#/library">← Topics</a>';
+    let html = '<section class="stack"><a class="back" href="#/library/' + esc(tp.domainId) + '">← Chapters</a>';
     html += '<p class="eyebrow">Objective ' + esc(tp.objective) + '</p><h1 class="h1">' + esc(tp.title) + '</h1>';
     html += '<p class="tiny muted">Source: ' + esc(pageRef(tp.pages)) + '</p>';
     html += '<div class="card"><h2 class="h2">Mini-lesson</h2>' + lessonBody(tp, "topic-more") + '</div>';
@@ -502,7 +516,7 @@
     for (let p = 1; p <= src.totalPdfPages; p++) {
       if (src.nonContentPages[p]) counts.none++; else if (builtPages.has(p)) counts.built++; else counts.mapped++;
     }
-    let html = '<section class="stack"><a class="back" href="#/library">← Topics</a><h1 class="h1">Coverage checklist</h1>';
+    let html = '<section class="stack"><a class="back" href="#/library">← Chapters</a><h1 class="h1">Coverage checklist</h1>';
     html += '<div class="card"><p><strong>Exam:</strong> ' + esc(src.exam) + '<br><span class="tiny muted">' + esc(src.examEvidence) + '</span></p>' +
       '<p><strong>Source:</strong> ' + esc(src.title) + ', ' + esc(src.version) + '. The PDF itself isn\'t included in this app.</p>' +
       '<dl class="stats">' + stat("Content pages with built lessons and practice", counts.built) +
@@ -588,6 +602,7 @@
       case "size": state.prefs.sprintSize = +el.getAttribute("data-n"); save(); render(); break;
       case "start-mixed": startSprint("mixed", state.prefs.sprintSize); break;
       case "start-topic": startSprint("topic", +el.getAttribute("data-n"), { topicId: el.getAttribute("data-topic") }); break;
+      case "start-domain": startSprint("domain", +el.getAttribute("data-n"), { domainId: el.getAttribute("data-domain") }); break;
       case "resume": go("sprint"); break;
       case "continue": doContinue(); break;
       case "review": startSprint("review", state.prefs.sprintSize); break;

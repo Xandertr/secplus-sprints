@@ -194,6 +194,29 @@ const log = (...a) => console.log("✓", ...a);
   await page.screenshot({ path: SHOTS + "/12-glossary.png" });
   log("library / topic / coverage / progress / settings / glossary search");
 
+  // 8b. Pick a chapter: home -> chapters -> jump to a domain -> study that domain only
+  await page.goto(URL_ + "#/home");
+  await page.click('[data-fk="pick-chapter"]');
+  await page.click('[data-fk="jump-d4"]');
+  await page.waitForSelector("#dom-d4[open]");
+  assert.ok(!(await page.locator("#dom-d1").evaluate(d => d.open)), "other domains stay closed");
+  await noHScroll("library/d4");
+  await page.screenshot({ path: SHOTS + "/13-chapters-d4.png" });
+  await page.click('[data-fk="sd-d4-3"]');
+  await page.waitForSelector("text=Got it, show me a question");
+  const ds = (await state()).session;
+  assert.strictEqual(ds.mode, "domain");
+  const dIdx = await page.evaluate(() => window.__secplus.idx);
+  for (const st of ds.steps) {
+    const tid = st.kind === "lesson" ? st.topicId : dIdx.activities[st.id].topicId;
+    assert.strictEqual(dIdx.topicById[tid].domainId, "d4");
+  }
+  await page.click('[data-action="pause"]');
+  await page.goto(URL_ + "#/topic/d4-firewalls");
+  await page.click("a.back");
+  await page.waitForSelector("#dom-d4[open]");
+  log("pick a chapter: jump to domain 4, study only domain 4, back link returns there");
+
   // 9. Export -> reset -> import restores progress
   const before = await state();
   await page.goto(URL_ + "#/settings");

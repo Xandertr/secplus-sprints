@@ -211,3 +211,6 @@ details[open].card summary::before { content: "▾"; }
 .filebtn:focus-within { outline: 3px solid var(--focus); outline-offset: 2px; }
 .warn { background: var(--low-bg); padding: 10px 12px; border-radius: 10px; }
 .ok { background: var(--good-bg); padding: 10px 12px; border-radius: 10px; }
+.jump { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; }
+.jump .btn { min-width: 48px; }
+.domainstudy { margin-top: 12px; display: grid; gap: 8px; }

@@ -158,3 +158,16 @@ test("review mode with nothing practiced returns no sprint", () => {
   const st = E.defaultState();
   assert.strictEqual(E.startSession(st, idx, 3, "review", {}, T0), null);
 });
+
+test("domain sprint only uses that domain, starts with its first chapter, and falls back to its own weak items", () => {
+  const st = E.defaultState();
+  const inD3 = id => idx.topicById[idx.activities[id].topicId].domainId === "d3";
+  const steps = E.buildSprint(st, idx, 5, "domain", { domainId: "d3" }, T0);
+  const acts = steps.filter(s => s.kind === "activity");
+  assert.strictEqual(acts.length, 5);
+  assert.ok(acts.every(s => inD3(s.id)));
+  assert.strictEqual(steps[0].kind, "lesson");
+  assert.strictEqual(steps[0].topicId, idx.topics.find(t => t.domainId === "d3").id);
+  // every domain can build a full sprint from a fresh start
+  for (const d of idx.domains) assert.strictEqual(E.buildSprint(st, idx, 3, "domain", { domainId: d.id }, T0).filter(s => s.kind === "activity").length, 3, d.id);
+});
