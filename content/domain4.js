@@ -149,7 +149,7 @@ window.SECPLUS = window.SECPLUS || {};
           id: "d4-hardening-a4", type: "multi", format: "Investigate",
           prompt: "You're hardening a fleet of servers. Which steps come from the notes? Select all that apply.",
           options: [
-            { t: "Enforce minimum password length and complexity", ok: true, why: "Listed under user accounts." },
+            { t: "Enforce minimum password length and complexity", ok: true, why: "Correct: strong password rules on server accounts make them much harder to guess or brute force." },
             { t: "Limit network access", ok: true, why: "Listed under network access and security." },
             { t: "Run anti-virus and anti-malware", ok: true, why: "Listed under monitor and secure." },
             { t: "Leave unused services enabled in case they're needed later", why: "Unneeded services add attack surface." }
@@ -195,12 +195,12 @@ window.SECPLUS = window.SECPLUS || {};
           prompt: "Match each deployment model to its description.",
           choices: ["BYOD", "COPE", "CYOD"],
           items: [
-            { t: "The employee owns the device and must meet company requirements", a: "BYOD", why: "Bring your own device." },
+            { t: "The employee owns the device and must meet company requirements", a: "BYOD", why: "BYOD (bring your own device): the phone is the employee's, but it has to meet company rules." },
             { t: "The company buys the device, allows personal use, and keeps full control", a: "COPE", why: "Corporate owned, personally enabled." },
-            { t: "Like COPE, but the employee picks which device", a: "CYOD", why: "Choose your own device." }
+            { t: "Like COPE, but the employee picks which device", a: "CYOD", why: "CYOD (choose your own device): the company owns it, like COPE, but you pick the model." }
           ],
           hint: "Who owns it, and who chooses it?",
-          explain: "Ownership and choice are what separate the three models.",
+          explain: "BYOD: employee owns it. COPE: company owns it, personal use allowed. CYOD: company owns it, employee chooses the model.",
           pages: [69, 70]
         },
         {
@@ -233,9 +233,9 @@ window.SECPLUS = window.SECPLUS || {};
           id: "d4-mobile-a4", type: "multi", format: "Investigate",
           prompt: "Which are Wi-Fi security concerns listed in the notes? Select all that apply.",
           options: [
-            { t: "Data capture", ok: true, why: "So encrypt your data." },
+            { t: "Data capture", ok: true, why: "Correct: anyone nearby can capture Wi-Fi traffic, which is why it must be encrypted." },
             { t: "On-path attacks", ok: true, why: "Attackers can monitor or modify data." },
-            { t: "Denial of service from frequency interference", ok: true, why: "Listed as a Wi-Fi DoS." },
+            { t: "Denial of service from frequency interference", ok: true, why: "Correct: interference on the radio frequency can knock everyone off, a Wi-Fi denial of service." },
             { t: "Location tracking through cell towers", why: "That's the notes' cellular network concern." }
           ],
           hint: "One belongs to cellular networks.",
@@ -282,7 +282,7 @@ window.SECPLUS = window.SECPLUS || {};
           options: [
             { t: "Because WPA2 doesn't encrypt traffic at all", why: "WPA2 encrypts. The flaw is in how the PSK can be brute forced." },
             { t: "With the PSK they have everyone's key, since there's no forward secrecy", ok: true, why: "One cracked key exposes all users on that network." },
-            { t: "It only affects the single user whose handshake was captured", why: "Everyone shares the same PSK." },
+            { t: "It only affects the single user whose handshake was captured", why: "No: in WPA2-Personal everyone shares one PSK, so cracking it exposes every user, not just one." },
             { t: "It forces the access point to switch to Open System mode", why: "Cracking the key doesn't change the AP's mode." }
           ],
           hint: "Everyone shares one key.",
@@ -307,7 +307,7 @@ window.SECPLUS = window.SECPLUS || {};
           prompt: "Match each 802.1X role to what it is.",
           choices: ["Supplicant", "Authenticator", "Authentication server"],
           items: [
-            { t: "The laptop trying to join the network", a: "Supplicant", why: "The supplicant is the client." },
+            { t: "The laptop trying to join the network", a: "Supplicant", why: "The supplicant is the client device asking to join, here the laptop." },
             { t: "The access point or switch that grants access", a: "Authenticator", why: "It's the device that provides access." },
             { t: "The RADIUS server checking the credentials", a: "Authentication server", why: "It validates the client credentials." }
           ],
@@ -319,7 +319,7 @@ window.SECPLUS = window.SECPLUS || {};
           id: "d4-wireless-a4", type: "choice", format: "Next action",
           prompt: "A company wants each employee to log in to Wi-Fi with their own credentials, checked by RADIUS. Which mode should you configure?",
           options: [
-            { t: "Open System", why: "No authentication at all." },
+            { t: "Open System", why: "Open System has no login at all, so it can't check each employee's credentials." },
             { t: "WPA3-Personal (PSK)", why: "Everyone would share the same key." },
             { t: "WPA3-Enterprise (802.1X)", ok: true, why: "Users authenticate individually against a server such as RADIUS." },
             { t: "WPA2-Personal with a longer pre-shared key", why: "Still one shared key, and still the PSK brute-force problem." }
@@ -333,9 +333,9 @@ window.SECPLUS = window.SECPLUS || {};
           prompt: "Put the AAA steps in order for a user joining the network.",
           steps: [
             { t: "Identification: the user claims an identity with a username", why: "Who you claim to be comes first." },
-            { t: "Authentication: they prove it with a password and other factors", why: "Then prove the claim." },
+            { t: "Authentication: they prove it with a password and other factors", why: "Step 2: after claiming who you are, you prove it with a password or other factor." },
             { t: "Authorization: the system decides what they can access", why: "Access depends on who they proved to be." },
-            { t: "Accounting: login time, data sent and logout time are recorded", why: "Usage is tracked last." }
+            { t: "Accounting: login time, data sent and logout time are recorded", why: "Step 4: once you're in, your usage is recorded for accounting." }
           ],
           hint: "Claim, prove, permit, record.",
           explain: "The AAA framework adds identification in front of the three A's.",
@@ -390,7 +390,7 @@ window.SECPLUS = window.SECPLUS || {};
           id: "d4-appsec-a2", type: "multi", format: "Investigate",
           prompt: "Your SAST tool reports 40 findings. Which statements match the notes? Select all that apply.",
           options: [
-            { t: "Some findings may be false positives, so verify each one", ok: true, why: "False positives are an issue." },
+            { t: "Some findings may be false positives, so verify each one", ok: true, why: "Correct: static tools flag things that aren't really problems, so check each finding before acting." },
             { t: "It probably caught buffer overflows and injection flaws", ok: true, why: "These are easy for static analysis." },
             { t: "It may have missed insecure cryptography or authentication flaws", ok: true, why: "Not everything can be found through analysis." },
             { t: "A clean SAST run means the app needs no other testing", why: "Don't rely on automation for everything." }
@@ -489,7 +489,7 @@ window.SECPLUS = window.SECPLUS || {};
           items: [
             { t: "Negotiate terms and conditions with suppliers", a: "Acquisition/procurement", why: "Part of the purchasing process." },
             { t: "Record which person owns a laptop", a: "Assignment/accounting", why: "Ownership is tracked centrally." },
-            { t: "Attach an RFID asset tag and enumerate its parts", a: "Monitoring/asset tracking", why: "Inventory and enumeration." },
+            { t: "Attach an RFID asset tag and enumerate its parts", a: "Monitoring/asset tracking", why: "Tagging an asset and listing its parts is asset tracking: knowing what you have and where." },
             { t: "Wipe a decommissioned server so nothing is recoverable", a: "Media sanitization", why: "Disposal must leave no usable information." }
           ],
           hint: "Buy, assign, track, dispose.",
@@ -500,9 +500,9 @@ window.SECPLUS = window.SECPLUS || {};
           id: "d4-assets-a4", type: "multi", format: "Investigate",
           prompt: "Which are reasons the notes give for data retention? Select all that apply.",
           options: [
-            { t: "Regulatory compliance, such as email and financial data", ok: true, why: "Some backup may be required." },
-            { t: "Recovering from accidental deletion", ok: true, why: "An operational need." },
-            { t: "Disaster recovery", ok: true, why: "Another operational need." },
+            { t: "Regulatory compliance, such as email and financial data", ok: true, why: "Correct: laws can require you to keep certain data, like emails and financial records." },
+            { t: "Recovering from accidental deletion", ok: true, why: "Correct: keeping copies lets you get back files someone deleted by mistake." },
+            { t: "Disaster recovery", ok: true, why: "Correct: retained backups let you rebuild after a disaster." },
             { t: "Keeping every file forever so nothing is ever purged", why: "Retention includes lifecycles and purging old data." }
           ],
           hint: "One option ignores the lifecycle.",
@@ -544,7 +544,7 @@ window.SECPLUS = window.SECPLUS || {};
           id: "d4-vulnscan-a1", type: "choice", format: "Compare",
           prompt: "How does a vulnerability scan differ from a penetration test?",
           options: [
-            { t: "A scan actively exploits flaws to prove they're real", why: "That's what a pentest does." },
+            { t: "A scan actively exploits flaws to prove they're real", why: "That describes a penetration test. A vulnerability scan looks for weaknesses without exploiting them." },
             { t: "A scan is usually minimally invasive and doesn't exploit", ok: true, why: "It identifies what's there without breaking in." },
             { t: "A scan only works from outside the network", why: "Test from both outside and inside." },
             { t: "A scan never uses port scanning", why: "Port scanning is a core part of it." }
@@ -614,13 +614,13 @@ window.SECPLUS = window.SECPLUS || {};
           prompt: "Match each source to its type of threat intelligence.",
           choices: ["OSINT", "Proprietary/third-party", "Information-sharing organization", "Dark web intelligence"],
           items: [
-            { t: "Public government hearings and reports", a: "OSINT", why: "Publicly available sources." },
+            { t: "Public government hearings and reports", a: "OSINT", why: "Public hearings and reports are open to anyone: open-source intelligence (OSINT)." },
             { t: "A paid service correlating threats across sources", a: "Proprietary/third-party", why: "Someone else compiled it, and you buy it." },
             { t: "Members submit data that is scored and validated for others", a: "Information-sharing organization", why: "That's how the Cyber Threat Alliance works." },
             { t: "A forum selling stolen credentials with your CEO's name", a: "Dark web intelligence", why: "Monitor overlay-network forums." }
           ],
           hint: "Free, bought, shared, hidden.",
-          explain: "Each source type fills a different gap.",
+          explain: "OSINT is free and public, proprietary intel is bought, sharing groups pool data, and dark web intel watches criminal markets.",
           pages: [74]
         },
         {
@@ -671,7 +671,7 @@ window.SECPLUS = window.SECPLUS || {};
           id: "d4-pentest-a1", type: "order", format: "Order",
           prompt: "Put the penetration testing process in order.",
           steps: [
-            { t: "Initial exploitation: get into the network", why: "First you need a foothold." },
+            { t: "Initial exploitation: get into the network", why: "Step 1: the tester first has to break in and get a foothold." },
             { t: "Lateral movement: move from system to system", why: "The inside is relatively unprotected." },
             { t: "Persistence: set up a way back in", why: "Backdoors or accounts keep access." },
             { t: "The pivot: use a compromised system to reach otherwise inaccessible systems", why: "A vulnerable system becomes a proxy or relay." }
@@ -684,9 +684,9 @@ window.SECPLUS = window.SECPLUS || {};
           id: "d4-pentest-a2", type: "multi", format: "Investigate",
           prompt: "Which belong in the rules of engagement? Select all that apply.",
           options: [
-            { t: "IP address ranges and in-scope devices", ok: true, why: "Scope is defined up front." },
-            { t: "Emergency contacts", ok: true, why: "Listed in the rules." },
-            { t: "Testing schedule, such as after 6 PM only", ok: true, why: "Type of testing and schedule." },
+            { t: "IP address ranges and in-scope devices", ok: true, why: "Correct: the rules say exactly which IP ranges and devices may be tested." },
+            { t: "Emergency contacts", ok: true, why: "Correct: if something breaks, everyone needs to know who to call." },
+            { t: "Testing schedule, such as after 6 PM only", ok: true, why: "Correct: the rules set when testing happens, for example only after 6 PM." },
             { t: "A list of the exploits that are guaranteed to work", why: "Nobody can guarantee that ahead of a test." }
           ],
           hint: "Purpose, scope, logistics.",
@@ -699,7 +699,7 @@ window.SECPLUS = window.SECPLUS || {};
           options: [
             { t: "Lateral movement", why: "That's moving between systems during an attack." },
             { t: "Responsible disclosure", ok: true, why: "Report, fix, then announce publicly." },
-            { t: "A false positive", why: "The flaw was real." },
+            { t: "A false positive", why: "A false positive is a reported flaw that isn't real. This flaw was real and was fixed before it was announced." },
             { t: "Persistence", why: "That's keeping access during a pentest." }
           ],
           hint: "A controlled information release.",
@@ -771,8 +771,8 @@ window.SECPLUS = window.SECPLUS || {};
           options: [
             { t: "Environmental variables", ok: true, why: "Environment, users and revenue change the priority." },
             { t: "Code signing", why: "Unrelated to prioritizing a vulnerability." },
-            { t: "False negatives", why: "Both were detected." },
-            { t: "Certificate of destruction", why: "That's for media disposal." }
+            { t: "False negatives", why: "A false negative is a missed vulnerability. Here both were found; the question is which matters more." },
+            { t: "Certificate of destruction", why: "A certificate of destruction proves media was destroyed. It has nothing to do with prioritizing fixes." }
           ],
           hint: "Where does it live, and who uses it?",
           explain: "Every environment is different, so the same CVE can rank differently.",
@@ -782,8 +782,8 @@ window.SECPLUS = window.SECPLUS || {};
           id: "d4-analyzevuln-a3", type: "choice", format: "Scenario",
           prompt: "A flaw would let attackers fully disable a customer-facing service. What exposure factor would the notes assign?",
           options: [
-            { t: "0%", why: "There's clearly a loss." },
-            { t: "25%", why: "Too low for a full outage." },
+            { t: "0%", why: "0% would mean no loss at all, but the service would be completely down." },
+            { t: "25%", why: "25% means losing a quarter of the value. A full outage loses all of it: 100%." },
             { t: "50%", why: "The notes use 50% for a small DDoS that only limits access." },
             { t: "100%", ok: true, why: "Completely disabling a service is a 100% exposure factor." }
           ],
@@ -795,7 +795,7 @@ window.SECPLUS = window.SECPLUS || {};
           id: "d4-analyzevuln-a4", type: "choice", format: "Next action",
           prompt: "A critical patch arrives. Your change board wants a week of testing; the security team wants it live now. What does the notes' idea of risk tolerance suggest?",
           options: [
-            { t: "Always patch immediately without testing", why: "That skips proper testing." },
+            { t: "Always patch immediately without testing", why: "Patching right away with no testing can break things. Risk tolerance looks for a balance." },
             { t: "Find a middle ground based on the severity", ok: true, why: "Testing takes time, and you're vulnerable while testing." },
             { t: "Never patch, since patches can break things", why: "Leaving it unpatched isn't an acceptable middle ground." },
             { t: "Remove all risk before deciding", why: "It's impractical to remove all risk." }
@@ -841,7 +841,7 @@ window.SECPLUS = window.SECPLUS || {};
           prompt: "A vulnerable service can't be patched for three weeks. Which response is a compensating control?",
           options: [
             { t: "Disable the problematic service or limit external access until the patch", ok: true, why: "These provide coverage until a patch is deployed." },
-            { t: "Mark the finding as a false positive so it stops appearing in reports until the patch is ready", why: "It's a real vulnerability." },
+            { t: "Mark the finding as a false positive so it stops appearing in reports until the patch is ready", why: "The vulnerability is real, so hiding it doesn't protect anything. A compensating control reduces the risk until the patch." },
             { t: "Wait three weeks and do nothing", why: "Compensating controls exist so you don't wait unprotected." },
             { t: "Buy insurance and consider it remediated", why: "Insurance transfers some cost but doesn't cover the gap." }
           ],
@@ -855,7 +855,7 @@ window.SECPLUS = window.SECPLUS || {};
           steps: [
             { t: "Rescan with an extensive vulnerability scan", why: "First, see what the scanner says now." },
             { t: "Audit remediated systems to confirm the patch deployed", why: "Then check each system really took it." },
-            { t: "Manually verify the system's security", why: "Finally, confirm by hand." }
+            { t: "Manually verify the system's security", why: "Step 3: after scanning and auditing, a person checks the system by hand." }
           ],
           hint: "Scan, audit, verify.",
           explain: "Validation answers two questions: does it stop the exploit, and is every system patched?",
@@ -878,9 +878,9 @@ window.SECPLUS = window.SECPLUS || {};
           id: "d4-remediation-a4", type: "multi", format: "Investigate",
           prompt: "Which items does a cybersecurity insurance policy typically cover, per the notes? Select all that apply.",
           options: [
-            { t: "Lost revenue", ok: true, why: "Listed." },
-            { t: "Data recovery costs", ok: true, why: "Listed." },
-            { t: "Privacy lawsuit costs", ok: true, why: "Listed." },
+            { t: "Lost revenue", ok: true, why: "Correct: insurance can pay for revenue lost while systems are down." },
+            { t: "Data recovery costs", ok: true, why: "Correct: it can cover the cost of getting your data back." },
+            { t: "Privacy lawsuit costs", ok: true, why: "Correct: it can cover lawsuits over leaked private data." },
             { t: "Losses from an employee's intentional act", why: "The notes say intentional acts aren't covered." }
           ],
           hint: "It doesn't cover everything.",
@@ -936,10 +936,10 @@ window.SECPLUS = window.SECPLUS || {};
           id: "d4-monitoring-a2", type: "choice", format: "Compare",
           prompt: "Why do the notes recommend archiving security data for an extended period?",
           options: [
-            { t: "Because dashboards only show the last hour", why: "Not the reason given." },
-            { t: "Because a SIEM can only correlate events once they are at least a year old and fully archived", why: "Not the reason given." },
+            { t: "Because dashboards only show the last hour", why: "Dashboards aren't the reason. Old logs are needed because breaches take about nine months to find and contain." },
+            { t: "Because a SIEM can only correlate events once they are at least a year old and fully archived", why: "Not true. Archiving matters because a breach often isn't found for months." },
             { t: "Breaches take about nine months on average to identify and contain", ok: true, why: "You'll need old data during that long investigation." },
-            { t: "So alerts can be sent by SMS", why: "Unrelated to archiving." }
+            { t: "So alerts can be sent by SMS", why: "Alerting by SMS has nothing to do with how long you keep data." }
           ],
           hint: "How long do breaches go unnoticed?",
           explain: "Long detection times mean old logs are critical. Law may also mandate retention.",
@@ -950,14 +950,14 @@ window.SECPLUS = window.SECPLUS || {};
           prompt: "Match each thing to monitor with its category from the notes.",
           choices: ["Systems", "Applications", "Infrastructure"],
           items: [
-            { t: "Logins from strange places", a: "Systems", why: "Authentication monitoring." },
-            { t: "Uptime and response times", a: "Applications", why: "Availability monitoring." },
-            { t: "Vendor and guest remote access", a: "Infrastructure", why: "Remote access systems." },
-            { t: "Increases or decreases in data transfer rates", a: "Applications", why: "Data transfers." },
+            { t: "Logins from strange places", a: "Systems", why: "Logins from odd locations are an authentication check on your systems." },
+            { t: "Uptime and response times", a: "Applications", why: "Whether an app is up and responding fast is application monitoring." },
+            { t: "Vendor and guest remote access", a: "Infrastructure", why: "Who connects remotely (vendors, guests) is watched at the infrastructure level." },
+            { t: "Increases or decreases in data transfer rates", a: "Applications", why: "A sudden change in how much data an app sends can signal a problem in that application." },
             { t: "Firewall and IPS reports", a: "Infrastructure", why: "Shows increases or types of attack." }
           ],
           hint: "Servers, apps, network gear.",
-          explain: "Monitoring covers systems, applications and infrastructure.",
+          explain: "Systems: logins and servers. Applications: uptime and data transfers. Infrastructure: remote access and firewall/IPS reports.",
           pages: [77]
         },
         {
@@ -1013,9 +1013,9 @@ window.SECPLUS = window.SECPLUS || {};
           choices: ["SCAP", "NetFlow", "SNMP trap", "DLP", "CIS benchmark"],
           items: [
             { t: "Lets different vendors' tools evaluate the same criteria", a: "SCAP", why: "A shared standard that enables automation between tools." },
-            { t: "A probe sends traffic flow summaries to a collector", a: "NetFlow", why: "Probe and collector." },
+            { t: "A probe sends traffic flow summaries to a collector", a: "NetFlow", why: "NetFlow: a probe watches traffic and sends flow summaries to a collector." },
             { t: "A switch alerts the moment CRC errors cross a threshold", a: "SNMP trap", why: "Sent by the device over udp/162." },
-            { t: "Stops credit card numbers leaving by email", a: "DLP", why: "Prevents data leakage." },
+            { t: "Stops credit card numbers leaving by email", a: "DLP", why: "DLP (data loss prevention) stops sensitive data like card numbers from leaving." },
             { t: "Minimum recommended security settings for an OS", a: "CIS benchmark", why: "Benchmarks are best-practice baselines." }
           ],
           hint: "Standard, flows, push alert, leak, baseline.",
@@ -1026,7 +1026,7 @@ window.SECPLUS = window.SECPLUS || {};
           id: "d4-tools-a2", type: "choice", format: "Compare",
           prompt: "What's the trade-off of an agentless compliance check compared with an installed agent?",
           options: [
-            { t: "It needs constant updates on every device", why: "That's the agent's downside." },
+            { t: "It needs constant updates on every device", why: "That's the downside of an installed agent. Agentless needs no updates, but can't alert when it isn't running." },
             { t: "It gives more detail than an agent", why: "Agents usually give more detail." },
             { t: "It can't alert you when it isn't running", ok: true, why: "It runs, checks, then disappears." },
             { t: "It requires a formal install on each device", why: "Agentless means no formal install." }
@@ -1052,10 +1052,10 @@ window.SECPLUS = window.SECPLUS || {};
           id: "d4-tools-a4", type: "multi", format: "Investigate",
           prompt: "Which are SIEM capabilities listed in the notes? Select all that apply.",
           options: [
-            { t: "Log aggregation and long-term storage", ok: true, why: "Listed." },
-            { t: "Data correlation across diverse data types", ok: true, why: "Listed." },
-            { t: "Forensic analysis after an event", ok: true, why: "Listed." },
-            { t: "Physically destroying old hard drives", why: "That's media sanitization." }
+            { t: "Log aggregation and long-term storage", ok: true, why: "Correct: a SIEM collects logs in one place and keeps them for a long time." },
+            { t: "Data correlation across diverse data types", ok: true, why: "Correct: it links events from different systems to spot attacks." },
+            { t: "Forensic analysis after an event", ok: true, why: "Correct: its stored data helps investigate what happened after an event." },
+            { t: "Physically destroying old hard drives", why: "Destroying drives is media sanitization, a physical job a SIEM can't do." }
           ],
           hint: "Collect, link, investigate.",
           explain: "A SIEM collects, stores, correlates and supports investigation.",
@@ -1097,14 +1097,14 @@ window.SECPLUS = window.SECPLUS || {};
           prompt: "Match each service to its default port from the notes.",
           choices: ["tcp/22", "tcp/443", "tcp/3389", "udp/53", "udp/123"],
           items: [
-            { t: "SSH", a: "tcp/22", why: "SSH server." },
-            { t: "HTTPS web server", a: "tcp/443", why: "Web uses tcp/80 and tcp/443." },
-            { t: "Microsoft RDP", a: "tcp/3389", why: "Remote Desktop." },
-            { t: "DNS query", a: "udp/53", why: "DNS." },
-            { t: "NTP", a: "udp/123", why: "Network Time Protocol." }
+            { t: "SSH", a: "tcp/22", why: "SSH uses tcp/22." },
+            { t: "HTTPS web server", a: "tcp/443", why: "HTTPS uses tcp/443; plain HTTP uses tcp/80." },
+            { t: "Microsoft RDP", a: "tcp/3389", why: "Microsoft Remote Desktop (RDP) uses tcp/3389." },
+            { t: "DNS query", a: "udp/53", why: "DNS lookups use udp/53." },
+            { t: "NTP", a: "udp/123", why: "NTP (time sync) uses udp/123." }
           ],
           hint: "Two of these are UDP.",
-          explain: "Port-based rules use these destination ports.",
+          explain: "Memorize these: SSH 22, HTTP 80, HTTPS 443, RDP 3389, DNS udp/53, NTP udp/123.",
           pages: [79]
         },
         {
@@ -1112,9 +1112,9 @@ window.SECPLUS = window.SECPLUS || {};
           prompt: "You add one allow rule for tcp/443 and nothing else. Traffic to tcp/8080 is dropped. Why?",
           options: [
             { t: "The implicit deny at the bottom of the rule list", ok: true, why: "Most firewalls deny anything not explicitly allowed." },
-            { t: "Port 8080 is reserved for SNMP", why: "SNMP uses udp/161 and 162." },
+            { t: "Port 8080 is reserved for SNMP", why: "8080 isn't SNMP; SNMP uses udp/161 and 162. The traffic was dropped because nothing allowed it." },
             { t: "Rules are read bottom to top", why: "They're usually read top to bottom." },
-            { t: "NAT always blocks high-numbered ports", why: "That's not how NAT works." }
+            { t: "NAT always blocks high-numbered ports", why: "NAT translates addresses; it doesn't block ports. The implicit deny did." }
           ],
           hint: "What's there even if you didn't add it?",
           explain: "Implicit deny drops anything no rule allowed.",
@@ -1125,9 +1125,9 @@ window.SECPLUS = window.SECPLUS || {};
           prompt: "Which feature defines a next-generation firewall?",
           options: [
             { t: "It only filters by port number", why: "That's a traditional firewall." },
-            { t: "It can't do NAT", why: "Firewalls commonly do NAT." },
+            { t: "It can't do NAT", why: "NGFWs can do NAT. What makes them 'next generation' is understanding applications." },
             { t: "It understands applications at OSI layer 7", ok: true, why: "Also called deep packet inspection or an application layer gateway." },
-            { t: "It has no rule list", why: "NGFWs still use rules." }
+            { t: "It has no rule list", why: "NGFWs still use rule lists. The difference is they can write rules about applications." }
           ],
           hint: "Which OSI layer?",
           explain: "An NGFW analyzes and categorizes every packet by application.",
@@ -1137,10 +1137,10 @@ window.SECPLUS = window.SECPLUS || {};
           id: "d4-firewalls-a4", type: "choice", format: "Next action",
           prompt: "Your IPS flags a new internal file-sharing pattern that matches no signature but is far from normal traffic. Which detection method fired?",
           options: [
-            { t: "Signature-based", why: "No signature matched." },
+            { t: "Signature-based", why: "No signature matched, so it wasn't signature-based. It was flagged for being unlike normal traffic." },
             { t: "Anomaly-based", ok: true, why: "It compares traffic to a baseline of normal." },
             { t: "Implicit deny", why: "That's a firewall rule, not IPS detection." },
-            { t: "Screened subnet", why: "That's a network design." }
+            { t: "Screened subnet", why: "A screened subnet is a network layout, not a way to detect attacks." }
           ],
           hint: "Baseline of normal.",
           explain: "Anomaly-based IPS flags unusual patterns; signature-based needs an exact match.",
@@ -1183,7 +1183,7 @@ window.SECPLUS = window.SECPLUS || {};
           options: [
             { t: "A URL category block list in the browser", why: "The malware isn't browsing, so URL filtering may never see it." },
             { t: "DNS filtering", ok: true, why: "It works for any DNS lookup: no IP address, no connection." },
-            { t: "A parental control setting", why: "Not aimed at server traffic." },
+            { t: "A parental control setting", why: "Parental controls filter what people browse. They won't stop a server's malware from connecting." },
             { t: "A transparent proxy that caches images", why: "Caching web content doesn't stop a non-web connection." }
           ],
           hint: "Every connection by name starts with a lookup.",
@@ -1197,18 +1197,18 @@ window.SECPLUS = window.SECPLUS || {};
           items: [
             { t: "Filters on the laptop itself, even at a café", a: "Agent-based", why: "The local agent makes the decisions anywhere." },
             { t: "A central internal proxy that controls user access to the Internet", a: "Forward proxy", why: "Sits between users and the Internet." },
-            { t: "A site rated suspicious is blocked automatically", a: "Reputation", why: "Filtering on perceived risk." },
+            { t: "A site rated suspicious is blocked automatically", a: "Reputation", why: "Reputation filtering blocks sites based on how risky they're rated." },
             { t: "All gambling sites are blocked", a: "Block rule by category", why: "A category with a block disposition." }
           ],
           hint: "Where does the decision happen, and on what basis?",
-          explain: "Filters differ in where they run and what they judge.",
+          explain: "Agents filter on the device, proxies filter in the middle, reputation scores sites by risk, and block rules target URLs or categories.",
           pages: [80, 81]
         },
         {
           id: "d4-webfilter-a3", type: "choice", format: "Compare",
           prompt: "What's the difference between an explicit and a transparent proxy?",
           options: [
-            { t: "Explicit proxies encrypt everything; transparent ones don't", why: "That's not the distinction." },
+            { t: "Explicit proxies encrypt everything; transparent ones don't", why: "Encryption isn't the difference. With explicit, the app is set up to use the proxy; transparent is invisible to it." },
             { t: "Applications must be configured for an explicit proxy; a transparent proxy is invisible to them", ok: true, why: "That's how the notes define them." },
             { t: "Transparent proxies can't cache content", why: "Caching is a general proxy feature." },
             { t: "A transparent proxy must be configured in every application, while an explicit proxy is invisible to the apps", why: "Reversed: explicit proxies need app configuration; transparent ones are invisible." }
@@ -1305,7 +1305,7 @@ window.SECPLUS = window.SECPLUS || {};
           prompt: "An app is said to be secure because it uses port 443. What should you do according to the notes?",
           options: [
             { t: "Accept it, because 443 always means HTTPS", why: "The port number doesn't guarantee security." },
-            { t: "Confirm the security features are enabled, using a packet capture if needed", ok: true, why: "Verify, don't assume." },
+            { t: "Confirm the security features are enabled, using a packet capture if needed", ok: true, why: "Correct: the port number alone proves nothing. Check that encryption is really on." },
             { t: "Move it to port 80, since traffic on the standard HTTP port is easier for the firewall to inspect", why: "Port 80 is in-the-clear HTTP, which makes things worse." },
             { t: "Disable the firewall to test it", why: "That isn't a verification step." }
           ],
@@ -1317,9 +1317,9 @@ window.SECPLUS = window.SECPLUS || {};
           id: "d4-secureproto-a2", type: "multi", format: "Investigate",
           prompt: "Which protocols do the notes list as sending traffic in the clear? Select all that apply.",
           options: [
-            { t: "Telnet", ok: true, why: "Listed." },
-            { t: "FTP", ok: true, why: "Listed." },
-            { t: "IMAP", ok: true, why: "Listed." },
+            { t: "Telnet", ok: true, why: "Correct: Telnet sends everything, even passwords, as plain text. Use SSH instead." },
+            { t: "FTP", ok: true, why: "Correct: FTP sends logins and files unencrypted. Use SFTP instead." },
+            { t: "IMAP", ok: true, why: "Correct: IMAP is unencrypted. IMAPS adds encryption." },
             { t: "HTTPS", why: "HTTPS is encrypted web browsing." }
           ],
           hint: "One is the encrypted version of web browsing.",
@@ -1345,9 +1345,9 @@ window.SECPLUS = window.SECPLUS || {};
           choices: ["SSH", "HTTPS", "IMAPS", "SFTP"],
           items: [
             { t: "Telnet (remote console)", a: "SSH", why: "SSH replaces Telnet for remote console access." },
-            { t: "HTTP (web browsing)", a: "HTTPS", why: "Encrypted web browsing." },
+            { t: "HTTP (web browsing)", a: "HTTPS", why: "HTTPS is HTTP with encryption." },
             { t: "IMAP (email client access)", a: "IMAPS", why: "IMAP over an encrypted connection." },
-            { t: "FTP (file transfer)", a: "SFTP", why: "Encrypted file transfer." }
+            { t: "FTP (file transfer)", a: "SFTP", why: "SFTP is the encrypted way to transfer files." }
           ],
           hint: "Most secure versions just add an S.",
           explain: "Pick the protocol with built-in encryption whenever one exists.",
@@ -1391,7 +1391,7 @@ window.SECPLUS = window.SECPLUS || {};
             { t: "Lists which servers may send mail for the domain", a: "SPF", why: "Authorized servers in a DNS TXT record." },
             { t: "Digitally signs outgoing messages", a: "DKIM", why: "Public key published in a DKIM TXT record." },
             { t: "Tells receivers to reject mail that fails checks and sends reports", a: "DMARC", why: "Policy plus compliance reports." },
-            { t: "Blocks suspicious inbound mail before users see it", a: "Mail gateway", why: "The gatekeeper." }
+            { t: "Blocks suspicious inbound mail before users see it", a: "Mail gateway", why: "A mail gateway checks mail at the door and blocks bad messages before they reach users." }
           ],
           hint: "List, sign, policy, gate.",
           explain: "SPF and DKIM validate; DMARC sets the policy; the gateway enforces at the door.",
@@ -1404,7 +1404,7 @@ window.SECPLUS = window.SECPLUS || {};
             { t: "A DMARC policy", ok: true, why: "DMARC tells receivers to accept, send to spam, or reject failures." },
             { t: "A second SPF record", why: "SPF lists servers but doesn't set the failure policy." },
             { t: "A DKIM signature on inbound mail", why: "DKIM signs your outgoing mail; it doesn't set policy." },
-            { t: "An MX record pointing to the attacker", why: "That would make things worse." }
+            { t: "An MX record pointing to the attacker", why: "An MX record says where to deliver mail. Pointing it at the attacker would hand them your email." }
           ],
           hint: "What should receivers do on failure?",
           explain: "DMARC builds on SPF and DKIM by adding a policy and reporting.",
@@ -1414,10 +1414,10 @@ window.SECPLUS = window.SECPLUS || {};
           id: "d4-email-a3", type: "choice", format: "Compare",
           prompt: "Where are SPF, DKIM and DMARC information published?",
           options: [
-            { t: "In each email's subject line", why: "No." },
-            { t: "In the receiver's spam folder", why: "No." },
+            { t: "In each email's subject line", why: "Subject lines are just text the sender writes, so they prove nothing. The records live in DNS." },
+            { t: "In the receiver's spam folder", why: "The spam folder is where failed mail may end up, not where the rules are published." },
             { t: "As TXT records in the sending domain's DNS", ok: true, why: "All three use DNS TXT records." },
-            { t: "On the end user's desktop", why: "Validation is server-side." }
+            { t: "On the end user's desktop", why: "Checks are done by mail servers using DNS, not on the user's computer." }
           ],
           hint: "Publicly available on the sender's…",
           explain: "Email validation lives in the sender's public DNS.",
@@ -1458,12 +1458,12 @@ window.SECPLUS = window.SECPLUS || {};
           prompt: "Match each DLP placement to the data state it protects.",
           choices: ["Data in use", "Data in motion", "Data at rest"],
           items: [
-            { t: "Endpoint DLP on a laptop", a: "Data in use", why: "On your computer." },
-            { t: "Network DLP watching traffic", a: "Data in motion", why: "On your network." },
-            { t: "DLP on a file server", a: "Data at rest", why: "On your server." }
+            { t: "Endpoint DLP on a laptop", a: "Data in use", why: "Endpoint DLP watches data being used on the laptop itself: data in use." },
+            { t: "Network DLP watching traffic", a: "Data in motion", why: "Network DLP watches data moving across the network: data in motion." },
+            { t: "DLP on a file server", a: "Data at rest", why: "DLP on a server protects stored files: data at rest." }
           ],
           hint: "Computer, network, server.",
-          explain: "DLP needs to be where the data is.",
+          explain: "Endpoint DLP = data in use, network DLP = data in motion, server DLP = data at rest.",
           pages: [82]
         },
         {
@@ -1471,9 +1471,9 @@ window.SECPLUS = window.SECPLUS || {};
           prompt: "You need to know immediately if a core system binary on a Linux server changes. Which tool fits?",
           options: [
             { t: "Tripwire (file integrity monitoring)", ok: true, why: "FIM flags changes to files that should never change." },
-            { t: "A mail gateway", why: "That screens email." },
-            { t: "USB blocking", why: "That stops removable media." },
-            { t: "A forward proxy", why: "That controls web access." }
+            { t: "A mail gateway", why: "A mail gateway filters email. Watching for changes to system files is file integrity monitoring." },
+            { t: "USB blocking", why: "USB blocking stops removable drives. It doesn't notice a changed file." },
+            { t: "A forward proxy", why: "A forward proxy controls web access. Tripwire watches files that should never change." }
           ],
           hint: "Some files should never change.",
           explain: "FIM: SFC on Windows, Tripwire on Linux.",
@@ -1483,9 +1483,9 @@ window.SECPLUS = window.SECPLUS || {};
           id: "d4-monitordata-a3", type: "choice", format: "Compare",
           prompt: "What lesson does the notes' Boeing spreadsheet incident teach?",
           options: [
-            { t: "Hidden spreadsheet columns are safe to email because recipients can't see them when the file opens", why: "That's exactly what leaked." },
+            { t: "Hidden spreadsheet columns are safe to email because recipients can't see them when the file opens", why: "Hidden columns are exactly what leaked 36,000 people's personal data, so they're not safe." },
             { t: "Having DLP software doesn't help if it isn't applied to the email that leaks", ok: true, why: "Boeing only used its DLP for classified work." },
-            { t: "USB drives are the only real DLP risk", why: "This leak was by email." },
+            { t: "USB drives are the only real DLP risk", why: "This leak happened by email, so USB isn't the only risk." },
             { t: "DLP only matters for classified data", why: "Personal data of 36,000 employees leaked." }
           ],
           hint: "They sold DLP software.",
@@ -1496,9 +1496,9 @@ window.SECPLUS = window.SECPLUS || {};
           id: "d4-monitordata-a4", type: "multi", format: "Investigate",
           prompt: "Which can cloud-based DLP do, per the notes? Select all that apply.",
           options: [
-            { t: "Block custom data strings unique to your organization", ok: true, why: "Listed." },
+            { t: "Block custom data strings unique to your organization", ok: true, why: "Correct: you can teach it data patterns unique to your company and block them." },
             { t: "Prevent file transfers to cloud storage", ok: true, why: "Listed under managing URL access." },
-            { t: "Block viruses and malware crossing the network", ok: true, why: "Listed." },
+            { t: "Block viruses and malware crossing the network", ok: true, why: "Correct: it scans all traffic passing through and blocks malware too." },
             { t: "Require hardware installed in every office", why: "Cloud-based DLP needs no hardware or software." }
           ],
           hint: "No hardware, no software.",
@@ -1542,12 +1542,12 @@ window.SECPLUS = window.SECPLUS || {};
           prompt: "Match each posture-check method to its description.",
           choices: ["Persistent agent", "Dissolvable agent", "Agentless NAC"],
           items: [
-            { t: "Permanently installed and periodically updated", a: "Persistent agent", why: "It stays on the system." },
-            { t: "Runs only during the assessment, then terminates", a: "Dissolvable agent", why: "No installation required." },
-            { t: "Checks during login and logoff through Active Directory, can't be scheduled", a: "Agentless NAC", why: "Integrated with AD." }
+            { t: "Permanently installed and periodically updated", a: "Persistent agent", why: "A persistent agent stays installed and gets updated over time." },
+            { t: "Runs only during the assessment, then terminates", a: "Dissolvable agent", why: "A dissolvable agent runs once for the check, then removes itself." },
+            { t: "Checks during login and logoff through Active Directory, can't be scheduled", a: "Agentless NAC", why: "Agentless NAC uses Active Directory to check at login and logoff; you can't schedule it." }
           ],
           hint: "Stays, vanishes, or never installs.",
-          explain: "Each method trades detail and upkeep differently.",
+          explain: "Persistent agents stay installed, dissolvable agents run once then vanish, agentless NAC checks at login through Active Directory.",
           pages: [83]
         },
         {
@@ -1555,9 +1555,9 @@ window.SECPLUS = window.SECPLUS || {};
           prompt: "A contractor's laptop fails the posture assessment because its anti-virus is out of date. What happens next?",
           options: [
             { t: "Give it full access but log the failure", why: "It's too dangerous to allow access." },
-            { t: "Put it on a quarantine network with just enough access to fix it, then reassess", ok: true, why: "That's the notes' flow." },
+            { t: "Put it on a quarantine network with just enough access to fix it, then reassess", ok: true, why: "Correct: quarantine gives just enough access to fix the problem, then the device is checked again." },
             { t: "Allow full access, since contractors are covered by the vendor's own security policies anyway", why: "A failed assessment means it's too dangerous to allow access." },
-            { t: "Turn off the posture check for contractors", why: "That removes the control." }
+            { t: "Turn off the posture check for contractors", why: "Turning the check off removes the protection entirely." }
           ],
           hint: "Fix it, then try again.",
           explain: "Quarantine, notify admins, remediate, reassess.",
@@ -1567,9 +1567,9 @@ window.SECPLUS = window.SECPLUS || {};
           id: "d4-endpoint-a3", type: "choice", format: "Compare",
           prompt: "What does XDR add on top of EDR?",
           options: [
-            { t: "It removes the endpoint agent entirely", why: "XDR still uses endpoint data." },
+            { t: "It removes the endpoint agent entirely", why: "XDR still uses endpoint agents, and adds network and cloud data on top." },
             { t: "It relies only on signatures", why: "EDR already moved beyond signatures." },
-            { t: "It replaces endpoint agents with yearly manual audits of every laptop, server and phone", why: "Not what XDR does." },
+            { t: "It replaces endpoint agents with yearly manual audits of every laptop, server and phone", why: "XDR is automatic and real-time, not yearly manual audits." },
             { t: "Network-based detection and correlation of endpoint, network and cloud data", ok: true, why: "Attacks involve more than the endpoint." }
           ],
           hint: "Extended beyond the endpoint.",
@@ -1650,7 +1650,7 @@ window.SECPLUS = window.SECPLUS || {};
           items: [
             { t: "The system works out which identity record you claim", a: "Resolution", why: "Who the system thinks you are." },
             { t: "You answer security questions and give a password", a: "Validation", why: "Gathering information from the user." },
-            { t: "You show a passport in person", a: "Verification/attestation", why: "Strong proof of identity." }
+            { t: "You show a passport in person", a: "Verification/attestation", why: "Showing a passport in person is verification: strong proof you are who you say." }
           ],
           hint: "Who you seem to be, what you know, what proves it.",
           explain: "Identity proofing confirms the person before IAM trusts them.",
@@ -1675,9 +1675,9 @@ window.SECPLUS = window.SECPLUS || {};
           choices: ["Container object", "Leaf object"],
           items: [
             { t: "Organizational unit", a: "Container object", why: "Containers hold other objects." },
-            { t: "Country", a: "Container object", why: "Top of the tree." },
-            { t: "A user", a: "Leaf object", why: "Users are leaves." },
-            { t: "A printer", a: "Leaf object", why: "Devices are leaves." }
+            { t: "Country", a: "Container object", why: "A country is a container at the top of the directory tree; it holds other objects." },
+            { t: "A user", a: "Leaf object", why: "Users are leaf objects: the end points of the tree, holding nothing beneath them." },
+            { t: "A printer", a: "Leaf object", why: "Printers and other devices are leaf objects too." }
           ],
           hint: "Branches vs. leaves.",
           explain: "The Directory Information Tree is a hierarchy of containers and leaves.",
@@ -1690,7 +1690,7 @@ window.SECPLUS = window.SECPLUS || {};
             { t: "A trust relationship for federation", ok: true, why: "Third parties must establish trust and its degree." },
             { t: "Local accounts with shared passwords", why: "That defeats federation and accountability." },
             { t: "SELinux on their laptops", why: "Unrelated to cross-organization login." },
-            { t: "A DMARC policy", why: "That's for email." }
+            { t: "A DMARC policy", why: "DMARC is an email anti-spoofing record. Cross-company logins need a federation trust." }
           ],
           hint: "Authenticate and authorize between two organizations.",
           explain: "Federation needs an agreed trust relationship.",
@@ -1734,13 +1734,13 @@ window.SECPLUS = window.SECPLUS || {};
           choices: ["MAC", "DAC", "RBAC", "Rule-based", "ABAC"],
           items: [
             { t: "A file labeled secret is readable only by users cleared for secret", a: "MAC", why: "Labels and clearances set by the administrator." },
-            { t: "You share your own spreadsheet with two teammates", a: "DAC", why: "The owner controls access." },
-            { t: "Anyone in the shipping group can use the shipping software", a: "RBAC", why: "Access comes from your role." },
+            { t: "You share your own spreadsheet with two teammates", a: "DAC", why: "When the owner decides who gets access, that's discretionary access control (DAC)." },
+            { t: "Anyone in the shipping group can use the shipping software", a: "RBAC", why: "Access based on your job role or group is role-based access control (RBAC)." },
             { t: "The lab network only works between 9 AM and 5 PM for everyone", a: "Rule-based", why: "A system rule on the object, not about who you are." },
             { t: "Access depends on IP, time, action and your relationship to the record together", a: "ABAC", why: "Combines many attributes with context." }
           ],
           hint: "Labels, owner, role, rule, many attributes.",
-          explain: "The models differ in who decides and on what basis.",
+          explain: "MAC uses labels set by admins, DAC lets the owner decide, RBAC uses your role, rule-based uses conditions, ABAC combines many attributes.",
           pages: [86]
         },
         {
@@ -1750,7 +1750,7 @@ window.SECPLUS = window.SECPLUS || {};
             { t: "Mandatory Access Control", why: "MAC is strict, and users can't change settings." },
             { t: "Discretionary Access Control", ok: true, why: "Owners can change access at any time." },
             { t: "Attribute-based access control", why: "ABAC is a next-generation, context-aware model." },
-            { t: "Role-based access control", why: "Admins assign access by role." }
+            { t: "Role-based access control", why: "RBAC is controlled by admins and fairly strong. DAC is the flexible but weak one." }
           ],
           hint: "The owner decides.",
           explain: "DAC is familiar from most OSes, flexible, and weak.",
@@ -1763,7 +1763,7 @@ window.SECPLUS = window.SECPLUS || {};
             { t: "Least privilege", ok: true, why: "Applications should run with minimal privileges." },
             { t: "Time-of-day restrictions", why: "The issue is excess rights, not timing." },
             { t: "Discretionary access control", why: "That's a model, not the broken principle." },
-            { t: "Federation", why: "Unrelated." }
+            { t: "Federation", why: "Federation is about logging in across companies. Too many rights breaks least privilege." }
           ],
           hint: "Bare minimum.",
           explain: "Limiting rights limits the scope of malicious behavior.",
@@ -1804,14 +1804,14 @@ window.SECPLUS = window.SECPLUS || {};
           prompt: "Match each authenticator to its factor.",
           choices: ["Something you know", "Something you have", "Something you are", "Somewhere you are"],
           items: [
-            { t: "A swipe pattern on a lock screen", a: "Something you know", why: "Only you know the pattern." },
-            { t: "A USB security key holding a certificate", a: "Something you have", why: "A physical device." },
-            { t: "An iris scan", a: "Something you are", why: "Biometric." },
-            { t: "A login allowed only from your country's IP range", a: "Somewhere you are", why: "Location-based." },
+            { t: "A swipe pattern on a lock screen", a: "Something you know", why: "A pattern you remember is something you know." },
+            { t: "A USB security key holding a certificate", a: "Something you have", why: "A physical USB key is something you have." },
+            { t: "An iris scan", a: "Something you are", why: "An iris scan is a biometric: something you are." },
+            { t: "A login allowed only from your country's IP range", a: "Somewhere you are", why: "Restricting by IP location is somewhere you are." },
             { t: "A code from an authenticator app", a: "Something you have", why: "A software token on your device." }
           ],
           hint: "Memory, object, body, place.",
-          explain: "MFA combines different factor categories.",
+          explain: "Know = password, PIN, pattern. Have = key, token, phone. Are = fingerprint, iris. Where = location.",
           pages: [87]
         },
         {
@@ -1819,7 +1819,7 @@ window.SECPLUS = window.SECPLUS || {};
           prompt: "A login asks for a password and then a security question. Is this multifactor?",
           options: [
             { t: "Yes, because there are two prompts", why: "Two prompts of the same kind are one factor." },
-            { t: "No, both are something you know", ok: true, why: "MFA needs different methods." },
+            { t: "No, both are something you know", ok: true, why: "Correct: two things you know is still one factor type. MFA needs different types." },
             { t: "Yes, because security questions are biometric", why: "They're knowledge, not biometrics." },
             { t: "No, because MFA requires exactly four factors", why: "Two different factors are enough." }
           ],
@@ -1876,8 +1876,8 @@ window.SECPLUS = window.SECPLUS || {};
           options: [
             { t: "Just-in-time permissions with ephemeral credentials from a vault", ok: true, why: "No permanent admin rights; access is time-limited." },
             { t: "Give the admins longer passwords and keep permanent rights", why: "Standing rights are still a great target." },
-            { t: "Share one admin password across the team", why: "That weakens accountability." },
-            { t: "Turn off logging for admin accounts", why: "That hides activity." }
+            { t: "Share one admin password across the team", why: "A shared password means you can't tell who did what, and it's still a permanent admin account." },
+            { t: "Turn off logging for admin accounts", why: "Turning off logging hides what admins do. It makes the risk worse." }
           ],
           hint: "No permanent administrator rights.",
           explain: "JIT narrows the scope of a breach: a stolen account has no elevated rights.",
@@ -1890,7 +1890,7 @@ window.SECPLUS = window.SECPLUS || {};
             { t: "The admin requests access from the central clearinghouse", why: "Requests go through one place." },
             { t: "Policy decides whether to grant or deny", why: "Based on predefined security policies." },
             { t: "A time-limited account with ephemeral credentials is created", why: "Primary passwords stay in the vault." },
-            { t: "The credentials are used for one session, then deleted", why: "Accounts are temporary." }
+            { t: "The credentials are used for one session, then deleted", why: "Final step: the temporary credentials are used once, then deleted." }
           ],
           hint: "Ask, decide, issue, expire.",
           explain: "JIT plus vaulting means primary passwords are never released.",
@@ -1901,9 +1901,9 @@ window.SECPLUS = window.SECPLUS || {};
           prompt: "What's the main reason to use a password manager?",
           options: [
             { t: "It lets you reuse one strong password everywhere", why: "The point is a different password per account." },
-            { t: "It removes the need for any encryption", why: "The database is encrypted." },
+            { t: "It removes the need for any encryption", why: "The password database is encrypted. The real benefit is having a different password everywhere." },
             { t: "It makes different passwords for every account practical", ok: true, why: "Remembering them all would be impractical." },
-            { t: "It replaces the need for password expiration in all cases", why: "The notes don't say that." }
+            { t: "It replaces the need for password expiration in all cases", why: "The notes don't say that. Password managers make unique passwords practical." }
           ],
           hint: "Different passwords, one database.",
           explain: "Password managers store unique passwords securely, and enterprise versions add recovery.",
@@ -1913,10 +1913,10 @@ window.SECPLUS = window.SECPLUS || {};
           id: "d4-passwords-a4", type: "multi", format: "Investigate",
           prompt: "Which steps increase password entropy, per the notes? Select all that apply.",
           options: [
-            { t: "Mixing upper and lower case with special characters", ok: true, why: "Listed." },
+            { t: "Mixing upper and lower case with special characters", ok: true, why: "Correct: mixing character types makes a password much harder to guess." },
             { t: "Using a phrase or set of words", ok: true, why: "The notes suggest considering a phrase." },
             { t: "Avoiding single dictionary words", ok: true, why: "No single words, no obvious passwords." },
-            { t: "Using your username as the password", why: "That's an obvious password." }
+            { t: "Using your username as the password", why: "Your username is the first thing an attacker would try." }
           ],
           hint: "One is the most obvious password of all.",
           explain: "Length and variety resist guessing and brute force.",
@@ -1957,11 +1957,11 @@ window.SECPLUS = window.SECPLUS || {};
           prompt: "Match each automation to its use case from the notes.",
           choices: ["User provisioning", "Guard rails", "Ticket creation", "Escalation", "Continuous integration and testing"],
           items: [
-            { t: "A new hire's accounts and access are created on day one", a: "User provisioning", why: "On-boarding." },
+            { t: "A new hire's accounts and access are created on day one", a: "User provisioning", why: "Creating accounts for a new hire automatically is user provisioning (on-boarding)." },
             { t: "A deploy is blocked because a validation found an open security group", a: "Guard rails", why: "Automated validations that limit behavior." },
             { t: "An email to the help desk becomes a ticket automatically", a: "Ticket creation", why: "Script email submissions into a ticket." },
             { t: "A script tries a fix, then pages the on-call tech if it fails", a: "Escalation", why: "Correct before involving a human." },
-            { t: "Every commit is tested and securely deployed", a: "Continuous integration and testing", why: "Constant updates, tested." }
+            { t: "Every commit is tested and securely deployed", a: "Continuous integration and testing", why: "Testing and deploying every commit automatically is continuous integration and testing." }
           ],
           hint: "Each one names the trigger and the action.",
           explain: "Automation fits wherever a task repeats and has clear rules.",
@@ -1973,8 +1973,8 @@ window.SECPLUS = window.SECPLUS || {};
           options: [
             { t: "Employee retention", why: "That's a benefit of automation." },
             { t: "Single point of failure", ok: true, why: "What happens if the script stops working?" },
-            { t: "Secure scaling", why: "That's a benefit." },
-            { t: "Reaction time", why: "That's a benefit." }
+            { t: "Secure scaling", why: "Secure scaling is a benefit of automation. The worry here is one fragile script everything depends on." },
+            { t: "Reaction time", why: "Fast reaction time is a benefit. The worry is that if the script breaks, everything stops." }
           ],
           hint: "If it breaks, everything stops.",
           explain: "One fragile script can become a deal-breaker. Plan for supportability too.",
@@ -1984,9 +1984,9 @@ window.SECPLUS = window.SECPLUS || {};
           id: "d4-automation-a3", type: "multi", format: "Investigate",
           prompt: "Which are automation benefits listed in the notes? Select all that apply.",
           options: [
-            { t: "Enforcing baselines by installing a missing patch automatically", ok: true, why: "Listed." },
-            { t: "Acting as a 24/7 workforce multiplier", ok: true, why: "Listed." },
-            { t: "Scaling cloud resources while keeping security in step", ok: true, why: "Secure scaling." },
+            { t: "Enforcing baselines by installing a missing patch automatically", ok: true, why: "Correct: a script can find and install a missing patch without anyone doing it by hand." },
+            { t: "Acting as a 24/7 workforce multiplier", ok: true, why: "Correct: scripts work around the clock, multiplying what the team can do." },
+            { t: "Scaling cloud resources while keeping security in step", ok: true, why: "Correct: when cloud resources scale up, automation applies the same security settings to them." },
             { t: "Eliminating all cost and technical debt", why: "Cost and technical debt are listed as considerations." }
           ],
           hint: "One option is a consideration, not a benefit.",
@@ -2031,8 +2031,8 @@ window.SECPLUS = window.SECPLUS || {};
           steps: [
             { t: "Preparation", why: "Tools, contacts and policies come first." },
             { t: "Detection and Analysis", why: "Identify that an incident is happening." },
-            { t: "Containment, Eradication, and Recovery", why: "Stop it, remove it, restore." },
-            { t: "Post-incident Activity", why: "Lessons learned." }
+            { t: "Containment, Eradication, and Recovery", why: "Step 3: stop the spread, remove the cause, then restore systems." },
+            { t: "Post-incident Activity", why: "Step 4: afterward, review what happened and learn from it." }
           ],
           hint: "Get ready, notice, fix, learn.",
           explain: "The four phases of NIST's Computer Security Incident Handling Guide.",
@@ -2043,9 +2043,9 @@ window.SECPLUS = window.SECPLUS || {};
           prompt: "Your web server logs show a vulnerability scanner probing your site, but nothing has been exploited. What is this?",
           options: [
             { t: "A precursor: a heads-up that an incident might occur", ok: true, why: "The notes list scanner activity in web logs as a heads-up." },
-            { t: "Proof of a successful breach that must be contained right away", why: "Nothing was exploited yet." },
-            { t: "A false negative", why: "It was detected." },
-            { t: "Post-incident activity", why: "There's been no incident yet." }
+            { t: "Proof of a successful breach that must be contained right away", why: "Nothing was exploited, so it's not a breach. It's a warning sign." },
+            { t: "A false negative", why: "A false negative is a missed problem. This was spotted in the logs." },
+            { t: "Post-incident activity", why: "Post-incident activity comes after an incident. Nothing has happened yet." }
           ],
           hint: "Future, not present.",
           explain: "Precursors warn of what's coming; analysis deals with attacks underway.",
@@ -2056,7 +2056,7 @@ window.SECPLUS = window.SECPLUS || {};
           prompt: "Why can isolating an infected machine sometimes be risky?",
           options: [
             { t: "Isolation always spreads the malware further, because cutting the cable forces it onto Wi-Fi networks", why: "Not always; usually it contains it." },
-            { t: "Some malware monitors connectivity and destroys or encrypts data when it's cut off", ok: true, why: "The notes warn about this." },
+            { t: "Some malware monitors connectivity and destroys or encrypts data when it's cut off", ok: true, why: "Correct: some malware watches its connection and destroys or encrypts data if it's cut off." },
             { t: "Sandboxes can't run malware", why: "Running malware safely is what sandboxes are for." },
             { t: "NIST forbids isolation", why: "Containment is part of the lifecycle." }
           ],
@@ -2069,10 +2069,10 @@ window.SECPLUS = window.SECPLUS || {};
           prompt: "Sort each step into eradication or recovery.",
           choices: ["Eradicate", "Recover"],
           items: [
-            { t: "Remove the malware", a: "Eradicate", why: "Remove the bad." },
-            { t: "Disable breached user accounts", a: "Eradicate", why: "Remove the attacker's access." },
-            { t: "Restore from backups", a: "Recover", why: "Get back to normal." },
-            { t: "Replace compromised files and tighten the perimeter", a: "Recover", why: "Rebuild and harden." }
+            { t: "Remove the malware", a: "Eradicate", why: "Removing the malware is eradication: getting rid of the cause." },
+            { t: "Disable breached user accounts", a: "Eradicate", why: "Disabling breached accounts removes the attacker's access: eradication." },
+            { t: "Restore from backups", a: "Recover", why: "Restoring backups gets you back to normal: recovery." },
+            { t: "Replace compromised files and tighten the perimeter", a: "Recover", why: "Replacing files and hardening the perimeter rebuilds the system: recovery." }
           ],
           hint: "Remove the bad, then rebuild.",
           explain: "Eradication removes the cause; recovery restores the system.",
@@ -2082,9 +2082,9 @@ window.SECPLUS = window.SECPLUS || {};
           id: "d4-ir-a5", type: "multi", format: "Investigate",
           prompt: "Which belong in incident preparation, per the notes? Select all that apply.",
           options: [
-            { t: "Clean OS and application images", ok: true, why: "Incident mitigation software." },
-            { t: "Critical file hash values and network diagrams", ok: true, why: "Incident analysis resources." },
-            { t: "Phones and contact information", ok: true, why: "Communication methods." },
+            { t: "Clean OS and application images", ok: true, why: "Correct: clean images let you rebuild infected systems quickly." },
+            { t: "Critical file hash values and network diagrams", ok: true, why: "Correct: known-good hashes and diagrams help you spot what changed." },
+            { t: "Phones and contact information", ok: true, why: "Correct: you need to know who to call and how to reach them." },
             { t: "Waiting until an incident to write the policy", why: "Policies are needed before, so everyone knows what to do." }
           ],
           hint: "Have it ready before you need it.",
@@ -2138,8 +2138,8 @@ window.SECPLUS = window.SECPLUS || {};
           id: "d4-irplanning-a2", type: "multi", format: "Investigate",
           prompt: "A simulated phishing email goes to all staff. What does it test? Select all that apply.",
           options: [
-            { t: "Whether the email filter let it through", ok: true, why: "Test internal security." },
-            { t: "Which users clicked", ok: true, why: "Test the users." },
+            { t: "Whether the email filter let it through", ok: true, why: "Correct: if the fake phish reached inboxes, the email filter missed it." },
+            { t: "Which users clicked", ok: true, why: "Correct: clicks show which people fell for it." },
             { t: "Who may need additional training", ok: true, why: "Clickers may need more training." },
             { t: "Whether backups restore correctly", why: "That's a recovery test, not a phishing simulation." }
           ],
@@ -2151,9 +2151,9 @@ window.SECPLUS = window.SECPLUS || {};
           id: "d4-irplanning-a3", type: "choice", format: "Compare",
           prompt: "During root cause analysis, the team blames a single misconfigured rule and stops. What warning from the notes applies?",
           options: [
-            { t: "Root cause analysis should be skipped for small incidents", why: "Not in the notes." },
-            { t: "Don't get tunnel vision; there can be more than one root cause", ok: true, why: "Keep asking why." },
-            { t: "Only intelligence data can find a root cause", why: "Not what the notes say." },
+            { t: "Root cause analysis should be skipped for small incidents", why: "The notes don't say to skip it. Even small incidents can have more than one cause." },
+            { t: "Don't get tunnel vision; there can be more than one root cause", ok: true, why: "Correct: keep asking 'why'. There may be more than one cause." },
+            { t: "Only intelligence data can find a root cause", why: "Not true. Root cause analysis uses facts from the incident itself." },
             { t: "Root causes are never backed by facts", why: "Conclusions should be backed by facts." }
           ],
           hint: "More than one.",
@@ -2196,7 +2196,7 @@ window.SECPLUS = window.SECPLUS || {};
           prompt: "A laptop with suspected malware is still running, and its disk is encrypted. Why might investigators collect data before powering it off?",
           options: [
             { t: "Data may be encrypted or difficult to collect after powering down", ok: true, why: "That's why live collection is an important skill." },
-            { t: "Powering off the laptop would automatically void the chain of custody for every file on it", why: "Not the reason." },
+            { t: "Powering off the laptop would automatically void the chain of custody for every file on it", why: "Shutting down doesn't void the chain of custody. The worry is losing memory or getting locked out by encryption." },
             { t: "RAM contents are written to disk at shutdown", why: "Memory contents are lost, not saved." },
             { t: "Chain of custody only starts after shutdown", why: "Chain of custody covers all handling." }
           ],
@@ -2211,7 +2211,7 @@ window.SECPLUS = window.SECPLUS || {};
           items: [
             { t: "Legal counsel tells custodians to preserve data for litigation", a: "Legal hold", why: "A hold notification starts ongoing preservation." },
             { t: "Every person who handles evidence is recorded, and hashes prove it's unchanged", a: "Chain of custody", why: "Controls evidence and integrity." },
-            { t: "Collecting RAM, disk, firmware and VM snapshots", a: "Acquisition", why: "Obtaining the data." },
+            { t: "Collecting RAM, disk, firmware and VM snapshots", a: "Acquisition", why: "Collecting RAM, disks, firmware and VM snapshots is acquisition: getting the data." },
             { t: "Producing electronic documents for the legal process without analyzing intent", a: "E-discovery", why: "Gathers data, generally without analysis." }
           ],
           hint: "Preserve, track, collect, produce.",
@@ -2222,8 +2222,8 @@ window.SECPLUS = window.SECPLUS || {};
           id: "d4-forensics-a3", type: "order", format: "Order",
           prompt: "Put the standard digital forensic process in order.",
           steps: [
-            { t: "Acquisition", why: "Obtain the data first." },
-            { t: "Analysis", why: "Then examine it." },
+            { t: "Acquisition", why: "Step 1: collect the data." },
+            { t: "Analysis", why: "Step 2: examine it to find out what happened." },
             { t: "Reporting", why: "Finally document findings and conclusions." }
           ],
           hint: "Collect, examine, document.",
@@ -2235,8 +2235,8 @@ window.SECPLUS = window.SECPLUS || {};
           prompt: "Why do forensic analysts work from copies of evidence?",
           options: [
             { t: "So the original can be analyzed later without any alterations", ok: true, why: "Preservation protects the original." },
-            { t: "Because copies are always faster to read and courts prefer evidence that has been converted", why: "Speed isn't the reason given." },
-            { t: "Because originals can't be hashed", why: "Originals can be hashed." },
+            { t: "Because copies are always faster to read and courts prefer evidence that has been converted", why: "Speed isn't the reason. Copies keep the original unchanged, which matters in court." },
+            { t: "Because originals can't be hashed", why: "Originals can be hashed. Copies are used so the original never changes." },
             { t: "To skip the chain of custody", why: "Copies don't remove that requirement." }
           ],
           hint: "Admissible in court.",
@@ -2283,9 +2283,9 @@ window.SECPLUS = window.SECPLUS || {};
           items: [
             { t: "Source IP, destination port and allow/deny disposition", a: "Firewall log", why: "Traffic flows through the firewall." },
             { t: "Timestamp and class of a known attack", a: "IPS/IDS log", why: "Predefined vulnerabilities with common data points." },
-            { t: "A policy change and a new process on a laptop", a: "Endpoint log", why: "Endpoint events." },
-            { t: "A routing update on a core router", a: "Network log", why: "Infrastructure changes." },
-            { t: "The sending servers listed in an email header", a: "Metadata", why: "Data describing other data." }
+            { t: "A policy change and a new process on a laptop", a: "Endpoint log", why: "Policy changes and new processes on a laptop show up in endpoint logs." },
+            { t: "A routing update on a core router", a: "Network log", why: "Routing updates come from network devices, so they're in network logs." },
+            { t: "The sending servers listed in an email header", a: "Metadata", why: "Email header details are metadata: data that describes the email." }
           ],
           hint: "Where would that event be recorded?",
           explain: "Each log type answers different questions, and the SIEM correlates them.",
@@ -2295,9 +2295,9 @@ window.SECPLUS = window.SECPLUS || {};
           id: "d4-logs-a2", type: "choice", format: "Scenario",
           prompt: "An unknown application is generating odd traffic, and the logs don't explain it. Which tool shows the details?",
           options: [
-            { t: "A dashboard", why: "Dashboards show summaries." },
+            { t: "A dashboard", why: "Dashboards show summaries. To see what an unknown app is actually sending, capture the packets." },
             { t: "A packet capture", ok: true, why: "It identifies unknown traffic and shows application data." },
-            { t: "An automated monthly report", why: "Too high-level and too slow." },
+            { t: "An automated monthly report", why: "A monthly report is too general and too late. A packet capture shows the traffic now." },
             { t: "A legal hold", why: "That preserves evidence for litigation." }
           ],
           hint: "Get into the details.",
@@ -2308,8 +2308,8 @@ window.SECPLUS = window.SECPLUS || {};
           id: "d4-logs-a3", type: "choice", format: "Compare",
           prompt: "What are dashboards not designed for, according to the notes?",
           options: [
-            { t: "Real-time status", why: "That's what they're for." },
-            { t: "Showing the most important data on one screen", why: "That's what they're for." },
+            { t: "Real-time status", why: "Real-time status is exactly what dashboards are for." },
+            { t: "Showing the most important data on one screen", why: "Showing the key data on one screen is what dashboards are for." },
             { t: "Customization", why: "Most allow adding and removing information." },
             { t: "Long-term analysis", ok: true, why: "Use reports and archives for that." }
           ],
@@ -2323,7 +2323,7 @@ window.SECPLUS = window.SECPLUS || {};
           options: [
             { t: "Stop collecting OS logs entirely", why: "They help find problems like brute force before they happen." },
             { t: "Filter, and don't forward everything", ok: true, why: "OS logs may require filtering." },
-            { t: "Only read logs after a breach", why: "That loses early detection." },
+            { t: "Only read logs after a breach", why: "Reading logs only after a breach means missing early warnings. Filter what you forward instead." },
             { t: "Replace the SIEM with dashboards", why: "Dashboards depend on that data." }
           ],
           hint: "Parse and filter.",

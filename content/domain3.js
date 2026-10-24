@@ -246,8 +246,8 @@ window.SECPLUS = window.SECPLUS || {};
           id: "d3-otherinfra-a4", type: "multi", format: "Investigate",
           prompt: "Your org is moving security monitoring to one central console. Which items do the notes list as trade-offs or benefits of centralizing? Select all that apply.",
           options: [
-            { t: "Correlated alerts", ok: true, why: "A listed benefit." },
-            { t: "Consolidated log file analysis", ok: true, why: "A listed benefit." },
+            { t: "Correlated alerts", ok: true, why: "Correct, a benefit: with everything in one console, related alerts from different systems can be linked together." },
+            { t: "Consolidated log file analysis", ok: true, why: "Correct, a benefit: all logs are analyzed in one place instead of on every system separately." },
             { t: "A possible single point of failure", ok: true, why: "The notes say 'it's not perfect' for this reason." },
             { t: "Guaranteed lower latency for every site", why: "The notes warn of potential performance issues, not guaranteed speed." }
           ],
@@ -294,13 +294,13 @@ window.SECPLUS = window.SECPLUS || {};
           choices: ["Resilience", "Scalability", "Risk transference", "Inability to patch", "Ease of recovery"],
           items: [
             { t: "How quickly can we repair after a failure (MTTR)?", a: "Resilience", why: "Resilience is about recovering and how fast." },
-            { t: "Capacity must grow and shrink many times a day", a: "Scalability", why: "Elasticity is scalability." },
+            { t: "Capacity must grow and shrink many times a day", a: "Scalability", why: "Scaling up and down quickly, many times a day, is elasticity, which is part of scalability." },
             { t: "Buy cybersecurity insurance to cover ransomware downtime", a: "Risk transference", why: "This moves the risk to a third party." },
             { t: "The HVAC controller has no update mechanism", a: "Inability to patch", why: "Embedded systems often can't be updated by users." },
             { t: "Reimage from the corporate image in 10 minutes", a: "Ease of recovery", why: "The notes compare a 1-hour media reload to a 10-minute image." }
           ],
           hint: "Each item has a keyword: repair, grow, insure, can't update, reimage.",
-          explain: "Design decisions weigh all of these against cost.",
+          explain: "Resilience is repair speed, scalability is growing and shrinking, insurance transfers risk, some devices can't be patched, and recovery should be easy.",
           pages: [54, 55]
         },
         {
@@ -322,8 +322,8 @@ window.SECPLUS = window.SECPLUS || {};
           options: [
             { t: "Mean time to repair, a resilience metric", ok: true, why: "The notes reference MTTR for resilience." },
             { t: "Maximum transfer throughput rate, a responsiveness metric", why: "That's invented and not the notes' term." },
-            { t: "Mean time to replicate, a backup metric", why: "It's repair, not replicate." },
-            { t: "Managed tenant trust rating, a cloud metric", why: "That's not a real term here." }
+            { t: "Mean time to replicate, a backup metric", why: "The R stands for repair: how long it takes on average to fix something. That's a resilience measure." },
+            { t: "Managed tenant trust rating, a cloud metric", why: "Made-up term. MTTR is mean time to repair, used to measure resilience." }
           ],
           hint: "Something will eventually break. How long to fix it?",
           explain: "MTTR measures how quickly you can recover.",
@@ -339,9 +339,9 @@ window.SECPLUS = window.SECPLUS || {};
           id: "d3-infracons-a5", type: "multi", format: "Investigate",
           prompt: "You're planning power and compute for a new data hall. Which statements match the notes? Select all that apply.",
           options: [
-            { t: "Primary power can come from one or more providers", ok: true, why: "Listed under power." },
-            { t: "Backup power includes a UPS and generators", ok: true, why: "Listed under backup services." },
-            { t: "Using multiple CPUs across clouds adds complexity but scales better", ok: true, why: "That's the compute trade-off." },
+            { t: "Primary power can come from one or more providers", ok: true, why: "Correct: main power can come from one utility or several for redundancy." },
+            { t: "Backup power includes a UPS and generators", ok: true, why: "Correct: a UPS covers the first minutes, and generators run longer outages." },
+            { t: "Using multiple CPUs across clouds adds complexity but scales better", ok: true, why: "Correct: spreading compute across clouds scales better but is harder to manage." },
             { t: "A single processor is always the most scalable option", why: "A single processor is easier to develop for, not more scalable." }
           ],
           hint: "Watch for 'always'.",
@@ -377,7 +377,7 @@ window.SECPLUS = window.SECPLUS || {};
           prompt: "You're asked to shrink the attack surface of a web app. Which actions do the notes list? Select all that apply.",
           options: [
             { t: "Audit the application code", ok: true, why: "Code is part of the attack surface." },
-            { t: "Block unneeded ports on the firewall", ok: true, why: "Open ports are entry points." },
+            { t: "Block unneeded ports on the firewall", ok: true, why: "Correct: every open port is a possible way in, so close the ones you don't need." },
             { t: "Monitor network traffic in real time", ok: true, why: "Listed as a way to minimize the surface." },
             { t: "Publish the admin interface publicly so it's easy to monitor", why: "That adds surface instead of reducing it." }
           ],
@@ -473,11 +473,11 @@ window.SECPLUS = window.SECPLUS || {};
           items: [
             { t: "Raises an alarm when it sees an exploit", a: "IDS", why: "Detection is an alarm or alert." },
             { t: "Stops the exploit before it enters the network", a: "IPS", why: "Prevention blocks in real time." },
-            { t: "Device dies and traffic continues uninspected", a: "Fail-open", why: "Data continues to flow." },
-            { t: "Device dies and nothing gets through", a: "Fail-closed", why: "Data does not flow." }
+            { t: "Device dies and traffic continues uninspected", a: "Fail-open", why: "Fail-open: if the device fails, traffic keeps flowing but isn't checked. Available, but less secure." },
+            { t: "Device dies and nothing gets through", a: "Fail-closed", why: "Fail-closed: if the device fails, nothing gets through. Secure, but the network is down." }
           ],
           hint: "Detect vs. prevent, and flow vs. no flow.",
-          explain: "These four terms show up in placement and design questions.",
+          explain: "An IDS only alerts; an IPS sits inline and blocks. If a device fails, fail-open lets traffic through and fail-closed stops it.",
           pages: [57]
         },
         {
@@ -554,9 +554,9 @@ window.SECPLUS = window.SECPLUS || {};
           id: "d3-appliances-a4", type: "multi", format: "Investigate",
           prompt: "Which features do the notes list for active/active load balancers? Select all that apply.",
           options: [
-            { t: "SSL offload (encryption and decryption)", ok: true, why: "Listed." },
-            { t: "Caching for fast responses", ok: true, why: "Listed." },
-            { t: "Content switching (application-centric balancing)", ok: true, why: "Listed." },
+            { t: "SSL offload (encryption and decryption)", ok: true, why: "Correct: the load balancer does the encryption work so the servers don't have to." },
+            { t: "Caching for fast responses", ok: true, why: "Correct: it can keep common responses ready and answer them instantly." },
+            { t: "Content switching (application-centric balancing)", ok: true, why: "Correct: it can send requests to different servers based on the application or content." },
             { t: "Issuing digital certificates to clients", why: "That's a CA's job, not a load balancer feature." }
           ],
           hint: "One belongs to PKI.",
@@ -610,7 +610,7 @@ window.SECPLUS = window.SECPLUS || {};
           prompt: "Match each 802.1X role.",
           choices: ["Supplicant", "Authenticator", "Authentication server"],
           items: [
-            { t: "The laptop asking to join the network", a: "Supplicant", why: "The supplicant is the client." },
+            { t: "The laptop asking to join the network", a: "Supplicant", why: "The supplicant is the device asking for access, here the laptop." },
             { t: "The switch port that grants or withholds access", a: "Authenticator", why: "The authenticator provides access." },
             { t: "The RADIUS server checking the credentials", a: "Authentication server", why: "It validates the client's credentials." }
           ],
@@ -624,7 +624,7 @@ window.SECPLUS = window.SECPLUS || {};
           options: [
             { t: "IEEE 802.1X port-based NAC", ok: true, why: "No network access until authentication succeeds." },
             { t: "A reverse proxy", why: "Proxies handle requests, not port access." },
-            { t: "Active/passive load balancing", why: "That isn't access control." },
+            { t: "Active/passive load balancing", why: "Load balancing spreads traffic across servers. Blocking a port until the user logs in is 802.1X." },
             { t: "A VLAN with no router", why: "VLANs segment but don't authenticate a port." }
           ],
           hint: "Port-based access control.",
@@ -669,7 +669,7 @@ window.SECPLUS = window.SECPLUS || {};
             { t: "A web application firewall", ok: true, why: "WAFs apply rules to HTTP/HTTPS and block unexpected input like SQLi." },
             { t: "A layer 4 port-based firewall", why: "It sees ports, not the SQL inside the HTTP request." },
             { t: "A forward proxy for employee browsing", why: "That controls outbound users, not inbound attacks." },
-            { t: "A UPS on the web server", why: "That's power resiliency." }
+            { t: "A UPS on the web server", why: "A UPS keeps power on during outages. It can't inspect web requests for SQL injection; a WAF can." }
           ],
           hint: "The rules need to understand HTTP conversations.",
           explain: "A WAF inspects web requests and allows or denies them based on expected input.",
@@ -680,7 +680,7 @@ window.SECPLUS = window.SECPLUS || {};
           prompt: "Match each description to the firewall type.",
           choices: ["Traditional (layer 4)", "NGFW", "WAF", "UTM"],
           items: [
-            { t: "Allows TCP port 443 and blocks everything else", a: "Traditional (layer 4)", why: "It filters by port number." },
+            { t: "Allows TCP port 443 and blocks everything else", a: "Traditional (layer 4)", why: "A traditional firewall decides by port number (layer 4), without understanding the application." },
             { t: "Allows Microsoft SQL Server but blocks YouTube, whatever the port", a: "NGFW", why: "It identifies applications at layer 7." },
             { t: "Rejects a form post containing script tags", a: "WAF", why: "It applies rules to HTTP conversations." },
             { t: "One box with spam filter, VPN endpoint, IPS and bandwidth shaper", a: "UTM", why: "All-in-one security appliance." }
@@ -693,10 +693,10 @@ window.SECPLUS = window.SECPLUS || {};
           id: "d3-firewalls-a3", type: "multi", format: "Investigate",
           prompt: "Which other names do the notes give for a next-generation firewall? Select all that apply.",
           options: [
-            { t: "Application layer gateway", ok: true, why: "Listed." },
-            { t: "Stateful multilayer inspection", ok: true, why: "Listed." },
-            { t: "Deep packet inspection", ok: true, why: "Listed." },
-            { t: "Port-based Network Access Control", why: "That's 802.1X." }
+            { t: "Application layer gateway", ok: true, why: "Correct: an NGFW is also called an application layer gateway, because it understands applications." },
+            { t: "Stateful multilayer inspection", ok: true, why: "Correct: it's also called stateful multilayer inspection." },
+            { t: "Deep packet inspection", ok: true, why: "Correct: it's also called deep packet inspection, because it looks inside packets." },
+            { t: "Port-based Network Access Control", why: "Port-based NAC is 802.1X, which controls who can join the network. It isn't a firewall." }
           ],
           hint: "One option belongs to port security.",
           explain: "NGFWs analyze and categorize every packet before deciding.",
@@ -752,7 +752,7 @@ window.SECPLUS = window.SECPLUS || {};
           prompt: "Why does the notes say an SSL/TLS VPN has '(almost) no firewall issues'?",
           options: [
             { t: "It uses the common SSL/TLS port tcp/443", ok: true, why: "Port 443 is almost always allowed outbound." },
-            { t: "It turns off the firewall while connected", why: "That's not how it works." },
+            { t: "It turns off the firewall while connected", why: "It never turns the firewall off. It uses tcp/443, the same port as normal HTTPS, which is almost always allowed." },
             { t: "It needs certificates on every firewall", why: "It doesn't require certificates or shared passwords." },
             { t: "It only works inside the local network", why: "It's for remote access across the Internet." }
           ],
@@ -810,27 +810,27 @@ window.SECPLUS = window.SECPLUS || {};
           prompt: "Classify each piece of data.",
           choices: ["PII", "PHI", "Trade secret", "Intellectual property", "Financial information"],
           items: [
-            { t: "Customer's full name, birth date and mother's maiden name", a: "PII", why: "It identifies an individual." },
+            { t: "Customer's full name, birth date and mother's maiden name", a: "PII", why: "Name, birth date and maiden name together identify one person: personally identifiable information (PII)." },
             { t: "A patient's diagnosis and treatment payments", a: "PHI", why: "Health information tied to a person." },
             { t: "The company's secret formula for a product", a: "Trade secret", why: "A secret unique to the organization." },
             { t: "A published logo and copyrighted user manual", a: "Intellectual property", why: "May be public but protected by copyright and trademark." },
-            { t: "Card numbers and bank records in the payments table", a: "Financial information", why: "Payment and banking data." }
+            { t: "Card numbers and bank records in the payments table", a: "Financial information", why: "Card numbers and bank records are financial information." }
           ],
           hint: "Identity, health, secret recipe, copyrighted, money.",
-          explain: "Classification drives how data is protected and handled.",
+          explain: "PII identifies a person, PHI is health data, trade secrets are hidden know-how, IP is protected creative work, and financial data covers money.",
           pages: [62]
         },
         {
           id: "d3-datatypes-a2", type: "choice", format: "Compare",
           prompt: "Which classification means 'very sensitive, must be approved to view'?",
           options: [
-            { t: "Confidential", ok: true, why: "That's the notes' definition." },
+            { t: "Confidential", ok: true, why: "Correct: confidential means very sensitive, and you need approval to see it." },
             { t: "Public / unclassified", why: "Public has no viewing restrictions." },
             { t: "Critical", why: "Critical is about availability: the data should always be available." },
             { t: "Proprietary", why: "Proprietary means owned by the organization, which is a different axis." }
           ],
           hint: "Approval required.",
-          explain: "Know each label's one-line meaning.",
+          explain: "Confidential = very sensitive, approval needed to view. Private = restricted, often PII. Public = anyone can see it.",
           pages: [62]
         },
         {
@@ -881,12 +881,12 @@ window.SECPLUS = window.SECPLUS || {};
           prompt: "Match each scenario to the state of data.",
           choices: ["Data at rest", "Data in transit", "Data in use"],
           items: [
-            { t: "Customer records on an encrypted SSD", a: "Data at rest", why: "Stored on a device." },
-            { t: "An API response travelling over TLS", a: "Data in transit", why: "Moving across the network." },
+            { t: "Customer records on an encrypted SSD", a: "Data at rest", why: "Data sitting on a drive is at rest, even when it's encrypted." },
+            { t: "An API response travelling over TLS", a: "Data in transit", why: "Data moving across a network is in transit; TLS protects it on the way." },
             { t: "Card numbers being processed in a POS terminal's RAM", a: "Data in use", why: "Actively processing in memory, usually decrypted." }
           ],
           hint: "Stored, moving, processing.",
-          explain: "Each state needs its own protections.",
+          explain: "At rest = stored, in transit = moving across a network, in use = in memory being processed.",
           pages: [62]
         },
         {
@@ -894,7 +894,7 @@ window.SECPLUS = window.SECPLUS || {};
           prompt: "A retailer encrypted card data at rest and in transit, but attackers still stole cards from the checkout terminals. Which state was exploited?",
           options: [
             { t: "Data in use (in memory)", ok: true, why: "As in the Target breach, data is decrypted in RAM while it's processed." },
-            { t: "Data at rest", why: "Stored data was encrypted." },
+            { t: "Data at rest", why: "Stored card data was encrypted, so it wasn't the weak point. The cards were read from memory while in use." },
             { t: "Data in transit", why: "Network traffic was encrypted." },
             { t: "Data sovereignty", why: "That's about legal jurisdiction, not a technical state." }
           ],
@@ -952,7 +952,7 @@ window.SECPLUS = window.SECPLUS || {};
           options: [
             { t: "Geofencing", ok: true, why: "It automatically allows or restricts access based on location." },
             { t: "Tokenization", why: "That replaces sensitive values with placeholders." },
-            { t: "Segmentation", why: "That separates data stores." },
+            { t: "Segmentation", why: "Segmentation separates data or networks. Unlocking features based on location is geofencing." },
             { t: "Hashing", why: "That's for integrity and password storage." }
           ],
           hint: "Location-based allow or deny.",
@@ -964,8 +964,8 @@ window.SECPLUS = window.SECPLUS || {};
           prompt: "Rank the location methods from most to least accurate, per the notes. Which order is right?",
           options: [
             { t: "GPS, then 802.11 wireless, then IP address", ok: true, why: "GPS is very accurate, 802.11 less, IP not very accurate." },
-            { t: "IP address, then GPS, then 802.11 wireless", why: "IP is the least accurate." },
-            { t: "802.11 wireless, then IP address, then GPS", why: "GPS is the most accurate." },
+            { t: "IP address, then GPS, then 802.11 wireless", why: "IP address is the least accurate, so it can't come first. The order is GPS, 802.11, then IP." },
+            { t: "802.11 wireless, then IP address, then GPS", why: "GPS is the most accurate, so it can't come last. The order is GPS, 802.11, then IP." },
             { t: "All three are equally accurate", why: "The notes rank them differently." }
           ],
           hint: "Satellites beat IP lookups.",
@@ -984,7 +984,7 @@ window.SECPLUS = window.SECPLUS || {};
             { t: "Password and MFA policies plus access rights after login", a: "Permission restrictions", why: "They control access to an account and what it can do." }
           ],
           hint: "Reversible, one-way, scrambled code, split, controlled access.",
-          explain: "Layer several protections. No single one covers everything.",
+          explain: "Encryption is two-way, hashing is one-way, obfuscation makes code unreadable, segmentation splits data up, and permissions limit access.",
           pages: [63, 64]
         },
         {
@@ -1062,10 +1062,10 @@ window.SECPLUS = window.SECPLUS || {};
           prompt: "Put the site resiliency process in order.",
           steps: [
             { t: "Prepare the recovery site and synchronize data", why: "It must be ready before anything happens." },
-            { t: "A disaster is called", why: "This triggers the failover." },
+            { t: "A disaster is called", why: "Someone officially declares a disaster, which starts the move to the recovery site." },
             { t: "Business processes fail over to the alternate site", why: "Operations continue elsewhere." },
             { t: "The problem is addressed at the primary", why: "This may take hours, weeks or longer." },
-            { t: "Revert back to the primary location", why: "Document this direction too." }
+            { t: "Revert back to the primary location", why: "Coming back to the main site is the last step, and it needs its own documented plan too." }
           ],
           hint: "Prep, declare, move, fix, return.",
           explain: "Document and practice both directions of the move.",
@@ -1118,12 +1118,12 @@ window.SECPLUS = window.SECPLUS || {};
           prompt: "Match each capacity action to its area.",
           choices: ["People", "Technology", "Infrastructure"],
           items: [
-            { t: "Hire more call center agents for launch week", a: "People", why: "Human capacity." },
+            { t: "Hire more call center agents for launch week", a: "People", why: "More staff for a busy week is people capacity." },
             { t: "Split the database across clustered SQL servers", a: "Technology", why: "Choosing technology that scales." },
             { t: "Add cloud-based storage and network capacity for a spike", a: "Infrastructure", why: "The underlying CPU, network and storage." }
           ],
           hint: "Humans, software choices, underlying resources.",
-          explain: "Balance all three to match demand.",
+          explain: "Capacity planning balances people, technology and infrastructure against demand.",
           pages: [65]
         },
         {
@@ -1179,7 +1179,7 @@ window.SECPLUS = window.SECPLUS || {};
             { t: "Remove a faulty CPU from the pool and keep processing", a: "Parallel processing", why: "Improved recovery by dropping the bad processor." }
           ],
           hint: "Talk, fake event, switch over, split work.",
-          explain: "Different tests trade realism for cost.",
+          explain: "Tabletop = talk it through, simulation = a realistic fake event, fail over = actually switch to backup, parallel processing = many CPUs sharing work.",
           pages: [66]
         },
         {
@@ -1230,8 +1230,8 @@ window.SECPLUS = window.SECPLUS || {};
           id: "d3-backups-a1", type: "order", format: "Order",
           prompt: "Put the journaling write process in order.",
           steps: [
-            { t: "Write a journal entry describing the change", why: "Record the intent first." },
-            { t: "Write the data to storage", why: "Now perform the actual write." },
+            { t: "Write a journal entry describing the change", why: "Step 1: write what you're about to change into the journal first." },
+            { t: "Write the data to storage", why: "Step 2: now actually write the data. If power fails mid-write, the journal shows what to fix." },
             { t: "Clear the journal entry", why: "The write finished, so get ready for the next." }
           ],
           hint: "Note it, do it, clear the note.",
@@ -1256,13 +1256,13 @@ window.SECPLUS = window.SECPLUS || {};
           prompt: "Match each technique to its description.",
           choices: ["Snapshot", "Replication", "Offsite backup", "Onsite backup"],
           items: [
-            { t: "Instant VM backup; later ones hold only the changes", a: "Snapshot", why: "Fast to revert to any point." },
+            { t: "Instant VM backup; later ones hold only the changes", a: "Snapshot", why: "A snapshot captures a VM instantly; later snapshots store only what changed. Easy to roll back." },
             { t: "Near real-time synced copies at every remote site", a: "Replication", why: "An ongoing, almost real-time backup." },
-            { t: "Copy sent over a WAN and available after a building fire", a: "Offsite backup", why: "It survives a site disaster." },
-            { t: "Local copy available immediately without an Internet link", a: "Onsite backup", why: "Fast and generally cheaper." }
+            { t: "Copy sent over a WAN and available after a building fire", a: "Offsite backup", why: "A copy stored at another site (offsite) survives if the building burns down." },
+            { t: "Local copy available immediately without an Internet link", a: "Onsite backup", why: "A local (onsite) copy is fast to restore and needs no Internet, but it's lost if the site is." }
           ],
           hint: "Point in time, continuous, far away, close by.",
-          explain: "Most organizations combine several methods.",
+          explain: "Snapshots roll back quickly, replication keeps live copies in sync, offsite copies survive disasters, and onsite copies restore fast.",
           pages: [66, 67]
         },
         {
@@ -1311,9 +1311,9 @@ window.SECPLUS = window.SECPLUS || {};
           id: "d3-power-a1", type: "order", format: "Order",
           prompt: "Utility power fails at a data center with a UPS and a generator. Put the events in order.",
           steps: [
-            { t: "Utility power drops", why: "This starts everything." },
+            { t: "Utility power drops", why: "Step 1: the utility power goes out." },
             { t: "The UPS batteries carry the load immediately", why: "Short-term backup with no interruption." },
-            { t: "The generator starts and gets up to speed", why: "It takes a few minutes." },
+            { t: "The generator starts and gets up to speed", why: "The generator takes a few minutes to start and get up to speed. The UPS covers that gap." },
             { t: "The generator takes over long-term power", why: "With fuel, it can power the building for a long time." }
           ],
           hint: "Batteries bridge the gap.",
@@ -1325,9 +1325,9 @@ window.SECPLUS = window.SECPLUS || {};
           prompt: "Which is a UPS type listed in the notes?",
           options: [
             { t: "Line-interactive", ok: true, why: "Listed with offline/standby and online/double-conversion." },
-            { t: "Active/passive", why: "That's a load balancing mode." },
+            { t: "Active/passive", why: "Active/passive describes load balancers, not UPS types. Line-interactive is a UPS type." },
             { t: "Fail-closed", why: "That's a security device failure mode." },
-            { t: "Site-to-site", why: "That's a VPN type." }
+            { t: "Site-to-site", why: "Site-to-site is a VPN type. Line-interactive is a UPS type." }
           ],
           hint: "Offline, line-…, online.",
           explain: "The three UPS types are offline/standby, line-interactive and online/double-conversion.",

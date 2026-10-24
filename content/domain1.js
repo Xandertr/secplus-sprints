@@ -380,7 +380,7 @@ window.SECPLUS = window.SECPLUS || {};
           options: [
             { t: "Employees' formal experience", ok: true, why: "The notes list this as part of the people baseline." },
             { t: "Current training levels", ok: true, why: "Training is part of evaluating people." },
-            { t: "Knowledge of security policies and procedures", ok: true, why: "This is listed explicitly." },
+            { t: "Knowledge of security policies and procedures", ok: true, why: "Correct: whether people know the security policies and procedures is part of the people side." },
             { t: "Firewall rule hit counts", why: "That's technical system data, not a people evaluation." },
             { t: "The CA's certificate revocation list", why: "This is a PKI artifact and unrelated to people." }
           ],
@@ -510,7 +510,7 @@ window.SECPLUS = window.SECPLUS || {};
             { t: "Sends sound waves and measures what bounces back", a: "Ultrasonic", why: "Ultrasonic sensors use reflected sound." }
           ],
           hint: "Heat, weight, big area, echo.",
-          explain: "Each sensor type senses a different physical signal.",
+          explain: "Infrared senses heat, pressure senses weight, microwave senses movement, and ultrasonic uses sound echoes.",
           pages: [16]
         },
         {
@@ -675,7 +675,7 @@ window.SECPLUS = window.SECPLUS || {};
             { t: "IT, who perform the actual upgrade", a: "Implementer", why: "In the notes' example, IT handles the change itself." }
           ],
           hint: "Who manages it, who's affected, who approves, who does it?",
-          explain: "Ownership and implementation are often different groups.",
+          explain: "Ownership: the owner requests and is responsible for the change, stakeholders are affected by it, the change control board approves it, and the implementer does the work.",
           pages: [17]
         },
         {
@@ -730,7 +730,7 @@ window.SECPLUS = window.SECPLUS || {};
             { t: "An allow list", ok: true, why: "Nothing runs unless it's approved." },
             { t: "A deny list", why: "A deny list blocks known-bad items and lets everything else run." },
             { t: "A compensating control", why: "This describes a control type, not an application execution policy." },
-            { t: "A honeyfile", why: "That's a deception tool." }
+            { t: "A honeyfile", why: "A honeyfile is a bait file that alerts when opened. Running only approved tools is an allow list." }
           ],
           hint: "Default-deny or default-allow?",
           explain: "Allow lists are very restrictive. Deny lists only block what's on the bad list.",
@@ -768,7 +768,7 @@ window.SECPLUS = window.SECPLUS || {};
             { t: "A dependency", ok: true, why: "To finish A, you must first finish B." },
             { t: "A legacy application", why: "Legacy refers to old, often unsupported apps, not version requirements." },
             { t: "A restricted activity", why: "That's about the approved scope of a change." },
-            { t: "A maintenance window", why: "That's about timing." }
+            { t: "A maintenance window", why: "A maintenance window is a scheduled time for changes. Needing a newer library is a dependency." }
           ],
           hint: "To complete A, you must complete B.",
           explain: "Dependencies can cross systems, and changing one component may require changing others.",
@@ -840,7 +840,7 @@ window.SECPLUS = window.SECPLUS || {};
             { t: "A third party holds copies of your decryption keys", ok: true, why: "It can be legitimate but needs careful process." },
             { t: "Encrypting a key with a second, stronger key", why: "That's closer to key wrapping, not escrow." },
             { t: "Revoking a key that may have been compromised", why: "That's revocation, handled with a CRL or OCSP." },
-            { t: "Generating keys inside a hardware module", why: "That describes an HSM or TPM." }
+            { t: "Generating keys inside a hardware module", why: "Generating keys inside hardware describes an HSM or TPM. Key escrow is a third party holding key copies." }
           ],
           hint: "Like a real estate escrow agent holding money for others.",
           explain: "Escrowed keys sit with someone else, which could be within your own organization.",
@@ -967,7 +967,7 @@ window.SECPLUS = window.SECPLUS || {};
             { t: "Out-of-band", ok: true, why: "The key never crosses the network." },
             { t: "In-band", why: "In-band would mean sending it over the network." },
             { t: "Key escrow", why: "Escrow is a third party holding keys." },
-            { t: "Key stretching", why: "That strengthens a weak key." }
+            { t: "Key stretching", why: "Key stretching makes a weak key harder to crack. Sharing a key by phone instead of the network is out-of-band." }
           ],
           hint: "Did the key travel on the 'net?",
           explain: "Out-of-band exchange uses the phone, a courier or a meeting in person.",
@@ -1096,7 +1096,7 @@ window.SECPLUS = window.SECPLUS || {};
             { t: "The QA dashboard shows ****-****-****-1234 to testers", a: "Data masking", why: "Part of the data is hidden from view." }
           ],
           hint: "Hidden inside, swapped out, partly covered.",
-          explain: "All three are obfuscation, applied differently.",
+          explain: "Steganography hides data inside something else, tokenization swaps it for a stand-in, and masking hides part of it from view.",
           pages: [22]
         },
         {
@@ -1105,7 +1105,7 @@ window.SECPLUS = window.SECPLUS || {};
           options: [
             { t: "The token and the original aren't mathematically related", ok: true, why: "There's nothing to decrypt. A lookup service maps them." },
             { t: "Tokens are always much longer than the original data they replace", why: "Length isn't the difference. The notes' example token is the same format." },
-            { t: "Tokenization only works on images", why: "That describes steganography." },
+            { t: "Tokenization only works on images", why: "Hiding data inside images is steganography. Tokens aren't encryption because there's no math linking them to the original." },
             { t: "Tokens use a public and private key pair", why: "That describes asymmetric encryption, not tokenization." }
           ],
           hint: "Could you reverse a token with math alone?",
@@ -1217,7 +1217,7 @@ window.SECPLUS = window.SECPLUS || {};
           prompt: "You download a test-runner binary, and the site posts its SHA-256 hash. What's the next action before installing?",
           options: [
             { t: "Hash your download and compare it to the posted value", ok: true, why: "A match confirms the file hasn't changed." },
-            { t: "Encrypt the binary with your public key", why: "That doesn't verify anything." },
+            { t: "Encrypt the binary with your public key", why: "Encrypting the file doesn't check it. Hash your copy and compare it with the posted hash." },
             { t: "Ask the vendor for their private key", why: "Private keys are never shared." },
             { t: "Rename the file so its hash changes", why: "Renaming doesn't change content hashes, and verification is the goal." }
           ],
@@ -1360,7 +1360,7 @@ window.SECPLUS = window.SECPLUS || {};
             { t: "A wildcard certificate for *.test.example.com", ok: true, why: "A wildcard applies to all server names in that domain." },
             { t: "A self-signed certificate for each host", why: "That works but isn't one certificate, and future hosts still need new ones." },
             { t: "OCSP stapling", why: "Stapling is about revocation status, not which names are covered." },
-            { t: "Key escrow", why: "Escrow is about holding keys." }
+            { t: "Key escrow", why: "Key escrow means a third party holds copies of keys. A wildcard certificate covers every host under one domain." }
           ],
           hint: "One name pattern for many hosts.",
           explain: "Wildcards (and the SAN extension) let one certificate cover many names.",
@@ -1370,8 +1370,8 @@ window.SECPLUS = window.SECPLUS || {};
           id: "d1-certs-a5", type: "multi", format: "Investigate",
           prompt: "You're inspecting an X.509 certificate. Which fields do the notes list as certificate details? Select all that apply.",
           options: [
-            { t: "Serial number", ok: true, why: "It's listed." },
-            { t: "Issuer", ok: true, why: "It's listed." },
+            { t: "Serial number", ok: true, why: "Correct: every certificate has a unique serial number." },
+            { t: "Issuer", ok: true, why: "Correct: the issuer is the CA that signed the certificate." },
             { t: "The holder's public key", ok: true, why: "Binding this key is the certificate's purpose." },
             { t: "The holder's private key", why: "Private keys are never placed in certificates." },
             { t: "The CA's private key", why: "The CA signs with it but never shares it." }

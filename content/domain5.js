@@ -37,10 +37,10 @@ window.SECPLUS = window.SECPLUS || {};
           id: "d5-policies-a1", type: "choice", format: "Compare",
           prompt: "According to the notes, what do security policies answer, and what do technical controls answer?",
           options: [
-            { t: "Policies answer 'how'; controls answer 'why'", why: "Reversed." },
+            { t: "Policies answer 'how'; controls answer 'why'", why: "That's reversed. Policies set what to do and why; technical controls carry out how." },
             { t: "Policies answer 'what' and 'why'; controls answer 'how'", ok: true, why: "That's the split in the notes." },
-            { t: "Both answer only 'who'", why: "Not the notes' framing." },
-            { t: "Policies answer 'when'; controls answer 'where'", why: "Not the notes' framing." }
+            { t: "Both answer only 'who'", why: "Policies and controls aren't about 'who'. Policies say what and why; controls say how." },
+            { t: "Policies answer 'when'; controls answer 'where'", why: "Not the split the notes make. Policies say what and why; controls say how." }
           ],
           hint: "Intent vs. implementation.",
           explain: "Policies set the rules and reasons; technology carries them out.",
@@ -52,7 +52,7 @@ window.SECPLUS = window.SECPLUS || {};
           options: [
             { t: "The disaster recovery plan", why: "That's for restoring IT after a disaster." },
             { t: "The acceptable use policy", ok: true, why: "It defines acceptable use of company assets." },
-            { t: "The SDLC", why: "That's for building software." },
+            { t: "The SDLC", why: "The SDLC is the process for building software. The AUP sets the rules for using company equipment." },
             { t: "NIST SP800-61", why: "That's an incident handling guide." }
           ],
           hint: "Acceptable use of company assets.",
@@ -64,7 +64,7 @@ window.SECPLUS = window.SECPLUS || {};
           prompt: "The payment system may go down for a day. The business wants to keep taking orders. What belongs in the business continuity plan?",
           options: [
             { t: "Manual alternatives like paper receipts and phone approvals, tested in advance", ok: true, why: "Continuity needs documented, tested alternatives." },
-            { t: "Nothing, because systems never fail", why: "Not everything goes to plan." },
+            { t: "Nothing, because systems never fail", why: "Systems do fail. Continuity means having tested backup ways of working, like paper receipts." },
             { t: "Improvise the alternatives during the outage, since every disaster is different and plans go stale", why: "They must be documented and tested before a problem." },
             { t: "A new acceptable use policy", why: "That doesn't keep the business running." }
           ],
@@ -77,14 +77,14 @@ window.SECPLUS = window.SECPLUS || {};
           prompt: "Match each incident response role to its description.",
           choices: ["Incident response team", "IT security management", "Compliance officers", "Technical staff", "User community"],
           items: [
-            { t: "A specialized group, trained and tested", a: "Incident response team", why: "They lead the response." },
-            { t: "Provides corporate support", a: "IT security management", why: "Leadership backing." },
+            { t: "A specialized group, trained and tested", a: "Incident response team", why: "The incident response team is trained and tested, and leads the response." },
+            { t: "Provides corporate support", a: "IT security management", why: "IT security management backs the response with company support and resources." },
             { t: "Knows the compliance rules in detail", a: "Compliance officers", why: "Intricate knowledge of compliance." },
-            { t: "The team in the trenches", a: "Technical staff", why: "Hands-on work." },
-            { t: "They see everything", a: "User community", why: "Users often notice first." }
+            { t: "The team in the trenches", a: "Technical staff", why: "Technical staff do the hands-on work of fixing systems." },
+            { t: "They see everything", a: "User community", why: "Users see everything happening day to day and often notice problems first." }
           ],
           hint: "Who does what during an incident?",
-          explain: "Incident response involves more than the IR team.",
+          explain: "The IR team leads, management supports, compliance officers know the rules, technical staff fix things, and users spot problems.",
           pages: [94]
         },
         {
@@ -124,8 +124,8 @@ window.SECPLUS = window.SECPLUS || {};
           items: [
             { t: "Only LDAP authentication to AD; no local accounts", a: "Password", why: "Acceptable authentication methods." },
             { t: "Mandatory access control only, no discretionary", a: "Access control", why: "Defines allowed access control types." },
-            { t: "Visitors need a mandatory escort", a: "Physical security", why: "Additional physical concerns." },
-            { t: "Minimum algorithms for data at rest", a: "Encryption", why: "Data encryption minimums." }
+            { t: "Visitors need a mandatory escort", a: "Physical security", why: "Escorting visitors is a rule about physical access to buildings." },
+            { t: "Minimum algorithms for data at rest", a: "Encryption", why: "Choosing which algorithms protect stored data belongs in the encryption standard." }
           ],
           hint: "Login, permissions, building, crypto.",
           explain: "Each standard formalizes one area so expectations are clear.",
@@ -135,10 +135,10 @@ window.SECPLUS = window.SECPLUS || {};
           id: "d5-standards-a2", type: "choice", format: "Scenario",
           prompt: "A contractor's engagement ends. Which standard should already document how their access is removed?",
           options: [
-            { t: "The encryption standard", why: "That covers cryptography." },
+            { t: "The encryption standard", why: "The encryption standard covers cryptography, not how a person's access is removed." },
             { t: "The access control standard", ok: true, why: "It documents removal for expiration, contract renewals and security issues." },
             { t: "The acceptable use policy", why: "That's about how assets may be used." },
-            { t: "The SDLC", why: "That's software development." }
+            { t: "The SDLC", why: "The SDLC is about building software. Removing someone's access belongs in the access control standard." }
           ],
           hint: "How access may be removed.",
           explain: "Access control standards cover granting and removing access.",
@@ -179,11 +179,11 @@ window.SECPLUS = window.SECPLUS || {};
           id: "d5-procedures-a1", type: "order", format: "Order",
           prompt: "Put the change control steps from the notes in order.",
           steps: [
-            { t: "Determine the scope of the change", why: "Know what's changing first." },
-            { t: "Analyze the risk", why: "Then understand the risk." },
-            { t: "Create a plan", why: "Plan the work." },
-            { t: "Get end-user approval", why: "Users sign off." },
-            { t: "Present the proposal to the change control board", why: "The board approves." },
+            { t: "Determine the scope of the change", why: "Step 1: work out exactly what's being changed." },
+            { t: "Analyze the risk", why: "Step 2: figure out what could go wrong." },
+            { t: "Create a plan", why: "Step 3: write a plan for making the change." },
+            { t: "Get end-user approval", why: "Step 4: the people affected agree to the change." },
+            { t: "Present the proposal to the change control board", why: "Step 5: the change control board reviews and approves it." },
             { t: "Document the changes", why: "Record what was done (with a backout plan ready throughout)." }
           ],
           hint: "Scope, risk, plan, users, board, record.",
@@ -196,7 +196,7 @@ window.SECPLUS = window.SECPLUS || {};
           options: [
             { t: "No, accounts must always be deleted immediately", why: "The notes say usually deactivated, not always deleted." },
             { t: "Yes, accounts are usually deactivated but not always deleted", ok: true, why: "That matches the offboarding notes." },
-            { t: "No, the account should stay active for a year", why: "It should be deactivated." },
+            { t: "No, the account should stay active for a year", why: "Leaving a former employee's account active for a year is a security risk. It should be deactivated." },
             { t: "Yes, and the hardware decision can be made later as needed", why: "Offboarding should be pre-planned, including hardware." }
           ],
           hint: "Deactivated vs. deleted.",
@@ -207,10 +207,10 @@ window.SECPLUS = window.SECPLUS || {};
           id: "d5-procedures-a3", type: "choice", format: "Compare",
           prompt: "Your ransomware playbook should trigger automated containment through integrated third-party tools. What platform do the notes mention?",
           options: [
-            { t: "SDLC", why: "That's software development." },
-            { t: "MOU", why: "That's an agreement type." },
+            { t: "SDLC", why: "The SDLC is the software development process. SOAR automates security playbooks." },
+            { t: "MOU", why: "An MOU is an informal agreement between parties, not a security tool." },
             { t: "SOAR", ok: true, why: "Security Orchestration, Automation, and Response." },
-            { t: "AUP", why: "That's acceptable use." }
+            { t: "AUP", why: "An AUP is a policy about using company assets, not an automation platform." }
           ],
           hint: "Orchestration, automation, response.",
           explain: "Playbooks often integrate with SOAR to automate steps.",
@@ -221,10 +221,10 @@ window.SECPLUS = window.SECPLUS || {};
           prompt: "Match each governance structure to its description.",
           choices: ["Board", "Committee", "Government entity", "Decentralized governance"],
           items: [
-            { t: "A panel of specialists gathering information for a committee", a: "Board", why: "Boards gather information." },
+            { t: "A panel of specialists gathering information for a committee", a: "Board", why: "A board is a panel of specialists who gather information for a committee." },
             { t: "Subject-matter experts who decide next steps and present results", a: "Committee", why: "Committees consider board input." },
-            { t: "Faces legal, administrative and political issues, often in public", a: "Government entity", why: "A different kind of machine." },
-            { t: "Decision-making spread across individuals or locations", a: "Decentralized governance", why: "Not one central group." }
+            { t: "Faces legal, administrative and political issues, often in public", a: "Government entity", why: "Government bodies deal with laws, administration and politics, often in public." },
+            { t: "Decision-making spread across individuals or locations", a: "Decentralized governance", why: "Decentralized means decisions are spread across people or locations, not one central group." }
           ],
           hint: "Who gathers, who decides, who's public, who's spread out.",
           explain: "Governance structures decide where processes and procedures come from.",
@@ -262,13 +262,13 @@ window.SECPLUS = window.SECPLUS || {};
           prompt: "Match each concern to its security consideration.",
           choices: ["Regulatory", "Legal", "Industry", "Geographical"],
           items: [
-            { t: "SOX requires certain financial record retention", a: "Regulatory", why: "A mandated regulation." },
+            { t: "SOX requires certain financial record retention", a: "Regulatory", why: "SOX is a law that companies must follow: a regulatory consideration." },
             { t: "A breach must be reported to affected people by law", a: "Legal", why: "Breach notification is a legal requirement." },
             { t: "A hospital needs highly secure storage and access logs", a: "Industry", why: "Medical industry requirements." },
-            { t: "A multinational faces widely varying laws across markets", a: "Geographical", why: "Global scope." }
+            { t: "A multinational faces widely varying laws across markets", a: "Geographical", why: "Operating in many countries means many different laws: a geographical consideration." }
           ],
           hint: "Regulation, law, market, location.",
-          explain: "Each consideration shapes security differently.",
+          explain: "Regulatory = mandated rules like SOX and HIPAA, legal = laws like breach notification, industry = sector needs, geographical = where you operate.",
           pages: [96]
         },
         {
@@ -278,7 +278,7 @@ window.SECPLUS = window.SECPLUS || {};
             { t: "Legal, because data moves between jurisdictions without human intervention", ok: true, why: "The security team must still follow legal guidelines." },
             { t: "Industry, because cloud is its own market", why: "The notes tie this to legal concerns." },
             { t: "None, since cloud providers take on every legal duty for the data they replicate between regions", why: "The security team must follow legal guidelines." },
-            { t: "Physical security", why: "Not the issue raised." }
+            { t: "Physical security", why: "Physical security isn't the issue. Data crossing borders raises legal questions about whose laws apply." }
           ],
           hint: "Which country's law applies?",
           explain: "Cloud computing makes legal responsibilities harder to track.",
@@ -319,10 +319,10 @@ window.SECPLUS = window.SECPLUS || {};
           prompt: "Match each person to their data role.",
           choices: ["Data owner", "Data controller", "Data processor", "Data custodian/steward"],
           items: [
-            { t: "The treasurer, accountable for financial information", a: "Data owner", why: "Often a senior officer." },
-            { t: "HR decides what personal data is processed for payroll and why", a: "Data controller", why: "Manages purposes and means." },
+            { t: "The treasurer, accountable for financial information", a: "Data owner", why: "The data owner is accountable for the data, usually a senior officer like the treasurer." },
+            { t: "HR decides what personal data is processed for payroll and why", a: "Data controller", why: "The data controller decides why and how personal data is processed." },
             { t: "An outside payroll firm that runs payroll for HR", a: "Data processor", why: "Processes on the controller's behalf." },
-            { t: "The admin who applies sensitivity labels and manages access rights", a: "Data custodian/steward", why: "Works directly with the data." }
+            { t: "The admin who applies sensitivity labels and manages access rights", a: "Data custodian/steward", why: "The custodian/steward works with the data every day: labels, access rights and security." }
           ],
           hint: "Accountable, decides, does, maintains.",
           explain: "Owners are accountable, controllers decide, processors act, custodians maintain.",
@@ -332,10 +332,10 @@ window.SECPLUS = window.SECPLUS || {};
           id: "d5-dataroles-a2", type: "choice", format: "Compare",
           prompt: "What's the key difference between a data controller and a data processor?",
           options: [
-            { t: "The processor decides why data is processed", why: "That's the controller." },
-            { t: "The controller manages purposes and means; the processor acts on the controller's behalf", ok: true, why: "Matches the notes." },
+            { t: "The processor decides why data is processed", why: "That's the controller's job. The processor only does the processing on the controller's behalf." },
+            { t: "The controller manages purposes and means; the processor acts on the controller's behalf", ok: true, why: "Correct: the controller decides the purpose and method; the processor does the work for them." },
             { t: "They're the same role with different names; GDPR just uses processor for what others call controller", why: "The notes define them separately." },
-            { t: "Only processors handle personal data", why: "Both deal with personal data." }
+            { t: "Only processors handle personal data", why: "Both handle personal data. The difference is who decides and who does the work." }
           ],
           hint: "Who decides vs. who does.",
           explain: "The payroll department is the controller; the payroll company is the processor.",
@@ -373,23 +373,23 @@ window.SECPLUS = window.SECPLUS || {};
           prompt: "Match each situation to the type of risk assessment.",
           choices: ["One-time", "Continuous", "Ad hoc", "Recurring"],
           items: [
-            { t: "Assessing risk for a company acquisition", a: "One-time", why: "Part of a one-time project." },
-            { t: "Every change request includes a risk assessment", a: "Continuous", why: "Built into change control." },
+            { t: "Assessing risk for a company acquisition", a: "One-time", why: "An acquisition is a one-off project, so its risk assessment is one-time." },
+            { t: "Every change request includes a risk assessment", a: "Continuous", why: "When every change includes a risk check, assessment is continuous." },
             { t: "The CEO asks if you're protected from an attack they just heard about", a: "Ad hoc", why: "Performed when the situation requires." },
             { t: "An annual assessment required by PCI DSS", a: "Recurring", why: "Mandated at standard intervals." }
           ],
           hint: "Project, process, surprise, schedule.",
-          explain: "Assessment timing depends on the trigger.",
+          explain: "One-time for a project, continuous inside a process, ad hoc when something comes up, recurring on a fixed schedule.",
           pages: [97]
         },
         {
           id: "d5-riskmgmt-a2", type: "choice", format: "Scenario",
           prompt: "After an ad hoc risk assessment is complete, what happens to the committee that ran it?",
           options: [
-            { t: "It becomes the permanent change control board", why: "Not in the notes." },
-            { t: "It's disbanded, since the risk may not need investigating again", ok: true, why: "Matches the notes' example." },
+            { t: "It becomes the permanent change control board", why: "No. An ad hoc committee is temporary and is disbanded when the assessment is done." },
+            { t: "It's disbanded, since the risk may not need investigating again", ok: true, why: "Correct: it was formed for one question, so it disbands once that's answered." },
             { t: "It must meet every quarter", why: "That's a recurring assessment." },
-            { t: "It reports to PCI DSS", why: "Unrelated." }
+            { t: "It reports to PCI DSS", why: "PCI DSS is a payment card standard, not someone a committee reports to." }
           ],
           hint: "Ad hoc means for this purpose.",
           explain: "Ad hoc assessments are one-off responses without a formal process.",
@@ -430,7 +430,7 @@ window.SECPLUS = window.SECPLUS || {};
           id: "d5-riskanalysis-a1", type: "choice", format: "Scenario",
           prompt: "A server worth $20,000 would lose half its value in a flood (EF 0.5). Floods hit twice a year (ARO 2). What's the ALE?",
           options: [
-            { t: "$10,000", why: "That's the SLE (AV × EF)." },
+            { t: "$10,000", why: "$10,000 is the loss from one flood (SLE). Two floods a year make the ALE $20,000." },
             { t: "$20,000", ok: true, why: "SLE $10,000 × ARO 2 = $20,000." },
             { t: "$40,000", why: "That's AV × ARO, skipping the exposure factor." },
             { t: "$5,000", why: "That divides instead of multiplies." }
@@ -445,23 +445,23 @@ window.SECPLUS = window.SECPLUS || {};
           choices: ["ARO", "AV", "EF", "SLE", "ALE"],
           items: [
             { t: "How many times per year the event is expected", a: "ARO", why: "Annualized rate of occurrence." },
-            { t: "What the asset is worth to the organization", a: "AV", why: "Asset value." },
-            { t: "The fraction of value lost in one incident", a: "EF", why: "Exposure factor." },
+            { t: "What the asset is worth to the organization", a: "AV", why: "AV (asset value) is what the asset is worth, including sales impact and fines." },
+            { t: "The fraction of value lost in one incident", a: "EF", why: "EF (exposure factor) is the share of value lost in one event, like 0.5 for half." },
             { t: "The cost of one event", a: "SLE", why: "Single loss expectancy = AV × EF." },
             { t: "The expected yearly loss", a: "ALE", why: "Annualized loss expectancy = ARO × SLE." }
           ],
           hint: "Rate, value, percentage, once, yearly.",
-          explain: "These five terms make up quantitative risk assessment.",
+          explain: "SLE = AV × EF (one event). ALE = ARO × SLE (per year).",
           pages: [97]
         },
         {
           id: "d5-riskanalysis-a3", type: "choice", format: "Compare",
           prompt: "In the notes' speed limit analogy, what represents risk tolerance?",
           options: [
-            { t: "The posted speed limit", why: "That's the risk appetite." },
+            { t: "The posted speed limit", why: "The posted limit is the risk appetite: the level you aim for." },
             { t: "Ticketing only well above the posted limit, adjusted for conditions", ok: true, why: "Tolerance is the acceptable variance from the appetite." },
-            { t: "The highest speed any car on that road is physically able to reach", why: "Not part of the analogy." },
-            { t: "The cost of a speeding ticket", why: "Not part of the analogy." }
+            { t: "The highest speed any car on that road is physically able to reach", why: "A car's top speed isn't in the analogy. Tolerance is how far over the limit is still accepted." },
+            { t: "The cost of a speeding ticket", why: "The fine isn't in the analogy. Tolerance is the leeway before a ticket is given." }
           ],
           hint: "The wiggle room.",
           explain: "Appetite is the target; tolerance is how far past it you'll accept.",
@@ -474,7 +474,7 @@ window.SECPLUS = window.SECPLUS || {};
             { t: "A risk owner assigned to manage it", ok: true, why: "Each indicator gets someone to manage the risk." },
             { t: "A traffic light color only", why: "That's a qualitative display, not a register requirement." },
             { t: "A guarantee it won't happen", why: "Registers manage risk; they can't eliminate it." },
-            { t: "Approval from PCI DSS", why: "Unrelated." }
+            { t: "Approval from PCI DSS", why: "PCI DSS is for card payments. Each risk indicator needs an owner who manages it." }
           ],
           hint: "Somebody has to own it.",
           explain: "Risk registers track indicators, owners and thresholds.",
@@ -521,9 +521,9 @@ window.SECPLUS = window.SECPLUS || {};
           choices: ["Transfer", "Accept", "Avoid", "Mitigate"],
           items: [
             { t: "Buy cybersecurity insurance", a: "Transfer", why: "Moves the risk to another party." },
-            { t: "Decide the small risk is worth taking", a: "Accept", why: "A business decision." },
-            { t: "Stop offering a high-risk service entirely", a: "Avoid", why: "Removes the risk." },
-            { t: "Invest in an IPS to lower the risk", a: "Mitigate", why: "Decreases the risk level." }
+            { t: "Decide the small risk is worth taking", a: "Accept", why: "Accepting means you knowingly take the risk." },
+            { t: "Stop offering a high-risk service entirely", a: "Avoid", why: "Avoiding means stopping the risky activity, so the risk goes away." },
+            { t: "Invest in an IPS to lower the risk", a: "Mitigate", why: "Mitigating means reducing the risk, for example with an IPS." }
           ],
           hint: "Pass it on, live with it, walk away, reduce it.",
           explain: "The four core strategies, with exemption and exception as forms of accept.",
@@ -536,7 +536,7 @@ window.SECPLUS = window.SECPLUS || {};
             { t: "Accept with exception", ok: true, why: "An internal policy isn't applied; this is the notes' own example." },
             { t: "Accept with exemption", why: "Exemptions relate to an external policy or regulation that can't be followed." },
             { t: "Transfer", why: "No other party takes the risk." },
-            { t: "Avoid", why: "The activity continues." }
+            { t: "Avoid", why: "Avoiding would mean stopping the activity. Here patching continues, just with a later deadline." }
           ],
           hint: "Internal policy, not regulation.",
           explain: "Exception: internal policy. Exemption: a policy or regulation that can't be followed.",
@@ -546,10 +546,10 @@ window.SECPLUS = window.SECPLUS || {};
           id: "d5-riskstrategies-a3", type: "choice", format: "Scenario",
           prompt: "Who is the usual audience of a formal risk report?",
           options: [
-            { t: "Every customer", why: "It's an internal document." },
+            { t: "Every customer", why: "A risk report is an internal document, not something shared with every customer." },
             { t: "Senior management, to decide on resources and budget", ok: true, why: "Usually created for senior management." },
-            { t: "Only the help desk, which uses it to prioritize tickets", why: "Not the intended audience." },
-            { t: "Attackers, as a deterrent", why: "Definitely not." }
+            { t: "Only the help desk, which uses it to prioritize tickets", why: "It's for senior management deciding on budget and resources, not ticket triage." },
+            { t: "Attackers, as a deterrent", why: "A risk report lists your weaknesses. Never give it to attackers." }
           ],
           hint: "Who controls budget?",
           explain: "Risk reports highlight critical and emerging risks for decision makers.",
@@ -589,10 +589,10 @@ window.SECPLUS = window.SECPLUS || {};
           prompt: "Match each question to the metric that answers it.",
           choices: ["RTO", "RPO", "MTTR", "MTBF"],
           items: [
-            { t: "How long until the service is back to its required level?", a: "RTO", why: "Recovery time objective." },
-            { t: "How much data can we afford to lose?", a: "RPO", why: "Recovery point objective." },
-            { t: "On average, how long does a fix take, including diagnosis?", a: "MTTR", why: "Mean time to repair." },
-            { t: "On average, how long between outages?", a: "MTBF", why: "Mean time between failures." }
+            { t: "How long until the service is back to its required level?", a: "RTO", why: "RTO (recovery time objective): how long until the service is working again." },
+            { t: "How much data can we afford to lose?", a: "RPO", why: "RPO (recovery point objective): how much data you can afford to lose." },
+            { t: "On average, how long does a fix take, including diagnosis?", a: "MTTR", why: "MTTR (mean time to repair): the average time to fix a problem." },
+            { t: "On average, how long between outages?", a: "MTBF", why: "MTBF (mean time between failures): the average time between breakdowns." }
           ],
           hint: "Time to recover, point in time, repair, between.",
           explain: "RTO and RPO are objectives; MTTR and MTBF are measurements.",
@@ -605,7 +605,7 @@ window.SECPLUS = window.SECPLUS || {};
             { t: "4 hours", why: "That's the number of breakdowns." },
             { t: "250 hours", ok: true, why: "Total uptime / number of breakdowns = 1,000 / 4." },
             { t: "4,000 hours", why: "That multiplies instead of divides." },
-            { t: "1,004 hours", why: "That adds them." }
+            { t: "1,004 hours", why: "MTBF divides total uptime by the number of breakdowns: 1,000 / 4 = 250." }
           ],
           hint: "Total uptime / number of breakdowns.",
           explain: "MTBF = 1,000 / 4 = 250 hours.",
@@ -615,8 +615,8 @@ window.SECPLUS = window.SECPLUS || {};
           id: "d5-bia-a3", type: "choice", format: "Compare",
           prompt: "After a restore, the database is online but only holds the last twelve months of data. Which metric does this describe?",
           options: [
-            { t: "RTO", why: "RTO is about time to recover." },
-            { t: "MTTR", why: "That's repair time." },
+            { t: "RTO", why: "RTO is how long recovery takes. How far back your data goes is the RPO." },
+            { t: "MTTR", why: "MTTR is average repair time. How much data you lost is the RPO." },
             { t: "RPO", ok: true, why: "How far back the data goes after recovery." },
             { t: "ALE", why: "That's a yearly loss estimate." }
           ],
@@ -675,7 +675,7 @@ window.SECPLUS = window.SECPLUS || {};
           prompt: "What made the SolarWinds incident in the notes so hard to catch?",
           options: [
             { t: "It used an unsigned installer that users ignored warnings about, so signature checks would have stopped it", why: "The malware had a valid digital signature." },
-            { t: "Malware arrived inside a legitimate software update with a valid signature", ok: true, why: "A supply chain compromise." },
+            { t: "Malware arrived inside a legitimate software update with a valid signature", ok: true, why: "Correct: the malware came inside a real, signed update from a trusted vendor, so it looked legitimate." },
             { t: "It only affected one customer", why: "At least 18,000 were potentially impacted." },
             { t: "It was caught the same week", why: "Updates ran March to June 2020; it was announced in December." }
           ],
@@ -687,9 +687,9 @@ window.SECPLUS = window.SECPLUS || {};
           id: "d5-thirdparty-a3", type: "multi", format: "Investigate",
           prompt: "During vendor selection, which are conflicts of interest from the notes? Select all that apply.",
           options: [
-            { t: "The vendor employs your CFO's brother", ok: true, why: "Listed." },
-            { t: "The vendor offers gifts if the contract is signed", ok: true, why: "Listed." },
-            { t: "The vendor also serves your largest competitor", ok: true, why: "Listed." },
+            { t: "The vendor employs your CFO's brother", ok: true, why: "Correct: a family link to your CFO could bias the decision." },
+            { t: "The vendor offers gifts if the contract is signed", ok: true, why: "Correct: gifts for signing could sway judgment." },
+            { t: "The vendor also serves your largest competitor", ok: true, why: "Correct: working for your biggest competitor could create a conflict." },
             { t: "The vendor passed a financial health check", why: "That's due diligence, not a conflict." }
           ],
           hint: "A personal interest that could compromise judgment.",
@@ -701,9 +701,9 @@ window.SECPLUS = window.SECPLUS || {};
           prompt: "A vendor contract was signed six months ago. What do the notes say about ongoing oversight?",
           options: [
             { t: "Oversight ends at signing", why: "It doesn't end when the contract is signed." },
-            { t: "Run regular reviews, with one person in charge of the relationship", ok: true, why: "That's vendor monitoring." },
-            { t: "Only review if the vendor asks", why: "Reviews should be regular." },
-            { t: "Replace the vendor every six months so no single vendor ever builds up enough risk to matter", why: "Not what the notes suggest." }
+            { t: "Run regular reviews, with one person in charge of the relationship", ok: true, why: "Correct: checks continue after signing, with one person owning the vendor relationship." },
+            { t: "Only review if the vendor asks", why: "Waiting for the vendor to ask means problems go unnoticed. Reviews should be regular." },
+            { t: "Replace the vendor every six months so no single vendor ever builds up enough risk to matter", why: "Swapping vendors that often isn't in the notes. Monitor the vendor you have." }
           ],
           hint: "Vendor monitoring.",
           explain: "Financial checks, security reviews and news monitoring continue for the whole relationship.",
@@ -744,14 +744,14 @@ window.SECPLUS = window.SECPLUS || {};
           prompt: "Match each agreement to its description.",
           choices: ["SLA", "MOU", "MSA", "SOW", "NDA"],
           items: [
-            { t: "Guarantees uptime and response times", a: "SLA", why: "Minimum terms for services." },
-            { t: "An informal letter of intent stating common goals", a: "MOU", why: "Not a signed contract." },
-            { t: "A broad framework contract for future projects", a: "MSA", why: "Later work builds on it." },
-            { t: "Lists deliverables, schedule and acceptance criteria for one job", a: "SOW", why: "Used with an MSA." },
-            { t: "Keeps trade secrets confidential", a: "NDA", why: "A confidentiality contract." }
+            { t: "Guarantees uptime and response times", a: "SLA", why: "An SLA (service level agreement) sets minimum service levels, like uptime." },
+            { t: "An informal letter of intent stating common goals", a: "MOU", why: "An MOU (memorandum of understanding) states shared goals but isn't a signed contract." },
+            { t: "A broad framework contract for future projects", a: "MSA", why: "An MSA (master service agreement) is the framework that later projects are built on." },
+            { t: "Lists deliverables, schedule and acceptance criteria for one job", a: "SOW", why: "A SOW (statement of work) details one job under the MSA." },
+            { t: "Keeps trade secrets confidential", a: "NDA", why: "An NDA (non-disclosure agreement) keeps shared information confidential." }
           ],
           hint: "Service level, intent, framework, job, secrets.",
-          explain: "Each agreement fits a different stage and purpose.",
+          explain: "SLA = service levels, MOU = shared intent, MOA = conditional agreement, MSA = framework contract, SOW = one job, NDA = confidentiality.",
           pages: [100]
         },
         {
@@ -759,9 +759,9 @@ window.SECPLUS = window.SECPLUS || {};
           prompt: "How does an MOA differ from an MOU?",
           options: [
             { t: "An MOA is the next step up: both sides conditionally agree to objectives", ok: true, why: "It can be a legal document, though it may lack enforceable promises." },
-            { t: "An MOA is less formal than an MOU", why: "It's the step above." },
+            { t: "An MOA is less formal than an MOU", why: "It's the other way round: an MOA is a step more formal than an MOU." },
             { t: "An MOA is always a fully enforceable contract with legal language, unlike every other agreement type", why: "It may not contain legally enforceable promises." },
-            { t: "They are identical", why: "The notes distinguish them." }
+            { t: "They are identical", why: "They're different: an MOU states intent, an MOA is a conditional agreement." }
           ],
           hint: "Understanding → agreement.",
           explain: "MOU: general agreement. MOA: conditional agreement, more formal.",
@@ -771,10 +771,10 @@ window.SECPLUS = window.SECPLUS || {};
           id: "d5-agreements-a3", type: "choice", format: "Scenario",
           prompt: "Two companies want to share secrets with each other during merger talks. Which agreement fits?",
           options: [
-            { t: "A unilateral NDA", why: "That protects only one side." },
+            { t: "A unilateral NDA", why: "A one-way NDA only protects one side. Both companies are sharing secrets here." },
             { t: "A bilateral (mutual) NDA", ok: true, why: "Both sides' information is protected." },
-            { t: "An SLA", why: "That covers service levels." },
-            { t: "A work order", why: "That details a job." }
+            { t: "An SLA", why: "An SLA sets service levels like uptime, not confidentiality." },
+            { t: "A work order", why: "A work order describes a job to be done, not confidentiality." }
           ],
           hint: "Both directions.",
           explain: "Mutual NDAs protect information flowing both ways.",
@@ -817,21 +817,21 @@ window.SECPLUS = window.SECPLUS || {};
           choices: ["SOX", "HIPAA", "GLBA"],
           items: [
             { t: "Accounting reform for public companies", a: "SOX", why: "Public Company Accounting Reform and Investor Protection Act of 2002." },
-            { t: "Storage, use and transmission of health information", a: "HIPAA", why: "Healthcare standards." },
+            { t: "Storage, use and transmission of health information", a: "HIPAA", why: "HIPAA covers how health information is stored, used and sent." },
             { t: "Privacy disclosures from financial institutions", a: "GLBA", why: "Gramm-Leach-Bliley Act of 1999." }
           ],
           hint: "Accounting, health, banking.",
-          explain: "Each regulation targets a different industry.",
+          explain: "SOX = public company finances, HIPAA = health information, GLBA = financial institutions' privacy.",
           pages: [101]
         },
         {
           id: "d5-compliance-a2", type: "choice", format: "Compare",
           prompt: "According to the notes, how do due care and due diligence differ?",
           options: [
-            { t: "Due care is about third-party activities and due diligence is about internal activities, the reverse of each other", why: "Reversed." },
+            { t: "Due care is about third-party activities and due diligence is about internal activities, the reverse of each other", why: "That's reversed. Due care is internal; due diligence usually involves third parties." },
             { t: "Due care tends to refer to internal activities; due diligence to third-party activities", ok: true, why: "That's the notes' distinction." },
             { t: "They're unrelated to compliance", why: "Both are part of compliance monitoring." },
-            { t: "Due diligence means signing off on documents", why: "That's attestation." }
+            { t: "Due diligence means signing off on documents", why: "Signing off on documents is attestation, not due diligence." }
           ],
           hint: "Inside vs. outside.",
           explain: "Both mean acting honestly, in good faith, and verifying.",
@@ -841,9 +841,9 @@ window.SECPLUS = window.SECPLUS || {};
           id: "d5-compliance-a3", type: "choice", format: "Scenario",
           prompt: "A company loses its license after compliance failures. What consequence do the notes describe?",
           options: [
-            { t: "It can keep selling but pays a small fee", why: "It can't sell products." },
+            { t: "It can keep selling but pays a small fee", why: "Losing a license means you can't sell at all, not just pay a fee." },
             { t: "It can't sell products, others can't buy from it, and re-licensing may be expensive", ok: true, why: "A significant economic sanction." },
-            { t: "Only the stock price changes for a while, and normal sales continue without any interruption", why: "That's reputational damage." },
+            { t: "Only the stock price changes for a while, and normal sales continue without any interruption", why: "That describes reputational damage. Losing a license stops sales entirely." },
             { t: "Nothing, licenses are symbolic", why: "Loss of license is a major sanction." }
           ],
           hint: "Significant economic sanction.",
@@ -856,7 +856,7 @@ window.SECPLUS = window.SECPLUS || {};
           options: [
             { t: "Nothing; signatures are a formality", why: "The signer is ultimately responsible." },
             { t: "They're ultimately responsible if the documentation is incorrect", ok: true, why: "That's attestation and acknowledgment." },
-            { t: "Responsibility for the report's accuracy passes to the regulator once it's been submitted", why: "It stays with the signer." },
+            { t: "Responsibility for the report's accuracy passes to the regulator once it's been submitted", why: "Responsibility stays with the person who signed, not the regulator." },
             { t: "The report no longer needs monitoring", why: "Compliance monitoring is ongoing." }
           ],
           hint: "Attestation.",
@@ -899,7 +899,7 @@ window.SECPLUS = window.SECPLUS || {};
             { t: "SOX", why: "That's public company accounting." },
             { t: "GLBA", why: "That's U.S. financial institution privacy." },
             { t: "GDPR", ok: true, why: "It gives data subjects a right to be forgotten." },
-            { t: "PCI DSS", why: "That's payment cards." }
+            { t: "PCI DSS", why: "PCI DSS is a payment card security standard. The right to be forgotten comes from GDPR." }
           ],
           hint: "European Union.",
           explain: "GDPR gives data subjects control over their personal data.",
@@ -909,9 +909,9 @@ window.SECPLUS = window.SECPLUS || {};
           id: "d5-privacy-a2", type: "multi", format: "Investigate",
           prompt: "Which count as personal data under GDPR, per the notes? Select all that apply.",
           options: [
-            { t: "A computer's IP address", ok: true, why: "Listed." },
-            { t: "Posts on social networking sites", ok: true, why: "Listed." },
-            { t: "Bank details", ok: true, why: "Listed." },
+            { t: "A computer's IP address", ok: true, why: "Correct: GDPR counts an IP address as personal data because it can identify someone." },
+            { t: "Posts on social networking sites", ok: true, why: "Correct: what you post on social media is personal data." },
+            { t: "Bank details", ok: true, why: "Correct: bank details are personal data." },
             { t: "A company's quarterly revenue total", why: "That's not data about an identifiable person." }
           ],
           hint: "Relates to an identifiable person.",
@@ -922,8 +922,8 @@ window.SECPLUS = window.SECPLUS || {};
           id: "d5-privacy-a3", type: "choice", format: "Compare",
           prompt: "Who is a data subject?",
           options: [
-            { t: "Only employees of the data controller", why: "It includes everyone." },
-            { t: "Any identified or identifiable natural person", ok: true, why: "You are a data subject." },
+            { t: "Only employees of the data controller", why: "It's not only employees. Anyone whose personal data is held, including you, is a data subject." },
+            { t: "Any identified or identifiable natural person", ok: true, why: "Correct: any real person who can be identified from the data is a data subject." },
             { t: "Only people outside the EU", why: "Not a limit in the definition." },
             { t: "The database administrator", why: "That's a role, not the definition." }
           ],
@@ -964,12 +964,12 @@ window.SECPLUS = window.SECPLUS || {};
           choices: ["Attestation", "Audit committee", "Self-assessment", "Examination"],
           items: [
             { t: "An auditor's opinion on the accuracy of your security posture", a: "Attestation", why: "An opinion of truth or accuracy." },
-            { t: "Oversees risk management; all audits start and stop here", a: "Audit committee", why: "Internal oversight." },
+            { t: "Oversees risk management; all audits start and stop here", a: "Audit committee", why: "The audit committee oversees risk management; every audit starts and ends with it." },
             { t: "The organization runs its own checks for ongoing reports", a: "Self-assessment", why: "Consolidated into ongoing reports." },
             { t: "Hands-on research into records during an external audit", a: "Examination", why: "View records, compile reports." }
           ],
           hint: "Opinion, oversight, own checks, hands-on.",
-          explain: "Internal and external audits each have their own parts.",
+          explain: "Attestation is an auditor's opinion, the audit committee oversees, self-assessments are your own checks, examinations are hands-on research.",
           pages: [102, 103]
         },
         {
@@ -978,8 +978,8 @@ window.SECPLUS = window.SECPLUS || {};
           options: [
             { t: "A self-assessment consolidated into the audit committee's ongoing reports", why: "That's done by your own organization." },
             { t: "An external audit by an independent third party", ok: true, why: "Regulations may require this, with set type and frequency." },
-            { t: "A tabletop exercise", why: "That's incident planning." },
-            { t: "A playbook review", why: "Not an audit type." }
+            { t: "A tabletop exercise", why: "A tabletop exercise practices incident response. A required outside audit is an external audit." },
+            { t: "A playbook review", why: "Reviewing playbooks isn't an audit type. This is an external audit." }
           ],
           hint: "Independent.",
           explain: "External audits are often driven by regulatory requirements.",
@@ -1018,11 +1018,11 @@ window.SECPLUS = window.SECPLUS || {};
           prompt: "Sort each technique into passive or active reconnaissance.",
           choices: ["Passive", "Active"],
           items: [
-            { t: "Reading the company's social media", a: "Passive", why: "Open sources." },
-            { t: "Dumpster diving", a: "Passive", why: "Listed under passive." },
+            { t: "Reading the company's social media", a: "Passive", why: "Reading public social media is passive: the target never knows." },
+            { t: "Dumpster diving", a: "Passive", why: "Going through discarded trash is passive: no contact with the target's systems." },
             { t: "Port scanning the perimeter", a: "Active", why: "Visible on network traffic and logs." },
-            { t: "OS fingerprinting", a: "Active", why: "Touches the target systems." },
-            { t: "Browsing online forums about the company", a: "Passive", why: "Open sources." }
+            { t: "OS fingerprinting", a: "Active", why: "OS fingerprinting sends probes to the target's systems, so it's active and can be seen." },
+            { t: "Browsing online forums about the company", a: "Passive", why: "Reading public forums is passive: open sources only." }
           ],
           hint: "Does it touch the target's systems?",
           explain: "Passive recon is hard to detect; active recon is relatively easy to see.",
@@ -1032,10 +1032,10 @@ window.SECPLUS = window.SECPLUS || {};
           id: "d5-pentests-a2", type: "choice", format: "Scenario",
           prompt: "A tester is given no information at all about the target systems. What type of test is this?",
           options: [
-            { t: "Known environment", why: "That's full disclosure." },
-            { t: "Partially known environment", why: "That's a mix." },
-            { t: "Unknown environment", ok: true, why: "A 'blind' test." },
-            { t: "Integrated", why: "That's a team perspective." }
+            { t: "Known environment", why: "In a known environment the tester gets full details up front." },
+            { t: "Partially known environment", why: "A partially known environment gives the tester some information." },
+            { t: "Unknown environment", ok: true, why: "Correct: no information at all is an unknown environment, a 'blind' test." },
+            { t: "Integrated", why: "Integrated describes red and blue teams working together, not how much the tester knows." }
           ],
           hint: "Blind.",
           explain: "Working knowledge ranges from full disclosure to none.",
@@ -1046,22 +1046,22 @@ window.SECPLUS = window.SECPLUS || {};
           prompt: "Match each team to its pentesting perspective.",
           choices: ["Red team", "Blue team", "Integrated"],
           items: [
-            { t: "Attacks systems looking for vulnerabilities to exploit", a: "Red team", why: "Offensive." },
-            { t: "Identifies attacks in real time and blocks access", a: "Blue team", why: "Defensive." },
-            { t: "Runs a continuous cycle of finding, patching and retesting", a: "Integrated", why: "An ongoing process." }
+            { t: "Attacks systems looking for vulnerabilities to exploit", a: "Red team", why: "The red team plays the attacker (offensive)." },
+            { t: "Identifies attacks in real time and blocks access", a: "Blue team", why: "The blue team defends and responds in real time (defensive)." },
+            { t: "Runs a continuous cycle of finding, patching and retesting", a: "Integrated", why: "Integrated means red and blue work together in an ongoing find-fix-retest cycle." }
           ],
           hint: "Attack, defend, both.",
-          explain: "Offensive, defensive and integrated perspectives.",
+          explain: "The red team attacks, the blue team defends, and integrated means the two work together in an ongoing cycle.",
           pages: [103]
         },
         {
           id: "d5-pentests-a4", type: "choice", format: "Compare",
           prompt: "Why does physical penetration testing matter even with strong OS security?",
           options: [
-            { t: "Physical access can bypass OS security by changing the boot process or OS files", ok: true, why: "That's the notes' point." },
-            { t: "Physical tests replace the need for network tests, so the red team can skip scanning and reconnaissance", why: "They complement them." },
-            { t: "OS security only works on weekdays", why: "Not a thing." },
-            { t: "Because elevators run the operating system", why: "No." }
+            { t: "Physical access can bypass OS security by changing the boot process or OS files", ok: true, why: "Correct: with hands on the machine, an attacker can boot other media or swap OS files." },
+            { t: "Physical tests replace the need for network tests, so the red team can skip scanning and reconnaissance", why: "Physical and network tests check different things, so you need both." },
+            { t: "OS security only works on weekdays", why: "Not true. OS security has no schedule; physical access can simply bypass it." },
+            { t: "Because elevators run the operating system", why: "Elevators aren't the point. Physical access lets someone tamper with the computer itself." }
           ],
           hint: "Boot from other media.",
           explain: "Physical security is key: keep unauthorized people away from the hardware.",
@@ -1094,23 +1094,23 @@ window.SECPLUS = window.SECPLUS || {};
           prompt: "Classify each behavior using the notes' categories.",
           choices: ["Risky", "Unexpected", "Unintentional"],
           items: [
-            { t: "A user edits the hosts file", a: "Risky", why: "Listed as risky behavior." },
-            { t: "A logon from another country", a: "Unexpected", why: "Listed as unexpected." },
-            { t: "Someone mistypes a domain name", a: "Unintentional", why: "Listed as unintentional." },
-            { t: "Uploading sensitive files", a: "Risky", why: "Listed as risky." },
-            { t: "Losing a USB drive", a: "Unintentional", why: "Misplacing USB drives." }
+            { t: "A user edits the hosts file", a: "Risky", why: "Editing the hosts file can redirect traffic: risky behavior." },
+            { t: "A logon from another country", a: "Unexpected", why: "A login from somewhere new and far away is unexpected behavior." },
+            { t: "Someone mistypes a domain name", a: "Unintentional", why: "A typo in a web address is an accident: unintentional behavior." },
+            { t: "Uploading sensitive files", a: "Risky", why: "Uploading sensitive files somewhere they shouldn't go is risky behavior." },
+            { t: "Losing a USB drive", a: "Unintentional", why: "Losing a USB drive is an accident: unintentional behavior." }
           ],
           hint: "Deliberate but dangerous, surprising, or accidental?",
-          explain: "Awareness training helps users and analysts spot all three.",
+          explain: "Risky = deliberate but dangerous, unexpected = out of the ordinary, unintentional = an honest mistake.",
           pages: [104]
         },
         {
           id: "d5-awareness-a2", type: "multi", format: "Investigate",
           prompt: "Which signs of phishing do the notes teach users to recognize? Select all that apply.",
           options: [
-            { t: "Spelling and grammatical errors", ok: true, why: "Listed." },
-            { t: "Domain name and email inconsistencies", ok: true, why: "Listed." },
-            { t: "Requests for personal information", ok: true, why: "Listed." },
+            { t: "Spelling and grammatical errors", ok: true, why: "Correct: real companies rarely send messages full of typos." },
+            { t: "Domain name and email inconsistencies", ok: true, why: "Correct: a sender's address or link that doesn't match the real domain is a red flag." },
+            { t: "Requests for personal information", ok: true, why: "Correct: legitimate senders don't ask for passwords or personal details by email." },
             { t: "A message from a known colleague with no links or attachments, about a meeting you scheduled", why: "Nothing here matches the warning signs." }
           ],
           hint: "One is an ordinary message.",
@@ -1122,9 +1122,9 @@ window.SECPLUS = window.SECPLUS || {};
           prompt: "An employee clicks a simulated phishing link for the first time. What do the notes suggest?",
           options: [
             { t: "Treat it as an opportunity for user training", ok: true, why: "A first occurrence is a training opportunity." },
-            { t: "Terminate their account immediately", why: "Not the guidance." },
+            { t: "Terminate their account immediately", why: "Firing people for a first click isn't the guidance. A first mistake is a chance to train." },
             { t: "Ignore it because it was only a simulation", why: "The point is learning from it." },
-            { t: "Stop running phishing campaigns", why: "They're how you find out." }
+            { t: "Stop running phishing campaigns", why: "The campaigns are how you find out who needs training, so keep running them." }
           ],
           hint: "Initial occurrence.",
           explain: "Immediate feedback and training; recurring issues get extra help.",
@@ -1164,7 +1164,7 @@ window.SECPLUS = window.SECPLUS || {};
           options: [
             { t: "Plug it in to see who it belongs to", why: "Unknown USB drives can contain malware." },
             { t: "Don't connect it; report it as a possible physical attack", ok: true, why: "Situational awareness covers physical attacks like this." },
-            { t: "Give it to a colleague in IT so they can plug it in and check it on their own workstation", why: "That just moves the risk." },
+            { t: "Give it to a colleague in IT so they can plug it in and check it on their own workstation", why: "Plugging it into any computer is the danger, whoever does it. Don't connect it; report it." },
             { t: "Format it and keep it", why: "Plugging it in at all is the risk." }
           ],
           hint: "Be ready for anything.",
@@ -1188,9 +1188,9 @@ window.SECPLUS = window.SECPLUS || {};
           id: "d5-training-a3", type: "multi", format: "Investigate",
           prompt: "Which are hybrid/remote work measures from the notes? Select all that apply.",
           options: [
-            { t: "Additional endpoint security", ok: true, why: "Listed." },
-            { t: "Security policies for VPN access", ok: true, why: "Listed." },
-            { t: "No access for family and friends", ok: true, why: "Listed." },
+            { t: "Additional endpoint security", ok: true, why: "Correct: home devices need extra endpoint protection." },
+            { t: "Security policies for VPN access", ok: true, why: "Correct: clear VPN rules protect the connection back to work." },
+            { t: "No access for family and friends", ok: true, why: "Correct: work devices shouldn't be shared with family or friends." },
             { t: "Sharing work laptops with household members", why: "That contradicts the guidance." }
           ],
           hint: "One option invites the household in.",

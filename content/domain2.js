@@ -237,7 +237,7 @@ window.SECPLUS = window.SECPLUS || {};
             { t: "A fake site at githuh.com hosts a login page", a: "Typosquatting", why: "A misspelled lookalike domain." },
             { t: "A caller says they're from your card company about an automatic payment and asks to confirm details", a: "Pretexting", why: "The attacker plays a character in a situation they made up." },
             { t: "A voicemail claims a bank security check is needed and gives a callback number", a: "Vishing", why: "Phishing by phone or voicemail." },
-            { t: "A text says your package is held and links to a 'fee payment' page", a: "Smishing", why: "Phishing by SMS." }
+            { t: "A text says your package is held and links to a 'fee payment' page", a: "Smishing", why: "SMS + phishing = smishing. A text message pushes you to a fake payment page." }
           ],
           hint: "Focus on the channel first, then the trick.",
           explain: "Several can overlap. A vishing call usually uses a pretext too. Pick the most specific match.",
@@ -317,7 +317,7 @@ window.SECPLUS = window.SECPLUS || {};
           options: [
             { t: "The victim doesn't notice it happening", ok: true, why: "Elicitation uses psychological techniques so the target doesn't notice." },
             { t: "It only happens by email", why: "The notes say it's often seen in vishing." },
-            { t: "It's only used against executives", why: "Anyone can be a target." },
+            { t: "It's only used against executives", why: "Wrong: anyone can be targeted. What makes it eliciting is that the victim doesn't notice they're giving information away." },
             { t: "It needs malware on the victim's device", why: "It's purely social. No malware is involved." }
           ],
           hint: "The notes call it 'hacking the human'.",
@@ -371,7 +371,7 @@ window.SECPLUS = window.SECPLUS || {};
           options: [
             { t: "Watering hole attack", ok: true, why: "Infecting a site the target group trusts and visits." },
             { t: "Typosquatting", why: "Typosquatting uses a lookalike domain, not a compromised real site." },
-            { t: "Smishing", why: "Smishing uses text messages." },
+            { t: "Smishing", why: "Smishing is phishing by text message. Here the attacker infected a website the targets already visit." },
             { t: "Business email compromise (BEC)", why: "BEC uses email, which the attacker couldn't get through here." }
           ],
           hint: "The real site was infected, not faked.",
@@ -384,8 +384,8 @@ window.SECPLUS = window.SECPLUS || {};
           options: [
             { t: "Generic anti-virus signatures", ok: true, why: "Generic signatures recognized the attack code and stopped it." },
             { t: "A user-awareness poster campaign in the office", why: "The victims did nothing unusual, they just browsed a normal site." },
-            { t: "Disabling email attachments", why: "This attack didn't use email." },
-            { t: "A longer password policy", why: "Passwords weren't the vector." }
+            { t: "Disabling email attachments", why: "This attack came through an infected website, not email, so blocking attachments wouldn't have helped." },
+            { t: "A longer password policy", why: "Passwords weren't involved. The malware arrived by visiting a trusted site, and anti-virus signatures caught it." }
           ],
           hint: "It's never one thing, but one layer caught it.",
           explain: "Defense in depth: firewalls and IPS, plus updated anti-malware signatures.",
@@ -423,7 +423,7 @@ window.SECPLUS = window.SECPLUS || {};
           prompt: "Put the misinformation process from the notes' diagram in order.",
           steps: [
             { t: "Create fake users", why: "Accounts are needed before anything can be posted." },
-            { t: "Create content", why: "The false story is produced." },
+            { t: "Create content", why: "Step 2: the fake story or content is made, ready to be spread by fake accounts." },
             { t: "Post it on social media", why: "It's published by the fake accounts." },
             { t: "Amplify the message", why: "Likes, shares and ads boost its reach." },
             { t: "Real users share it", why: "Real people now spread it unknowingly." },
@@ -450,10 +450,10 @@ window.SECPLUS = window.SECPLUS || {};
           id: "d2-othersocial-a3", type: "multi", format: "Investigate",
           prompt: "Which are features of influence campaigns according to the notes? Select all that apply.",
           options: [
-            { t: "Sway public opinion on political and social issues", ok: true, why: "That's their purpose." },
+            { t: "Sway public opinion on political and social issues", ok: true, why: "Correct: changing what people think about political and social issues is the whole goal." },
             { t: "Often run by nation-state actors", ok: true, why: "To divide, distract and persuade." },
             { t: "Can use paid advertising", ok: true, why: "Buying a voice for an opinion." },
-            { t: "Spread through social media sharing and liking", ok: true, why: "Social media enables them." },
+            { t: "Spread through social media sharing and liking", ok: true, why: "Correct: shares and likes on social media spread the message far and fast, for free." },
             { t: "Require exploiting a software vulnerability", why: "They exploit people and platforms, not code." }
           ],
           hint: "Think opinion, not exploits.",
@@ -551,7 +551,7 @@ window.SECPLUS = window.SECPLUS || {};
             { t: "A buffer overflow", ok: true, why: "The extra data spilled past the buffer and overwrote the neighboring variable." },
             { t: "A race condition", why: "There's no timing between two events here, just too much data." },
             { t: "Memory injection", why: "Injection adds code to a process. This is input overwriting memory." },
-            { t: "A hash collision in the input validator", why: "No hashing is involved." }
+            { t: "A hash collision in the input validator", why: "A hash collision is two inputs giving the same hash. Here, data spilled into memory next to the field, which is an overflow." }
           ],
           hint: "More data than space.",
           explain: "This mirrors the notes' diagram: overflowing variable A changes variable B.",
@@ -603,7 +603,7 @@ window.SECPLUS = window.SECPLUS || {};
           prompt: "An API checks a coupon's 'unused' flag, then applies the discount and marks it used. A load test fires the same coupon 20 times in parallel and it applies 6 times. What is this?",
           options: [
             { t: "A TOCTOU race condition", ok: true, why: "The state changed between the check and the use, and parallel requests all passed the check." },
-            { t: "A buffer overflow", why: "No memory was overwritten." },
+            { t: "A buffer overflow", why: "A buffer overflow writes past a memory boundary. Here the problem is timing: checks and updates overlapped." },
             { t: "SQL injection", why: "No input was crafted to change a query." },
             { t: "A replay attack", why: "These are legitimate parallel requests hitting a timing gap, not captured traffic." }
           ],
@@ -616,7 +616,7 @@ window.SECPLUS = window.SECPLUS || {};
           prompt: "Put the notes' bank race condition in order (both accounts start at $100).",
           steps: [
             { t: "User 1 and User 2 both check the balances and see $100 in each account", why: "Both checks happen before either transfer." },
-            { t: "User 1 transfers $50 from A to B (A: $50, B: $150)", why: "The first transfer completes." },
+            { t: "User 1 transfers $50 from A to B (A: $50, B: $150)", why: "First transfer finishes normally: $50 leaves A and arrives in B." },
             { t: "User 2 transfers $50 from A, still thinking it has $100", why: "Their check is stale. This is the gap between check and use." },
             { t: "Result: A has $50 and B has $200", why: "Money was created. The expected result was A $0 and B $200, or A $50 and B $150." }
           ],
@@ -713,8 +713,8 @@ window.SECPLUS = window.SECPLUS || {};
           steps: [
             { t: "Confirm you have a working backup", why: "Have a fallback before changing anything." },
             { t: "Apply the patch to a test image and run regression tests", why: "A patch might break something else." },
-            { t: "Save work and schedule the reboot", why: "Patches may need a reboot." },
-            { t: "Roll out to the fleet and monitor", why: "Deploy once it's tested." }
+            { t: "Save work and schedule the reboot", why: "Many OS patches need a restart, so plan it so nobody loses work." },
+            { t: "Roll out to the fleet and monitor", why: "Only after testing do you push to every server, then watch for problems." }
           ],
           hint: "Fallback first, deploy last.",
           explain: "Always update, but test and keep a fallback.",
@@ -779,10 +779,10 @@ window.SECPLUS = window.SECPLUS || {};
           id: "d2-sqli-a2", type: "multi", format: "Investigate",
           prompt: "Which outcomes do the notes list as possible with SQL injection? Select all that apply.",
           options: [
-            { t: "View all database information", ok: true, why: "Listed." },
-            { t: "Delete database information", ok: true, why: "Listed." },
-            { t: "Add users", ok: true, why: "Listed." },
-            { t: "Denial of service", ok: true, why: "Listed." },
+            { t: "View all database information", ok: true, why: "Correct: injected SQL can read the whole database, not just the record the form meant to show." },
+            { t: "Delete database information", ok: true, why: "Correct: if the attacker can run SQL, they can run DELETE too." },
+            { t: "Add users", ok: true, why: "Correct: injected INSERT statements can create new accounts for the attacker." },
+            { t: "Denial of service", ok: true, why: "Correct: heavy or destructive queries can make the database unavailable." },
             { t: "Physically damage the database server", why: "Not something SQL injection does." }
           ],
           hint: "If you control the query, you control the data.",
@@ -823,10 +823,10 @@ window.SECPLUS = window.SECPLUS || {};
           id: "d2-xss-a1", type: "order", format: "Order",
           prompt: "Put the reflected XSS attack from the notes' diagram in order.",
           steps: [
-            { t: "Attacker sends the victim a link containing a malicious script", why: "Step 1: delivery." },
+            { t: "Attacker sends the victim a link containing a malicious script", why: "Step 1: the attack starts with a link that hides a script in it." },
             { t: "Victim clicks the link and visits the legitimate site", why: "Step 2: the trusted site is used." },
             { t: "The site loads and the script runs in the victim's browser", why: "Step 3: it runs as if it came from the server." },
-            { t: "The script sends the victim's session cookie to the attacker", why: "Step 4: data is stolen." }
+            { t: "The script sends the victim's session cookie to the attacker", why: "Step 4: the script runs in the victim's browser and sends their session cookie to the attacker." }
           ],
           hint: "Link, click, run, steal.",
           explain: "Reflected XSS bounces the script off the real site, so the browser trusts it.",
@@ -907,7 +907,7 @@ window.SECPLUS = window.SECPLUS || {};
             { t: "Add protections such as firewall rules and IPS signatures", ok: true, why: "Legacy platforms may need extra protection around them." },
             { t: "Ignore it, since it's only in the lab", why: "One system can be an entry point." },
             { t: "Write your own firmware patch", why: "Only the vendor can realistically fix their firmware." },
-            { t: "Expose it to the internet so remote testers can reach it more easily", why: "That increases risk." }
+            { t: "Expose it to the internet so remote testers can reach it more easily", why: "This makes it worse: an unpatchable system should be hidden behind more protection, not exposed." }
           ],
           hint: "If you can't fix it, protect around it.",
           explain: "Compare the risk to the return, then add compensating protections.",
@@ -948,7 +948,7 @@ window.SECPLUS = window.SECPLUS || {};
             { t: "VM escape", ok: true, why: "Breaking out of a VM to the host gives control of other guests." },
             { t: "Resource reuse", why: "Resource reuse can leak data, but taking control of other guests is escape." },
             { t: "Sideloading", why: "Sideloading is installing apps outside an app store." },
-            { t: "Jailbreaking", why: "That's for mobile devices." }
+            { t: "Jailbreaking", why: "Jailbreaking removes limits on an iPhone. Breaking out of one VM to control others is VM escape." }
           ],
           hint: "They got out of the box.",
           explain: "VM escape is described as a huge exploit: full control of the virtual world.",
@@ -960,7 +960,7 @@ window.SECPLUS = window.SECPLUS || {};
           options: [
             { t: "Resource reuse", ok: true, why: "Shared, reused resources let data leak between VMs." },
             { t: "VM escape", why: "No one broke out to control the host." },
-            { t: "Buffer overflow", why: "No buffer was overrun." },
+            { t: "Buffer overflow", why: "A buffer overflow writes too much data into memory. Here, leftover memory from another VM was read: resource reuse." },
             { t: "Misconfigured open permissions", why: "This is the hypervisor's memory handling, not a permission setting." }
           ],
           hint: "The hypervisor hands out the same RAM to different VMs.",
@@ -971,9 +971,9 @@ window.SECPLUS = window.SECPLUS || {};
           id: "d2-virt-a3", type: "order", format: "Order",
           prompt: "Order the bug chain from the notes' 2017 VM escape example.",
           steps: [
-            { t: "Browser JavaScript engine bug: code runs in the browser sandbox", why: "First foothold." },
+            { t: "Browser JavaScript engine bug: code runs in the browser sandbox", why: "Step 1: the attacker first gets code running inside the browser's sandbox." },
             { t: "OS kernel bug: the guest OS is compromised", why: "Out of the sandbox, into the guest." },
-            { t: "Hypervisor hardware simulation bug: escape to the host", why: "Out of the VM." }
+            { t: "Hypervisor hardware simulation bug: escape to the host", why: "Final step: a bug in the hypervisor lets the code break out of the VM onto the host." }
           ],
           hint: "From the inside out.",
           explain: "Real escapes usually chain several vulnerabilities, layer by layer.",
@@ -1012,11 +1012,11 @@ window.SECPLUS = window.SECPLUS || {};
           prompt: "Match each cloud service attack to its description.",
           choices: ["Authentication bypass", "Directory traversal", "Remote code execution", "Out-of-bounds write", "Denial of service"],
           items: [
-            { t: "Weak or faulty login logic lets an attacker skip sign-in", a: "Authentication bypass", why: "Exploits weak authentication." },
+            { t: "Weak or faulty login logic lets an attacker skip sign-in", a: "Authentication bypass", why: "The attacker gets in without valid credentials because the login check itself is weak." },
             { t: "A request reaches files outside the intended folder due to bad configuration", a: "Directory traversal", why: "Faulty configuration puts data at risk." },
             { t: "An unpatched service lets an attacker run their own commands", a: "Remote code execution", why: "Takes advantage of unpatched systems." },
             { t: "Input writes into unauthorized memory and crashes the service", a: "Out-of-bounds write", why: "Data corruption, crashing or code execution." },
-            { t: "The service is flooded until it stops responding", a: "Denial of service", why: "A fundamental attack type." }
+            { t: "The service is flooded until it stops responding", a: "Denial of service", why: "Flooding a service until it can't respond is denial of service (DoS)." }
           ],
           hint: "Think about what's being abused: login, paths, patches, memory or capacity.",
           explain: "Cloud services face the same core attacks as any app, at larger scale.",
@@ -1028,7 +1028,7 @@ window.SECPLUS = window.SECPLUS || {};
           options: [
             { t: "Turn on MFA for console users", ok: true, why: "The notes point out most organizations skip MFA on management consoles." },
             { t: "Move every cloud workload back on-premises", why: "Overkill. The gap is a missing basic control." },
-            { t: "Rename the admin accounts", why: "Doesn't add a second factor." },
+            { t: "Rename the admin accounts", why: "Renaming accounts still leaves password-only login. MFA adds a second factor." },
             { t: "Publish the console URL less widely", why: "Obscurity isn't authentication." }
           ],
           hint: "Simple best practices aren't being used.",
@@ -1072,10 +1072,10 @@ window.SECPLUS = window.SECPLUS || {};
           items: [
             { t: "An HVAC contractor's stolen VPN credentials led to a retailer's card breach", a: "Service provider", why: "The Target breach came through a service vendor." },
             { t: "Counterfeit networking gear sold as a major brand", a: "Hardware provider", why: "The fake Cisco equipment case." },
-            { t: "Malicious code shipped in official product updates", a: "Software provider", why: "The SolarWinds Orion case." }
+            { t: "Malicious code shipped in official product updates", a: "Software provider", why: "This was SolarWinds Orion: real, signed updates from the vendor carried the malware." }
           ],
           hint: "Who supplied what: a service, a device, or code?",
-          explain: "Every link in the chain needs its own trust controls.",
+          explain: "Attacks can come through any supplier: service providers, hardware vendors or software updates. Each needs checking.",
           pages: [37]
         },
         {
@@ -1095,9 +1095,9 @@ window.SECPLUS = window.SECPLUS || {};
           id: "d2-supplychain-a3", type: "multi", format: "Investigate",
           prompt: "Which hardware supply chain practices appear in the notes? Select all that apply.",
           options: [
-            { t: "Use a small supplier base", ok: true, why: "Tighter control over vendors." },
+            { t: "Use a small supplier base", ok: true, why: "Correct: fewer suppliers means you can control and check each one more closely." },
             { t: "Strict controls over policies and procedures", ok: true, why: "Make sure proper security is in place." },
-            { t: "Make security part of the overall design", ok: true, why: "There's a limit to trust." },
+            { t: "Make security part of the overall design", ok: true, why: "Correct: you can't fully trust every supplier, so build security into the design itself." },
             { t: "Buy from whichever reseller is cheapest", why: "That's how counterfeit gear gets in." }
           ],
           hint: "Fewer, controlled suppliers.",
@@ -1156,7 +1156,7 @@ window.SECPLUS = window.SECPLUS || {};
           items: [
             { t: "Telnet", a: "SSH", why: "SSH replaces cleartext remote terminals." },
             { t: "FTP", a: "SFTP", why: "SFTP is the encrypted file transfer option." },
-            { t: "IMAP", a: "IMAPS", why: "IMAP over TLS." }
+            { t: "IMAP", a: "IMAPS", why: "IMAPS is IMAP wrapped in TLS encryption, so email logins and messages aren't sent in the clear." }
           ],
           hint: "Most just add an S.",
           explain: "Unencrypted protocols expose all traffic. A packet capture shows it.",
@@ -1207,12 +1207,12 @@ window.SECPLUS = window.SECPLUS || {};
           prompt: "Match each term to its meaning.",
           choices: ["Rooting", "Jailbreaking", "Sideloading"],
           items: [
-            { t: "Gaining OS-level access on an Android device", a: "Rooting", why: "Android's term." },
-            { t: "Gaining OS-level access on an iPhone", a: "Jailbreaking", why: "Apple iOS's term." },
+            { t: "Gaining OS-level access on an Android device", a: "Rooting", why: "On Android, getting full OS (root) access is called rooting." },
+            { t: "Gaining OS-level access on an iPhone", a: "Jailbreaking", why: "On an iPhone, the same thing is called jailbreaking." },
             { t: "Installing an app from a downloaded file instead of an app store", a: "Sideloading", why: "Manual install that skips the store." }
           ],
           hint: "Two are platform names for the same idea.",
-          explain: "All three get around the controls MDM depends on.",
+          explain: "Rooting (Android), jailbreaking (iPhone) and sideloading (installing apps from outside the store) all bypass the controls MDM relies on.",
           pages: [38]
         },
         {
@@ -1220,7 +1220,7 @@ window.SECPLUS = window.SECPLUS || {};
           prompt: "Your MDM reports policies applied, but a user's jailbroken phone is still running blocked apps. Why?",
           options: [
             { t: "Jailbreaking bypasses the MDM's controls", ok: true, why: "Uncontrolled OS access defeats the MDM." },
-            { t: "The phone needs a stronger Wi-Fi signal", why: "Connectivity isn't the issue." },
+            { t: "The phone needs a stronger Wi-Fi signal", why: "Signal strength doesn't affect policy. Jailbreaking removes the OS controls the MDM relies on." },
             { t: "MDM only works on laptops", why: "MDM is built for mobile devices." },
             { t: "App stores always allow blocked apps", why: "Stores are a managed source. Sideloading avoids them." }
           ],
@@ -1332,8 +1332,8 @@ window.SECPLUS = window.SECPLUS || {};
           options: [
             { t: "An offline backup", ok: true, why: "Ransomware can't encrypt what it can't reach." },
             { t: "A longer password policy", why: "Doesn't bring back encrypted files." },
-            { t: "Paying quickly to get a discount", why: "Paying isn't protection." },
-            { t: "Turning off the screen saver", why: "Unrelated." }
+            { t: "Paying quickly to get a discount", why: "Paying doesn't protect you, and there's no guarantee you'll get your files back. An offline backup is the safety net." },
+            { t: "Turning off the screen saver", why: "A screen saver has nothing to do with ransomware recovery. Offline backups do." }
           ],
           hint: "What gets your data back?",
           explain: "Backups plus patching plus up-to-date signatures. Keep everything up to date.",
@@ -1343,10 +1343,10 @@ window.SECPLUS = window.SECPLUS || {};
           id: "d2-malware-a3", type: "multi", format: "Investigate",
           prompt: "Which of these does the notes' list give as ways your computer ends up running malware? Select all that apply.",
           options: [
-            { t: "Clicking an email link", ok: true, why: "Listed." },
-            { t: "A web page pop-up", ok: true, why: "Listed." },
-            { t: "A drive-by download", ok: true, why: "Listed." },
-            { t: "A worm", ok: true, why: "Listed." },
+            { t: "Clicking an email link", ok: true, why: "Correct: clicking a malicious email link is one way malware gets in." },
+            { t: "A web page pop-up", ok: true, why: "Correct: a pop-up on a web page can trick you into running malware." },
+            { t: "A drive-by download", ok: true, why: "Correct: a drive-by download installs malware just by visiting a page." },
+            { t: "A worm", ok: true, why: "Correct: a worm spreads by itself across the network, no click needed." },
             { t: "Changing your desktop wallpaper", why: "Not a malware delivery method." }
           ],
           hint: "Your computer must run a program somehow.",
@@ -1387,7 +1387,7 @@ window.SECPLUS = window.SECPLUS || {};
           prompt: "What's the main difference between a virus and a worm?",
           options: [
             { t: "A worm needs no user action to spread", ok: true, why: "Worms self-propagate over the network. Viruses need execution." },
-            { t: "Viruses only infect Linux", why: "No such limit." },
+            { t: "Viruses only infect Linux", why: "Not true: viruses exist for every OS. The real difference is that worms spread without anyone doing anything." },
             { t: "Worms can't harm data", why: "Worms can take over many systems quickly." },
             { t: "Only viruses can use the network", why: "Worms use the network as their transmission medium." }
           ],
@@ -1399,10 +1399,10 @@ window.SECPLUS = window.SECPLUS || {};
           id: "d2-virusworm-a2", type: "order", format: "Order",
           prompt: "Put the fileless virus infection from the notes' diagram in order.",
           steps: [
-            { t: "User clicks a malicious website link", why: "The entry point." },
-            { t: "The site exploits a Flash, Java or Windows vulnerability", why: "Uses the vulnerable system." },
-            { t: "PowerShell launches and downloads a payload into RAM", why: "Nothing is written as a file." },
-            { t: "Scripts run in memory, exfiltrate data and damage files", why: "The attack does its work." },
+            { t: "User clicks a malicious website link", why: "Step 1: the user clicks a link to a malicious site." },
+            { t: "The site exploits a Flash, Java or Windows vulnerability", why: "Step 2: the site exploits a weakness in Flash, Java or Windows on the user's system." },
+            { t: "PowerShell launches and downloads a payload into RAM", why: "Step 3: PowerShell pulls the payload straight into memory. No file is saved, so file scanners miss it." },
+            { t: "Scripts run in memory, exfiltrate data and damage files", why: "Step 4: the in-memory scripts steal data and damage files." },
             { t: "An auto-start entry is added to the Registry", why: "So it comes back after a reboot." }
           ],
           hint: "Click, exploit, load to memory, act, persist.",
@@ -1414,13 +1414,13 @@ window.SECPLUS = window.SECPLUS || {};
           prompt: "Match each virus to its type.",
           choices: ["Program virus", "Boot sector virus", "Script virus", "Macro virus"],
           items: [
-            { t: "Infects an installer executable", a: "Program virus", why: "It's part of the application." },
-            { t: "Loads before the operating system", a: "Boot sector virus", why: "'Who needs an OS?'" },
+            { t: "Infects an installer executable", a: "Program virus", why: "A program virus attaches to an application, so it runs when the program runs." },
+            { t: "Loads before the operating system", a: "Boot sector virus", why: "A boot sector virus lives in the boot area and starts before the OS does." },
             { t: "Runs through the browser's scripting engine", a: "Script virus", why: "OS- and browser-based scripts." },
-            { t: "Hides in a spreadsheet's automation code", a: "Macro virus", why: "Common in Microsoft Office." }
+            { t: "Hides in a spreadsheet's automation code", a: "Macro virus", why: "A macro virus hides in document automation, like Excel or Word macros." }
           ],
           hint: "Where does the virus live?",
-          explain: "Virus types are named after what they infect.",
+          explain: "Viruses are named after where they live: a program, the boot sector, a script, or a document macro.",
           pages: [39]
         },
         {
@@ -1468,8 +1468,8 @@ window.SECPLUS = window.SECPLUS || {};
           id: "d2-spyware-a2", type: "order", format: "Order",
           prompt: "Order the bloatware removal options from first choice to last.",
           steps: [
-            { t: "Use the OS's built-in uninstaller", why: "Works for most applications." },
-            { t: "Use the app's own uninstaller", why: "Some apps need their own." },
+            { t: "Use the OS's built-in uninstaller", why: "Try this first: the OS's normal uninstall removes most apps cleanly." },
+            { t: "Use the app's own uninstaller", why: "Next: some apps ship their own uninstaller that removes leftovers the OS misses." },
             { t: "Use a third-party uninstaller or cleaner, with a backup ready", why: "Probably not the first option." }
           ],
           hint: "Start with what's built in.",
@@ -1515,7 +1515,7 @@ window.SECPLUS = window.SECPLUS || {};
             { t: "Modified kernel module hides a process from Task Manager and anti-virus", a: "Rootkit", why: "Changes core system files to stay invisible." }
           ],
           hint: "Trigger, capture or hide?",
-          explain: "Each type has a signature behavior.",
+          explain: "Keyloggers record keys, rootkits hide in the OS, and logic bombs wait for a trigger. Match each to its behavior.",
           pages: [41]
         },
         {
@@ -1523,9 +1523,9 @@ window.SECPLUS = window.SECPLUS || {};
           prompt: "Why can't signature-based anti-virus reliably stop logic bombs, and what helps instead?",
           options: [
             { t: "Each is unique; use change control and change monitoring", ok: true, why: "No predefined signatures, so rely on process, monitoring and auditing." },
-            { t: "They're encrypted; use a bigger hash", why: "Encryption isn't the reason." },
-            { t: "They only run on Macs; switch OS", why: "Not true." },
-            { t: "They're harmless until found", why: "They can be very destructive." }
+            { t: "They're encrypted; use a bigger hash", why: "Encryption isn't the issue. Each logic bomb is custom code, so there's no known signature to match." },
+            { t: "They only run on Macs; switch OS", why: "Logic bombs can run on any OS. The problem is they're unique, so signatures can't catch them." },
+            { t: "They're harmless until found", why: "Wrong: they can be very destructive when triggered. Change control and monitoring help catch them first." }
           ],
           hint: "There's nothing to match a signature against.",
           explain: "Formal change control, alerting on changes (like Tripwire) and constant auditing.",
@@ -1577,9 +1577,9 @@ window.SECPLUS = window.SECPLUS || {};
           prompt: "An auditor clones an employee's access badge in seconds and walks into the server room. What control do the notes suggest?",
           options: [
             { t: "Require another factor along with the badge", ok: true, why: "That's why we have MFA: a cloned card alone isn't enough." },
-            { t: "Issue new badges with a more visible photo and color", why: "Color doesn't stop cloning." },
+            { t: "Issue new badges with a more visible photo and color", why: "A nicer photo doesn't stop a badge from being copied. A second factor (like a PIN) does." },
             { t: "Make every user's password longer", why: "Passwords aren't involved at the door." },
-            { t: "Patch the server OS", why: "The attack is physical." }
+            { t: "Patch the server OS", why: "The attacker walked in physically. Server patches don't stop a cloned badge." }
           ],
           hint: "Something you have can be copied.",
           explain: "RFID duplicators are cheap and fast. Add a second factor.",
@@ -1595,7 +1595,7 @@ window.SECPLUS = window.SECPLUS || {};
             { t: "Tampering with cooling so servers overheat", a: "Environmental", why: "Attacks the operating environment (HVAC)." }
           ],
           hint: "Force, copy or environment?",
-          explain: "Physical security must cover all of them.",
+          explain: "Brute force breaks in, RFID cloning copies badges, and environmental attacks target power or HVAC.",
           pages: [41]
         },
         {
@@ -1634,7 +1634,7 @@ window.SECPLUS = window.SECPLUS || {};
             { t: "DDoS reflection and amplification", ok: true, why: "Small requests reflect off low-authentication services and grow into a big attack." },
             { t: "DNS poisoning", why: "Poisoning changes DNS answers. It doesn't flood a target." },
             { t: "Domain hijacking", why: "That's taking over the domain registration." },
-            { t: "Wireless jamming", why: "That's radio interference." }
+            { t: "Wireless jamming", why: "Jamming blocks wireless signals. This attack bounces small DNS queries into big replies aimed at the victim." }
           ],
           hint: "Small in, big out, aimed at someone else.",
           explain: "Protocols with little or no authentication, like NTP, DNS and ICMP, get turned against the victim.",
@@ -1644,10 +1644,10 @@ window.SECPLUS = window.SECPLUS || {};
           id: "d2-dos-a2", type: "choice", format: "Troubleshoot",
           prompt: "The lab network goes down whenever a new switch is connected. There's no attacker. The notes would call this what?",
           options: [
-            { t: "A 'friendly' unintentional DoS, such as a layer 2 loop without STP", ok: true, why: "Not every DoS is malicious." },
+            { t: "A 'friendly' unintentional DoS, such as a layer 2 loop without STP", ok: true, why: "Correct: a DoS can be accidental. A switching loop with no Spanning Tree Protocol can flood the network by itself." },
             { t: "A DDoS attack from a botnet of compromised lab machines", why: "There's no army of computers here." },
             { t: "A replay attack", why: "No captured data is being replayed." },
-            { t: "Ransomware", why: "Nothing is encrypted." }
+            { t: "Ransomware", why: "Ransomware encrypts files for money. Here nothing is encrypted and there's no attacker." }
           ],
           hint: "It's not always a bad actor.",
           explain: "Loops, giant downloads and even water leaks can deny service.",
@@ -1657,10 +1657,10 @@ window.SECPLUS = window.SECPLUS || {};
           id: "d2-dos-a3", type: "multi", format: "Investigate",
           prompt: "Which are reasons the notes give for launching a DoS? Select all that apply.",
           options: [
-            { t: "Gain a competitive advantage", ok: true, why: "Listed." },
+            { t: "Gain a competitive advantage", ok: true, why: "Correct: knocking a competitor's service offline can win you business." },
             { t: "Create a smokescreen for another exploit", ok: true, why: "For example, before a DNS spoofing attack." },
-            { t: "Make a service unavailable", ok: true, why: "That's the core goal." },
-            { t: "Permanently encrypt the victim's files", why: "That's ransomware." }
+            { t: "Make a service unavailable", ok: true, why: "Correct: making a service unavailable is the basic goal of any DoS." },
+            { t: "Permanently encrypt the victim's files", why: "Encrypting files for ransom is ransomware, not a DoS motive from the notes." }
           ],
           hint: "Availability is the target.",
           explain: "DoS attacks availability, sometimes as a distraction.",
@@ -1700,13 +1700,13 @@ window.SECPLUS = window.SECPLUS || {};
           prompt: "Match each typosquatting example (target: example.com) to its type.",
           choices: ["Outright misspelling", "Typing error", "Different phrase", "Different top-level domain"],
           items: [
-            { t: "exampel.com", a: "Outright misspelling", why: "The word is spelled wrong." },
-            { t: "exmple.com", a: "Typing error", why: "A dropped key." },
-            { t: "examples.com", a: "Different phrase", why: "A slightly different name." },
-            { t: "example.org", a: "Different top-level domain", why: "Same name, different TLD." }
+            { t: "exampel.com", a: "Outright misspelling", why: "The letters are in the wrong order, a misspelling people may not notice." },
+            { t: "exmple.com", a: "Typing error", why: "A letter is missing, like a slip of the finger while typing." },
+            { t: "examples.com", a: "Different phrase", why: "A slightly different name that looks close enough to the real one." },
+            { t: "example.org", a: "Different top-level domain", why: "Same name, different ending (.org instead of .com)." }
           ],
           hint: "Spelling, keystroke, wording or TLD?",
-          explain: "All are forms of URL hijacking that profit from mistakes.",
+          explain: "Typosquatting registers names people mistype: misspellings, typos, similar phrases or a different ending like .org.",
           pages: [42]
         },
         {
@@ -1714,7 +1714,7 @@ window.SECPLUS = window.SECPLUS || {};
           prompt: "Attackers phish the login for a company's domain registrar account and point its domains to their own servers. What is this?",
           options: [
             { t: "Domain hijacking", ok: true, why: "Control of the registration controls where traffic flows." },
-            { t: "A DNS amplification attack", why: "That's a DDoS technique." },
+            { t: "A DNS amplification attack", why: "DNS amplification is a DDoS that floods a victim. Taking over the registrar account to repoint domains is domain hijacking." },
             { t: "Typosquatting", why: "Typosquatting uses a different domain. This is the real one." },
             { t: "ARP poisoning", why: "That's a local network on-path attack." }
           ],
@@ -1769,8 +1769,8 @@ window.SECPLUS = window.SECPLUS || {};
           options: [
             { t: "Deauth attack; 802.11w protects those frames", ok: true, why: "802.11w encrypts important management frames like deauthenticate." },
             { t: "RF jamming; use a stronger password", why: "Jamming is noise. These are forged frames, and passwords don't help." },
-            { t: "DNS poisoning; flush DNS", why: "This happens below DNS." },
-            { t: "Bloatware; uninstall apps", why: "Unrelated." }
+            { t: "DNS poisoning; flush DNS", why: "DNS poisoning fakes name lookups. Being kicked off Wi-Fi happens lower, at the wireless frame level." },
+            { t: "Bloatware; uninstall apps", why: "Bloatware is unwanted preinstalled software. It doesn't send fake disconnect frames." }
           ],
           hint: "Look at the frame type.",
           explain: "Management frames were originally sent with no authentication.",
@@ -1781,8 +1781,8 @@ window.SECPLUS = window.SECPLUS || {};
           prompt: "Wi-Fi drops whenever the break-room microwave runs. Is this jamming?",
           options: [
             { t: "No, it's interference", ok: true, why: "The notes separate accidental interference from deliberate jamming." },
-            { t: "Yes, all signal loss is jamming", why: "Jamming needs intent." },
-            { t: "No, it's a deauth attack", why: "There are no forged frames." },
+            { t: "Yes, all signal loss is jamming", why: "No: jamming is deliberate. A microwave causes accidental interference." },
+            { t: "No, it's a deauth attack", why: "A deauth attack sends fake disconnect frames. Nothing is being sent here; the microwave just creates noise." },
             { t: "Yes, microwaves are reactive jammers", why: "Reactive jamming is a deliberate technique." }
           ],
           hint: "Does anyone want your network to fail?",
@@ -1821,7 +1821,7 @@ window.SECPLUS = window.SECPLUS || {};
           prompt: "On the lab subnet, a host starts answering ARP requests for the gateway's IP with its own MAC, then forwards traffic onward. What attack is this?",
           options: [
             { t: "ARP poisoning (on-path)", ok: true, why: "ARP has no security, so the attacker becomes the middle hop." },
-            { t: "DNS amplification", why: "No DNS flooding here." },
+            { t: "DNS amplification", why: "DNS amplification floods a victim with DNS replies. Here a host is lying about who owns the gateway's IP address." },
             { t: "Replay attack", why: "Replay reuses captured data later. This is live redirection." },
             { t: "Domain hijacking", why: "Domain registration isn't involved." }
           ],
@@ -1876,10 +1876,10 @@ window.SECPLUS = window.SECPLUS || {};
           id: "d2-replay-a1", type: "order", format: "Order",
           prompt: "Put the session hijacking steps from the notes' diagram in order.",
           steps: [
-            { t: "Victim authenticates to the server", why: "Step 1." },
-            { t: "Server gives the client a session ID", why: "Step 2." },
+            { t: "Victim authenticates to the server", why: "Step 1: the victim logs in normally." },
+            { t: "Server gives the client a session ID", why: "Step 2: the server hands back a session ID so the user stays logged in." },
             { t: "Attacker intercepts the session ID", why: "It was visible on the network." },
-            { t: "Attacker uses it to access the server as the victim", why: "No password needed." }
+            { t: "Attacker uses it to access the server as the victim", why: "Final step: with the stolen session ID, the attacker is treated as the victim without needing the password." }
           ],
           hint: "The ID has to exist before it can be stolen.",
           explain: "Encrypting traffic keeps the session ID from being captured.",
@@ -1949,17 +1949,17 @@ window.SECPLUS = window.SECPLUS || {};
             { t: "Estonian Central Health Database", a: "SQL injection", why: "Breached healthcare information for a whole country." }
           ],
           hint: "Ransomware, script on a page, or database query?",
-          explain: "Malicious code comes in many forms.",
+          explain: "Real attacks used different code: WannaCry exploited SMBv1, British Airways was hit by cross-site scripting, and Estonia's health database by SQL injection.",
           pages: [45]
         },
         {
           id: "d2-maliciouscode-a2", type: "multi", format: "Investigate",
           prompt: "Which protections against malicious code do the notes list? Select all that apply.",
           options: [
-            { t: "Anti-malware", ok: true, why: "Listed." },
-            { t: "Firewall", ok: true, why: "Listed." },
-            { t: "Continuous updates and patches", ok: true, why: "Listed." },
-            { t: "Secure computing habits", ok: true, why: "Listed." },
+            { t: "Anti-malware", ok: true, why: "Correct: anti-malware catches known malicious code." },
+            { t: "Firewall", ok: true, why: "Correct: a firewall blocks unwanted connections the code might use." },
+            { t: "Continuous updates and patches", ok: true, why: "Correct: patches close the holes malicious code exploits." },
+            { t: "Secure computing habits", ok: true, why: "Correct: careful habits, like not opening unknown attachments, stop a lot of attacks." },
             { t: "Disabling all logging", why: "Logs help detection. Disabling them helps attackers." }
           ],
           hint: "Protection comes from many sources.",
@@ -2005,7 +2005,7 @@ window.SECPLUS = window.SECPLUS || {};
           options: [
             { t: "Directory traversal", ok: true, why: "../ sequences read files outside the web root." },
             { t: "Cross-site request forgery (CSRF)", why: "CSRF tricks a victim's browser into sending a request." },
-            { t: "Password spraying", why: "No logins are involved." },
+            { t: "Password spraying", why: "Password spraying tries common passwords on many logins. This log shows ../ paths reaching outside the web folder." },
             { t: "DLL injection", why: "No library is loaded into a process." }
           ],
           hint: "Look at the dots and slashes.",
@@ -2016,8 +2016,8 @@ window.SECPLUS = window.SECPLUS || {};
           id: "d2-appattacks-a2", type: "order", format: "Order",
           prompt: "Put the CSRF attack from the notes' diagram in order.",
           steps: [
-            { t: "Attacker creates a funds transfer request", why: "Step 1." },
-            { t: "The request is sent as a link to someone who may be logged into the bank", why: "Step 2." },
+            { t: "Attacker creates a funds transfer request", why: "Step 1: the attacker builds a request that would move money." },
+            { t: "The request is sent as a link to someone who may be logged into the bank", why: "Step 2: the request is hidden in a link sent to someone who's probably logged in to the bank." },
             { t: "The visitor clicks and unknowingly sends the request to the bank", why: "Step 3: the browser carries their session." },
             { t: "The bank validates it and sends funds to the attacker", why: "Step 4: the site trusted the browser." }
           ],
@@ -2031,11 +2031,11 @@ window.SECPLUS = window.SECPLUS || {};
           options: [
             { t: "XSS: user trusts site. CSRF: site trusts browser", ok: true, why: "XSS runs script the user trusts. CSRF sends requests the site trusts." },
             { t: "Both exploit the database's trust in the app", why: "That's closer to SQL injection." },
-            { t: "XSS: site trusts the user. CSRF: user trusts the site", why: "That's backwards." },
+            { t: "XSS: site trusts the user. CSRF: user trusts the site", why: "That's reversed. XSS abuses a user's trust in a site; CSRF abuses a site's trust in the user's browser." },
             { t: "Neither involves trust", why: "Both are built on misplaced trust." }
           ],
           hint: "Who trusts whom?",
-          explain: "This pairing is a classic exam comparison.",
+          explain: "XSS: the user trusts the site, so the site's injected script runs in their browser. CSRF: the site trusts the browser, so a forged request is accepted.",
           pages: [46]
         },
         {
@@ -2044,7 +2044,7 @@ window.SECPLUS = window.SECPLUS || {};
           options: [
             { t: "Horizontal privilege escalation", ok: true, why: "User A reaches user B's resources at the same level." },
             { t: "Vertical escalation to SYSTEM", why: "No higher-level account was gained." },
-            { t: "Buffer overflow", why: "No memory was overrun." },
+            { t: "Buffer overflow", why: "A buffer overflow overwrites memory. Here user A reached another normal user's data by changing an ID: horizontal escalation." },
             { t: "Replay attack", why: "Nothing captured was replayed." }
           ],
           hint: "Sideways, not upward.",
@@ -2056,8 +2056,8 @@ window.SECPLUS = window.SECPLUS || {};
           prompt: "Which mitigations for privilege escalation are in the notes? Select all that apply.",
           options: [
             { t: "Patch quickly", ok: true, why: "These are high-priority patches." },
-            { t: "Keep anti-malware updated", ok: true, why: "Blocks known vulnerabilities." },
-            { t: "Data Execution Prevention", ok: true, why: "Limits where code can run." },
+            { t: "Keep anti-malware updated", ok: true, why: "Correct: updated anti-malware can block known escalation exploits." },
+            { t: "Data Execution Prevention", ok: true, why: "Correct: DEP stops code from running in memory areas meant only for data." },
             { t: "Address space layout randomization", ok: true, why: "Prevents attacks at a known memory address." },
             { t: "Give every user admin rights to reduce help desk tickets", why: "That makes escalation unnecessary for attackers." }
           ],
@@ -2094,11 +2094,11 @@ window.SECPLUS = window.SECPLUS || {};
           choices: ["Birthday attack", "Downgrade attack", "SSL stripping"],
           items: [
             { t: "Attacker generates many document versions until one hashes the same as a signed one", a: "Birthday attack", why: "Brute-forcing a hash collision." },
-            { t: "On-path attacker forces client and server to fall back to an old, broken protocol", a: "Downgrade attack", why: "Like POODLE forcing SSL 3.0." },
+            { t: "On-path attacker forces client and server to fall back to an old, broken protocol", a: "Downgrade attack", why: "The attacker forces both sides down to an old, weak protocol, as POODLE did with SSL 3.0." },
             { t: "Victim sees http:// while the attacker relays to the server over https://", a: "SSL stripping", why: "The victim side is never encrypted." }
           ],
           hint: "Collision, fallback or removing HTTPS?",
-          explain: "All three undo security without stealing the key.",
+          explain: "Birthday attacks hunt for hash collisions, downgrade attacks force an old weak protocol, and SSL stripping keeps the victim on plain HTTP.",
           pages: [47]
         },
         {
@@ -2106,9 +2106,9 @@ window.SECPLUS = window.SECPLUS || {};
           prompt: "Which defense against birthday attacks do the notes give?",
           options: [
             { t: "Use a large hash output size", ok: true, why: "More possible outputs make collisions far harder to find." },
-            { t: "Hash the data twice with MD5 for extra strength", why: "MD5 collisions are known." },
+            { t: "Hash the data twice with MD5 for extra strength", why: "MD5 is already known to have collisions, and hashing twice doesn't fix that. A bigger hash output does." },
             { t: "Use shorter hashes so they compute faster", why: "Shorter output makes collisions easier." },
-            { t: "Store passwords in plaintext", why: "Never." }
+            { t: "Store passwords in plaintext", why: "Never store passwords in plaintext. Birthday attacks are beaten with larger hash sizes." }
           ],
           hint: "More possible outputs.",
           explain: "Collision resistance grows with hash output size.",
@@ -2161,9 +2161,9 @@ window.SECPLUS = window.SECPLUS || {};
           prompt: "Why is offline brute force more dangerous than online brute force?",
           options: [
             { t: "No lockouts apply to a stolen hash list", ok: true, why: "The attacker compares guesses locally as fast as their hardware allows." },
-            { t: "It doesn't need any compute", why: "It needs a lot of compute." },
-            { t: "It works against plaintext only", why: "It attacks hashes." },
-            { t: "Online attacks are faster", why: "Online attacks are very slow." }
+            { t: "It doesn't need any compute", why: "Wrong: it takes a lot of computing power. It's dangerous because there are no lockouts on a stolen hash file." },
+            { t: "It works against plaintext only", why: "It attacks stored hashes, guessing passwords until a hash matches." },
+            { t: "Online attacks are faster", why: "Online attacks are slow and get locked out. Offline attacks run at full speed with no limit." }
           ],
           hint: "What stops online guessing?",
           explain: "Strong, slow hash algorithms are the defense once hashes are stolen.",
@@ -2206,15 +2206,15 @@ window.SECPLUS = window.SECPLUS || {};
           prompt: "Match each observation to the IOC it represents.",
           choices: ["Impossible travel", "Concurrent session usage", "Blocked content", "Out-of-cycle logging", "Missing logs", "Resource consumption"],
           items: [
-            { t: "Login from Omaha, then from Melbourne three minutes later", a: "Impossible travel", why: "No one travels that fast." },
-            { t: "The same user is interactively logged in from two offices right now", a: "Concurrent session usage", why: "You don't have a clone." },
+            { t: "Login from Omaha, then from Melbourne three minutes later", a: "Impossible travel", why: "Nobody can travel from Omaha to Melbourne in three minutes, so one of those logins is fake." },
+            { t: "The same user is interactively logged in from two offices right now", a: "Concurrent session usage", why: "One person can't be at two desks at once, so someone else is using the account." },
             { t: "A server can't reach the anti-malware vendor's update site", a: "Blocked content", why: "Attackers play keep-away with fixes." },
             { t: "OS patch entries on a Thursday when patching is always Tuesday", a: "Out-of-cycle logging", why: "Activity at an unexpected time." },
-            { t: "Auth logs for 02:00 to 04:00 are gone", a: "Missing logs", why: "Attackers cover their tracks." },
+            { t: "Auth logs for 02:00 to 04:00 are gone", a: "Missing logs", why: "Deleted logs are a red flag: attackers erase evidence of what they did." },
             { t: "Outbound transfer spike at 3 AM in firewall logs", a: "Resource consumption", why: "Every attacker action has a footprint." }
           ],
           hint: "Read each like a log line.",
-          explain: "Most IOCs are found by log analysis and automation.",
+          explain: "Indicators of compromise are signs of an intrusion: impossible travel, concurrent sessions, blocked content, odd log timing, missing logs, spikes in resource use.",
           pages: [48, 49]
         },
         {
@@ -2223,8 +2223,8 @@ window.SECPLUS = window.SECPLUS || {};
           options: [
             { t: "An attacker locked it to set up a reset", ok: true, why: "The notes describe lockout as part of a larger plan." },
             { t: "A normal forgotten password, so reset it right away", why: "Possible, but the timing matches a known attack pattern. Verify." },
-            { t: "A DNS poisoning attack on the help desk", why: "DNS isn't involved." },
-            { t: "Bloatware", why: "Unrelated." }
+            { t: "A DNS poisoning attack on the help desk", why: "DNS isn't involved. The lockout plus a reset call fits an attacker trying to take over the account." },
+            { t: "Bloatware", why: "Bloatware is unwanted preinstalled software. This is a social engineering pattern." }
           ],
           hint: "Lockout plus reset call.",
           explain: "Verify identity carefully when a reset follows a lockout.",
@@ -2234,10 +2234,10 @@ window.SECPLUS = window.SECPLUS || {};
           id: "d2-ioc-a3", type: "multi", format: "Investigate",
           prompt: "Which of these do the notes list as indicators of compromise? Select all that apply.",
           options: [
-            { t: "Changes to file hash values", ok: true, why: "Listed." },
-            { t: "Changes to DNS data", ok: true, why: "Listed." },
-            { t: "Spikes of read requests to certain files", ok: true, why: "Listed." },
-            { t: "Irregular international traffic", ok: true, why: "Listed." },
+            { t: "Changes to file hash values", ok: true, why: "Correct: a changed hash means a file was modified." },
+            { t: "Changes to DNS data", ok: true, why: "Correct: changed DNS records can redirect your traffic to attackers." },
+            { t: "Spikes of read requests to certain files", ok: true, why: "Correct: sudden heavy reads of certain files can mean data is being stolen." },
+            { t: "Irregular international traffic", ok: true, why: "Correct: unusual traffic to other countries can be data leaving." },
             { t: "A scheduled, approved patch on Patch Tuesday", why: "Expected activity, not an indicator." }
           ],
           hint: "Unexpected change is the theme.",
@@ -2279,10 +2279,10 @@ window.SECPLUS = window.SECPLUS || {};
           prompt: "Match each application allow-list rule to its type.",
           choices: ["Application hash", "Certificate", "Path", "Network zone"],
           items: [
-            { t: "Only run the binary whose SHA-256 is 9f2c...", a: "Application hash", why: "Allows only that exact file." },
+            { t: "Only run the binary whose SHA-256 is 9f2c...", a: "Application hash", why: "An application hash rule allows only that exact file. Any change to the file blocks it." },
             { t: "Allow any app signed by our internal code-signing CA", a: "Certificate", why: "Trusts signed apps from certain publishers." },
-            { t: "Only run executables from C:\\Program Files\\", a: "Path", why: "Location-based." },
-            { t: "Apps may only run from the corporate network zone", a: "Network zone", why: "Zone-based." }
+            { t: "Only run executables from C:\\Program Files\\", a: "Path", why: "A path rule allows programs based on the folder they run from." },
+            { t: "Apps may only run from the corporate network zone", a: "Network zone", why: "A network zone rule allows apps based on which network the device is on." }
           ],
           hint: "What does the rule check: fingerprint, signer, folder or network?",
           explain: "Hash rules are strict but break on every update. Certificate rules survive updates from the same publisher.",
@@ -2305,7 +2305,7 @@ window.SECPLUS = window.SECPLUS || {};
           id: "d2-segmentation-a3", type: "choice", format: "Next action",
           prompt: "You're about to push a new ACL to the switch you're managing remotely. What do the notes warn you about?",
           options: [
-            { t: "You can accidentally lock yourself out", ok: true, why: "Be careful configuring ACLs." },
+            { t: "You can accidentally lock yourself out", ok: true, why: "Correct: one wrong ACL rule can block your own remote session, cutting you off from the switch." },
             { t: "ACLs only work at night", why: "Time of day can be a condition, but that's not the warning." },
             { t: "ACLs encrypt all traffic", why: "ACLs allow or deny. They don't encrypt." },
             { t: "ACLs can't filter by IP", why: "IP address is a common condition." }
@@ -2350,24 +2350,24 @@ window.SECPLUS = window.SECPLUS || {};
           choices: ["Patching", "Encryption", "Monitoring", "Least privilege", "Configuration enforcement", "Decommissioning"],
           items: [
             { t: "Out-of-band update for a newly announced zero-day", a: "Patching", why: "Emergency patches outside the normal cycle." },
-            { t: "Turning on BitLocker for every test laptop", a: "Encryption", why: "Full disk encryption." },
-            { t: "Sending firewall and auth logs into a SIEM", a: "Monitoring", why: "Sensors feeding a collector." },
-            { t: "CI deploy job can write to one bucket only", a: "Least privilege", why: "Only exactly what's needed." },
+            { t: "Turning on BitLocker for every test laptop", a: "Encryption", why: "BitLocker encrypts the whole disk, so a stolen laptop's data can't be read." },
+            { t: "Sending firewall and auth logs into a SIEM", a: "Monitoring", why: "Sending logs to a SIEM is monitoring: sensors produce data and a collector gathers it." },
+            { t: "CI deploy job can write to one bucket only", a: "Least privilege", why: "Giving the job access to exactly one bucket and nothing more is least privilege." },
             { t: "A laptop missing its EDR agent is put in a quarantine VLAN on connect", a: "Configuration enforcement", why: "Posture assessment, then quarantine." },
             { t: "Old test servers' SSDs are destroyed under a formal policy", a: "Decommissioning", why: "Don't throw data in the trash." }
           ],
           hint: "Which technique does each action belong to?",
-          explain: "These techniques overlap and work together.",
+          explain: "Patch to close holes, encrypt to protect stolen data, monitor to spot attacks, limit rights, enforce configs, and destroy old media properly.",
           pages: [50]
         },
         {
           id: "d2-mitigation-a2", type: "order", format: "Order",
           prompt: "Put configuration enforcement steps in order.",
           steps: [
-            { t: "Device connects to the network", why: "The check runs every time." },
-            { t: "Posture assessment checks OS patches, EDR, firewall and certificates", why: "An extensive check." },
-            { t: "Non-compliant device is quarantined in a private VLAN", why: "Limited access until fixed." },
-            { t: "After corrections, the device is rechecked", why: "Then allowed if it passes." }
+            { t: "Device connects to the network", why: "Step 1: every time a device connects, the check starts." },
+            { t: "Posture assessment checks OS patches, EDR, firewall and certificates", why: "Step 2: the device is checked for patches, EDR, firewall and certificates." },
+            { t: "Non-compliant device is quarantined in a private VLAN", why: "Step 3: a device that fails goes into a private VLAN with limited access." },
+            { t: "After corrections, the device is rechecked", why: "Step 4: once fixed, it's checked again and let in if it passes." }
           ],
           hint: "Check, isolate, fix, recheck.",
           explain: "Enforcement keeps out-of-date devices off the main network.",
@@ -2379,7 +2379,7 @@ window.SECPLUS = window.SECPLUS || {};
           options: [
             { t: "Sensors generate data; collectors aggregate it", ok: true, why: "Logs from IPS, firewalls and servers flow into SIEMs and syslog servers." },
             { t: "Sensors are always hardware; collectors are always cloud", why: "Sensors can be built into software or devices." },
-            { t: "Collectors block traffic; sensors encrypt it", why: "Neither is their role." },
+            { t: "Collectors block traffic; sensors encrypt it", why: "Neither blocks nor encrypts. Sensors generate the data; collectors gather it in one place." },
             { t: "They're the same thing", why: "They're different roles in the pipeline." }
           ],
           hint: "Source vs. destination.",
@@ -2440,7 +2440,7 @@ window.SECPLUS = window.SECPLUS || {};
             { t: "It also uses behavior and can auto-respond", ok: true, why: "Detect, investigate and respond: isolate, quarantine or roll back via API." },
             { t: "It only uses signatures, but updates them faster", why: "Signatures aren't its only detection tool." },
             { t: "It needs a technician to approve every response", why: "It's API driven with no intervention required." },
-            { t: "It replaces the need for patching", why: "Nothing replaces patching." }
+            { t: "It replaces the need for patching", why: "Nothing replaces patching. EDR adds behavior-based detection and automatic response." }
           ],
           hint: "Detect, investigate, respond.",
           explain: "EDR scales to more threats by not relying only on signatures.",
@@ -2453,7 +2453,7 @@ window.SECPLUS = window.SECPLUS || {};
             { t: "Host-based firewall", ok: true, why: "Controls traffic per application process and blocks unknown processes." },
             { t: "Full disk encryption", why: "FDE protects data at rest, not traffic." },
             { t: "VLAN segmentation", why: "That's network-level, not per-process on the host." },
-            { t: "Decommissioning policy", why: "That's for retired devices." }
+            { t: "Decommissioning policy", why: "A decommissioning policy covers retiring devices. A host-based firewall blocks a process's connections." }
           ],
           hint: "It knew which process was talking.",
           explain: "Host-based firewalls see and control traffic per application.",
@@ -2470,7 +2470,7 @@ window.SECPLUS = window.SECPLUS || {};
             { t: "Fewer apps means fewer bugs and patch processes to manage", a: "Removing unnecessary software", why: "Reduces risk with an easy fix." }
           ],
           hint: "Data at rest, in transit, host attacks, or attack surface?",
-          explain: "Hardening is layered: defense in depth.",
+          explain: "Disk encryption protects a stolen drive, VPNs protect traffic, HIPS blocks attacks on the host, and fewer apps mean fewer bugs.",
           pages: [50, 51]
         },
         {
