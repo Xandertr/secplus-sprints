@@ -214,3 +214,48 @@ details[open].card summary::before { content: "▾"; }
 .jump { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; }
 .jump .btn { min-width: 48px; }
 .domainstudy { margin-top: 12px; display: grid; gap: 8px; }
+
+/* Home: one main action, the rest as a quiet list */
+.card.hero { border: 2px solid var(--primary-soft); }
+.menu { display: flex; flex-direction: column; background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); overflow: hidden; }
+.mrow { display: flex; justify-content: space-between; align-items: center; gap: 12px; width: 100%; min-height: 64px; padding: 10px 16px; border: 0; background: transparent; color: var(--text); font: inherit; text-align: left; text-decoration: none; cursor: pointer; }
+.mrow + .mrow { border-top: 1px solid var(--border); }
+.mrow:hover { background: var(--surface-2); }
+.mrow > span[aria-hidden] { color: var(--muted); font-size: 22px; }
+
+/* Vocabulary: tappable terms and the key-terms panel */
+.term { font: inherit; color: inherit; background: none; border: 0; padding: 0; cursor: pointer; text-decoration: underline dotted var(--primary); text-decoration-thickness: 2px; text-underline-offset: 4px; text-align: inherit; }
+.term:hover { color: var(--primary); }
+.vocab { margin-top: 12px; }
+.vocabbtn { display: inline-flex; align-items: center; gap: 8px; min-height: 44px; padding: 6px 14px; border-radius: 999px; border: 1px solid var(--border); background: var(--surface-2); color: var(--text); font: inherit; font-size: 16px; font-weight: 600; cursor: pointer; }
+.vocabbtn[aria-expanded="true"] { background: var(--primary-soft); border-color: var(--primary); }
+.vcount { background: var(--surface); border-radius: 999px; padding: 0 8px; font-size: 14px; }
+.vpanel { margin-top: 10px; background: var(--primary-soft); border-radius: 12px; padding: 10px 14px; }
+.vpanel dl { margin: 0; }
+.vterm { padding: 8px 0; }
+.vterm + .vterm { border-top: 1px solid var(--border); }
+.vterm.focus dt { color: var(--primary); }
+.vterm dt { font-weight: 700; }
+.vterm dd { margin: 2px 0 0; font-size: 16px; }
+.vex { display: block; color: var(--muted); font-size: 15px; margin-top: 2px; }
+
+/* Lessons: one point at a time, lead term in bold */
+.bullets.steps { list-style: none; padding: 0; }
+.bullets.steps li { background: var(--surface-2); border-radius: 10px; padding: 10px 14px; }
+.bullets.steps li.latest { background: var(--primary-soft); }
+.bullets.steps li + li { margin-top: 10px; }
+
+/* Feedback: verdict first, then the one idea to keep */
+.verdict { font-size: 22px; font-weight: 800; margin: 0 0 2px !important; }
+.feedback.good .verdict { color: var(--good); }
+.feedback.mid .verdict { color: var(--mid); }
+.feedback.low .verdict { color: var(--low); }
+.fhead { font-weight: 600; font-size: 17px; }
+.keyidea { background: var(--surface); border-radius: 10px; padding: 10px 14px; margin: 10px 0; }
+.keyidea p { margin: 0; }
+.keyidea .klabel { font-size: 13px; font-weight: 800; letter-spacing: .06em; text-transform: uppercase; color: var(--primary); margin-bottom: 4px; }
+.feedback .btn.small { margin: 4px 8px 4px 0; }
+.others { list-style: none; padding: 0; margin: 6px 0 10px; }
+.others li { background: var(--surface); border-radius: 10px; padding: 8px 12px; font-size: 16px; }
+.others li + li { margin-top: 8px; }
+.opt .why strong { color: var(--text); }

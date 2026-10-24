@@ -1,7 +1,7 @@
 /*
  * Glossary - plain-English definitions in original wording.
  * pages = PDF page numbers in the course notes. domain = which domain the term was taken from.
- * Currently covers Domains 1-2 (PDF 10-51). Add terms for other domains as they are built.
+ * Covers all five domains, plus everyday networking and security terms the questions lean on.
  */
 window.SECPLUS = window.SECPLUS || {};
 window.SECPLUS.glossary = [
@@ -186,7 +186,7 @@ window.SECPLUS.glossary = [
   { term: "Responsible disclosure", domain: "d4", pages: [75], def: "Researcher reports, vendor fixes, then the vulnerability is announced.", ex: "" },
   { term: "CVSS", domain: "d4", pages: [75], def: "Common Vulnerability Scoring System: a 0 to 10 severity score.", ex: "" },
   { term: "CVE", domain: "d4", pages: [75], def: "Common Vulnerabilities and Exposures: the standard list of named vulnerabilities.", ex: "" },
-  { term: "Exposure factor", domain: "d4", pages: [75], def: "The percentage of value lost if a vulnerability is exploited.", ex: "" },
+  { term: "Exposure factor (EF)", domain: "d4", pages: [75], def: "The percentage of value lost if a vulnerability is exploited.", ex: "" },
   { term: "Compensating control", domain: "d4", pages: [76], def: "An alternative control that covers a gap until the optimal fix (such as a patch) is possible.", ex: "" },
   { term: "SCAP", domain: "d4", pages: [78], def: "Security Content Automation Protocol: a NIST standard so different tools evaluate the same criteria.", ex: "" },
   { term: "SNMP trap", domain: "d4", pages: [79], def: "An alert a device sends on its own over udp/162 when a threshold is crossed.", ex: "" },
@@ -247,5 +247,51 @@ window.SECPLUS.glossary = [
   { term: "Passive / active reconnaissance", domain: "d5", pages: [103], def: "Gathering info from open sources (hard to detect) vs. probing the target directly (visible in logs).", ex: "" },
   { term: "Unknown environment test", domain: "d5", pages: [103], def: "A 'blind' penetration test where the tester knows nothing about the systems.", ex: "" },
   { term: "Phishing campaign", domain: "d5", pages: [104], def: "An organization sending simulated phishing to its own staff to measure clicks and train.", ex: "" },
-  { term: "Insider threat", domain: "d5", pages: [105], def: "A threat from within; countered with multiple approvals and monitoring.", ex: "" }
+  { term: "Insider threat", domain: "d5", pages: [105], def: "A threat from within; countered with multiple approvals and monitoring.", ex: "" },
+  // Everyday terms that show up across many questions
+  { term: "Firewall", domain: "d3", pages: [59, 60], def: "A device or software that allows or blocks network traffic based on rules.", ex: "A rule that blocks everything inbound except tcp/443." },
+  { term: "Virtual private network (VPN)", domain: "d3", pages: [60, 61], def: "An encrypted tunnel that carries traffic safely across an untrusted network like the Internet.", ex: "A laptop at a cafe connecting back to the office network." },
+  { term: "IPsec", domain: "d3", pages: [61], def: "A set of protocols that encrypts and authenticates traffic at the IP layer, often used for site-to-site VPNs.", ex: "" },
+  { term: "TLS / SSL", domain: "d1", pages: [20, 60], def: "TLS encrypts data between two systems, like a browser and a web server. SSL is its older, retired predecessor.", ex: "The padlock in your browser." },
+  { term: "HTTPS", domain: "d2", pages: [45, 47], def: "Web traffic (HTTP) sent inside a TLS-encrypted connection, normally on tcp/443.", ex: "" },
+  { term: "Domain Name System (DNS)", domain: "d2", pages: [42], def: "The system that turns names like example.com into IP addresses.", ex: "" },
+  { term: "Address Resolution Protocol (ARP)", domain: "d2", pages: [43], def: "Finds the hardware (MAC) address that belongs to an IP address on the local network. It has no security, so it can be poisoned.", ex: "" },
+  { term: "Network address translation (NAT)", domain: "d3", pages: [53], def: "Rewrites IP addresses as traffic passes through a router or firewall, usually so many private devices can share one public address.", ex: "" },
+  { term: "VLAN", domain: "d3", pages: [53, 76], def: "A virtual LAN: one physical switch split into separate logical networks.", ex: "Guest Wi-Fi on its own VLAN, away from company servers." },
+  { term: "Segmentation", domain: "d2", pages: [49], def: "Splitting a network (or data) into separate parts so a problem in one part can't easily spread.", ex: "" },
+  { term: "Proxy", domain: "d3", pages: [58], def: "A server that sits between users and the Internet, making requests for them so traffic can be checked, filtered or cached.", ex: "" },
+  { term: "IDS / IPS", domain: "d3", pages: [57], def: "An intrusion detection system watches traffic and alerts on attacks. An intrusion prevention system sits inline and can block them.", ex: "" },
+  { term: "Network access control (NAC)", domain: "d4", pages: [59, 83], def: "Checks a device or user before letting it onto the network.", ex: "" },
+  { term: "SIEM", domain: "d4", pages: [92], def: "Security information and event management: collects logs from many systems into one place to correlate, alert and report.", ex: "" },
+  { term: "Data loss prevention (DLP)", domain: "d3", pages: [82], def: "Tools that spot sensitive data like card numbers and stop it leaving where it shouldn't.", ex: "" },
+  { term: "SSH", domain: "d4", pages: [57, 79], def: "Secure Shell: an encrypted way to log in to and manage a remote system, on tcp/22.", ex: "" },
+  { term: "RDP", domain: "d4", pages: [57, 79], def: "Remote Desktop Protocol: shows a remote Windows desktop over the network, on tcp/3389.", ex: "" },
+  { term: "SNMP", domain: "d4", pages: [79], def: "Simple Network Management Protocol: used to monitor and manage network devices. Version 3 adds encryption.", ex: "" },
+  { term: "API", domain: "d3", pages: [52], def: "Application programming interface: a defined way for programs to talk to each other.", ex: "" },
+  { term: "Virtual machine (VM)", domain: "d2", pages: [36], def: "A complete computer running as software on shared hardware, managed by a hypervisor.", ex: "" },
+  { term: "Hypervisor", domain: "d2", pages: [36], def: "The software that creates and runs virtual machines and keeps them separate.", ex: "" },
+  { term: "IoT", domain: "d3", pages: [53], def: "Internet of Things: everyday devices with network connections, like sensors, cameras and smart speakers.", ex: "" },
+  { term: "Pre-shared key (PSK)", domain: "d4", pages: [70], def: "One shared password that every device uses to join a wireless network.", ex: "" },
+  { term: "WPA3", domain: "d4", pages: [70, 71], def: "The current Wi-Fi security standard. It replaces WPA2 and uses SAE so passwords can't be cracked offline from captured traffic.", ex: "" },
+  { term: "Multi-factor authentication (MFA)", domain: "d4", pages: [87], def: "Logging in with two or more different kinds of factor, such as something you know plus something you have.", ex: "A password plus a code from your phone." },
+  { term: "Biometrics", domain: "d4", pages: [87], def: "Using a body feature, like a fingerprint or face, as an authentication factor.", ex: "" },
+  { term: "Smart card", domain: "d4", pages: [87], def: "A card with a chip that proves you have it; usually used with a PIN.", ex: "" },
+  { term: "Password manager", domain: "d4", pages: [87], def: "An app that creates and stores a different strong password for every account.", ex: "" },
+  { term: "Malware", domain: "d2", pages: [39], def: "Any software built to do harm, such as viruses, worms, ransomware and spyware.", ex: "" },
+  { term: "Trojan horse", domain: "d2", pages: [39], def: "Malware disguised as something useful so the user installs it.", ex: "A 'free game' that also installs a backdoor." },
+  { term: "Spyware", domain: "d2", pages: [40], def: "Malware that secretly watches what you do and sends it to someone else.", ex: "" },
+  { term: "Keylogger", domain: "d2", pages: [41], def: "Malware or a device that records what you type, to steal passwords and other details.", ex: "" },
+  { term: "Botnet", domain: "d2", pages: [42], def: "A group of infected computers controlled remotely, often used for DDoS attacks or spam.", ex: "" },
+  { term: "DDoS", domain: "d2", pages: [42], def: "Distributed denial of service: many systems flood a target at once so real users can't reach it.", ex: "" },
+  { term: "Phishing", domain: "d2", pages: [29], def: "A fake message that tricks people into clicking a link, opening a file or giving up details.", ex: "" },
+  { term: "Spoofing", domain: "d2", pages: [29], def: "Faking an identity, like a sender address, phone number or IP address, to look trustworthy.", ex: "" },
+  { term: "Brute force", domain: "d2", pages: [48], def: "Trying every possible password or key until one works.", ex: "" },
+  { term: "PII", domain: "d3", pages: [62], def: "Personally identifiable information: data that can identify a specific person.", ex: "Name plus date of birth." },
+  { term: "PHI", domain: "d3", pages: [62], def: "Protected health information: health data linked to a person.", ex: "" },
+  { term: "Vulnerability scan", domain: "d4", pages: [73], def: "An automated check of systems for known weaknesses, like missing patches or open ports. It looks but doesn't exploit.", ex: "" },
+  { term: "Penetration test", domain: "d5", pages: [74, 99], def: "An authorized simulated attack that actually tries to exploit weaknesses to see how far an attacker could get.", ex: "" },
+  { term: "SDLC", domain: "d5", pages: [94], def: "Software development lifecycle: the stages of planning, building, testing and releasing software.", ex: "" },
+  { term: "SOX", domain: "d5", pages: [96, 101], def: "The Sarbanes-Oxley Act: US law on the accuracy of public companies' financial reporting.", ex: "" },
+  { term: "HIPAA", domain: "d5", pages: [101], def: "US law protecting the privacy and security of health information.", ex: "" },
+  { term: "PCI DSS", domain: "d5", pages: [97], def: "Payment Card Industry Data Security Standard: the rules for anyone storing or handling payment card data.", ex: "" }
 ];

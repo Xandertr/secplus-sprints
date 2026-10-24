@@ -454,7 +454,7 @@
     const s = state.session;
     if (!s || s.index >= s.steps.length) return;
     const step = s.steps[s.index];
-    const cur = { stepIndex: s.index, hintShown: false, answered: false, response: null, result: null, unsure: false, revealed: false, moreOpen: false };
+    const cur = { stepIndex: s.index, hintShown: false, vocabUsed: false, answered: false, response: null, result: null, unsure: false, revealed: false, moreOpen: false };
     if (step.kind === "activity") {
       const a = idx.activities[step.id];
       cur.layout = presentActivity(a, rng);
@@ -474,11 +474,11 @@
     if (cur.answered) return cur.result;
     const result = grade(a, cur.response);
     cur.prevCard = state.cards[a.id] ? Object.assign({}, state.cards[a.id]) : null;
-    const rec = recordAnswer(state, a.id, result, { usedHint: cur.hintShown }, now);
+    const rec = recordAnswer(state, a.id, result, { usedHint: cur.hintShown || !!cur.vocabUsed }, now);
     cur.answered = true;
     cur.result = Object.assign({}, result, { outcome: rec.outcome, xpGained: rec.xpGained, firstAttempt: rec.firstAttempt, wasReview: rec.wasReview });
     s.xp += rec.xpGained;
-    s.results.push({ id: a.id, outcome: rec.outcome, correct: result.correct, hinted: cur.hintShown, review: !!step.review });
+    s.results.push({ id: a.id, outcome: rec.outcome, correct: result.correct, hinted: cur.hintShown || !!cur.vocabUsed, review: !!step.review });
     s.updatedAt = now;
     return cur.result;
   }

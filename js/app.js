@@ -50,6 +50,114 @@
   function topicOf(activityId) { return idx.topicById[idx.activities[activityId].topicId]; }
   function pick(list) { return list[Math.floor(Math.random() * list.length)]; }
 
+  // Bold the lead-in of a lesson point ("Integrity: ...") so the eye lands on the term first.
+  function leadBold(b) {
+    const i = b.indexOf(":");
+    if (i > 0 && i < 45 && b.slice(0, i).split(" ").length <= 6) return '<strong>' + esc(b.slice(0, i + 1)) + '</strong>' + esc(b.slice(i + 1));
+    return esc(b);
+  }
+
+  // ------------------------------------------------------------ vocabulary
+  // Slash-named glossary entries whose parts aren't acronyms: the phrases to look for in question text.
+  const VOCAB_ALIASES = {
+    "Jailbreaking / rooting": ["jailbreaking", "jailbreak", "rooting"],
+    "Hot / warm / cold site": ["hot site", "warm site", "cold site"],
+    "Fail-open / fail-closed": ["fail-open", "fail-closed", "fail open", "fail closed"],
+    "Risk appetite / tolerance": ["risk appetite", "risk tolerance"],
+    "Transfer / accept / avoid / mitigate": ["risk transfer"],
+    "Data controller / processor": ["data controller", "data processor"],
+    "Due diligence / due care": ["due diligence", "due care"],
+    "Red team / blue team": ["red team", "blue team"],
+    "Passive / active reconnaissance": ["passive reconnaissance", "active reconnaissance"],
+    "Data custodian/steward": ["data custodian", "data steward", "custodian"]
+  };
+  const VOCAB = buildVocab(S.glossary);
+  function buildVocab(list) {
+    const seen = {}, out = [];
+    function add(name, gi) {
+      name = name.trim();
+      if (name.length < 2 || seen[name.toLowerCase()]) return;
+      seen[name.toLowerCase()] = true;
+      const acr = /[A-Z]/.test(name) && /^[A-Z0-9][A-Z0-9.-]*[A-Z0-9]$/.test(name);
+      const src = name.replace(/[.*+?^${}()|[\]\\]/g, "\\$&").replace(/\s+/g, "\\s+");
+      // acronyms are case-sensitive so "CA" doesn't match "ca"; words take simple plurals
+      out.push({ gi: gi, len: name.length, re: new RegExp("(^|[^A-Za-z0-9])(" + src + (acr ? "s?" : "(?:s|es)?") + ")(?![A-Za-z0-9])", acr ? "g" : "gi") });
+    }
+    list.forEach(function (g, gi) {
+      if (VOCAB_ALIASES[g.term]) { VOCAB_ALIASES[g.term].forEach(function (n) { add(n, gi); }); return; }
+      g.term.split(/\s*\/\s*/).forEach(function (part) {
+        const m = part.match(/^(.*?)\s*\(([^)]+)\)$/);
+        if (m) { add(m[1], gi); add(m[2], gi); } else add(part, gi);
+      });
+    });
+    return out.sort(function (a, b) { return b.len - a.len; });
+  }
+  // Glossary hits in a string, longest term first, never overlapping.
+  function findTerms(text) {
+    const hits = [];
+    text = String(text || "");
+    VOCAB.forEach(function (v) {
+      v.re.lastIndex = 0;
+      let m;
+      while ((m = v.re.exec(text))) {
+        const start = m.index + m[1].length, end = start + m[2].length;
+        if (!hits.some(function (h) { return start < h.end && end > h.start; })) hits.push({ gi: v.gi, start: start, end: end });
+      }
+    });
+    return hits.sort(function (a, b) { return a.start - b.start; });
+  }
+  function termList(texts) {
+    const out = [];
+    texts.forEach(function (t) { findTerms(t).forEach(function (h) { if (out.indexOf(h.gi) < 0) out.push(h.gi); }); });
+    return out;
+  }
+  // Prompt text with the first mention of each glossary term made tappable.
+  function markTerms(text) {
+    text = String(text || "");
+    const done = {};
+    let out = "", pos = 0;
+    findTerms(text).forEach(function (h) {
+      if (done[h.gi]) return;
+      done[h.gi] = true;
+      out += esc(text.slice(pos, h.start)) + '<button class="term" data-action="term" data-g="' + h.gi + '" data-fk="term-' + h.gi + '" aria-label="' + esc(text.slice(h.start, h.end)) + ': show meaning">' + esc(text.slice(h.start, h.end)) + '</button>';
+      pos = h.end;
+    });
+    return out + esc(text.slice(pos));
+  }
+  function activityTerms(a, cur) {
+    const texts = [a.type === "recall" ? a.front : a.prompt, a.artifact && a.artifact.body];
+    (a.options || []).forEach(function (o) { texts.push(o.t); });
+    (a.items || []).forEach(function (it) { texts.push(it.t); });
+    (a.choices || []).forEach(function (c) { texts.push(c); });
+    (a.steps || []).forEach(function (st) { texts.push(st.t); });
+    if (cur.answered || cur.revealed) {
+      texts.push(a.back, a.explain);
+      (a.options || []).forEach(function (o) { texts.push(o.why); });
+      (a.items || []).forEach(function (it) { texts.push(it.why); });
+      (a.steps || []).forEach(function (st) { texts.push(st.why); });
+    }
+    return termList(texts);
+  }
+  function vocabKey() { const s = state.session; return s ? s.index + ":" + (s.steps[s.index].id || "lesson") : ""; }
+  function vocabPanel(gis, peekCounts) {
+    if (!gis.length) return "";
+    const open = !!(ui.vocab && ui.vocab.key === vocabKey());
+    let html = '<div class="vocab"><button class="vocabbtn" data-action="vocab" data-fk="vocab" aria-expanded="' + open + '" aria-controls="vocabpanel">' +
+      '<span>Key terms</span><span class="vcount">' + gis.length + '</span><span aria-hidden="true">' + (open ? "▾" : "▸") + '</span></button>';
+    if (open) {
+      const f = ui.vocab.focus;
+      const order = f != null && gis.indexOf(f) >= 0 ? [f].concat(gis.filter(function (g) { return g !== f; })) : gis;
+      html += '<div class="vpanel" id="vocabpanel">' +
+        (peekCounts ? '<p class="tiny muted">Peeking counts like a hint: no penalty, the question just comes back a bit sooner.</p>' : "") +
+        '<dl>' + order.map(function (gi) {
+          const g = S.glossary[gi];
+          return '<div class="vterm' + (gi === f ? " focus" : "") + '"><dt>' + esc(g.term) + '</dt><dd>' + esc(g.def) +
+            (g.ex ? '<span class="vex">Example: ' + esc(g.ex) + '</span>' : "") + '</dd></div>';
+        }).join("") + '</dl></div>';
+    }
+    return html + '</div>';
+  }
+
   const PRAISE = ["Nice, that's right.", "Yes, exactly.", "Spot on.", "Correct. Good thinking.", "You've got it."];
   const GENTLE = ["Not quite, and that's useful to know.", "Close. Here's the key idea.", "Not this time. Now you'll remember it.", "Good attempt. Let's look at why."];
 
@@ -113,7 +221,6 @@
     const cur = E.currentTopic(state, idx);
     let html = '<section class="stack">';
     html += '<h1 class="h1">Small steps count.</h1>';
-    html += '<p class="lead">Pick a tiny sprint. You can stop after any question.</p>';
 
     if (s) {
       const step = s.steps[s.index];
@@ -123,26 +230,25 @@
         '<button class="btn primary big" data-action="resume" data-fk="resume" data-autofocus>Continue where I stopped</button></div>';
     }
 
-    html += '<div class="card"><h2 class="h2">Start a small sprint</h2>' +
-      '<p class="muted">New material mixed with anything due for review.</p>' +
+    html += '<div class="card hero"><h2 class="h2">Start a small sprint</h2>' +
+      '<p class="tiny muted">How many questions? Stop after any one.</p>' +
       sizePicker(size) +
       '<button class="btn ' + (s ? "" : "primary ") + 'big" data-action="start-mixed" data-fk="start-mixed"' + (s ? "" : " data-autofocus") + '>Start ' + plural(size, "question") + '</button></div>';
 
-    html += '<div class="grid2">';
-    html += '<button class="btn tile" data-action="continue" data-fk="continue"><strong>Continue</strong><span>' +
-      (s ? "Resume your paused sprint" : cur ? esc(cur.title) : "All built topics started") + '</span></button>';
-    html += '<button class="btn tile" data-action="review" data-fk="review"><strong>Review</strong><span>' +
-      (st.due ? plural(st.due, "item") + " due" : st.attempted ? "Nothing due. Practice weak spots" : "Nothing to review yet") + '</span></button>';
+    html += '<div class="menu" role="group" aria-label="Other ways to study">';
+    html += '<a class="mrow" href="#/library" data-fk="pick-chapter"><span><strong>Pick a chapter</strong><span class="tiny muted block">Study one domain or topic</span></span><span aria-hidden="true">›</span></a>';
+    html += '<button class="mrow" data-action="continue" data-fk="continue"><span><strong>Continue</strong><span class="tiny muted block">' +
+      (s ? "Resume your paused sprint" : cur ? esc(cur.title) : "All topics started") + '</span></span><span aria-hidden="true">›</span></button>';
+    html += '<button class="mrow" data-action="review" data-fk="review"><span><strong>Review</strong><span class="tiny muted block">' +
+      (st.due ? plural(st.due, "item") + " due" : st.attempted ? "Nothing due. Practice weak spots" : "Nothing to review yet") + '</span></span><span aria-hidden="true">›</span></button>';
+    html += '<button class="mrow" data-action="recommend" data-fk="recommend"><span><strong>Not sure?</strong><span class="tiny muted block">Suggest what to study next</span></span><span aria-hidden="true">›</span></button>';
     html += '</div>';
-    html += '<a class="btn big" href="#/library" data-fk="pick-chapter">Pick a chapter to study</a>';
-
-    if (ui.flash) html += '<p class="ok" role="status">' + esc(ui.flash) + '</p>';
-    html += '<button class="btn ghost big" data-action="recommend" data-fk="recommend">What should I study next?</button>';
     if (ui.recommend) {
       const rec = ui.recommend;
       html += '<div class="card soft" role="status"><p>' + esc(rec.reason) + '</p>' +
         '<button class="btn primary" data-action="do-recommend" data-fk="do-recommend">Let\'s do that</button></div>';
     }
+    if (ui.flash) html += '<p class="ok" role="status">' + esc(ui.flash) + '</p>';
 
     html += '<p class="statline"><span>' + st.xp + ' XP</span><span>' + st.attempted + '/' + st.builtTotal + ' activities tried</span><span>' + st.due + ' due</span></p>';
     html += '<p class="tiny muted">XP counts effort (reading, trying, reviewing). It isn\'t a measure of exam readiness. ' +
@@ -230,7 +336,7 @@
 
   function lessonBody(tp, moreKey) {
     const open = ui[moreKey] === tp.id;
-    let html = '<ul class="bullets">' + tp.lesson.summary.map(function (b) { return '<li>' + esc(b) + '</li>'; }).join("") + '</ul>';
+    let html = '<ul class="bullets">' + tp.lesson.summary.map(function (b) { return '<li>' + leadBold(b) + '</li>'; }).join("") + '</ul>';
     if (tp.lesson.more && tp.lesson.more.length) {
       html += '<button class="btn ghost small" aria-expanded="' + open + '" data-action="toggle-lesson-more" data-key="' + moreKey + '" data-topic="' + esc(tp.id) + '" data-fk="lm">' + (open ? "Show less" : "Explain more") + '</button>';
       if (open) html += '<ul class="bullets more">' + tp.lesson.more.map(function (b) { return '<li>' + esc(b) + '</li>'; }).join("") + '</ul>';
@@ -258,21 +364,43 @@
     return html;
   }
 
+  function lessonShown(tp) {
+    const n = tp.lesson.summary.length;
+    return ui.lesson && ui.lesson.key === vocabKey() ? Math.min(n, ui.lesson.shown) : 1;
+  }
   function viewLessonStep(tp) {
-    return '<article class="card qcard" aria-labelledby="qhead"><p class="eyebrow">Mini-lesson · ' + esc(tp.objective) + '</p>' +
-      '<h1 class="h2" id="qhead">' + esc(tp.title) + '</h1>' + lessonBody(tp, "sprint-more") +
-      '<div class="actions"><button class="btn primary big" data-action="next" data-fk="next" data-autofocus>Got it, show me a question</button>' +
-      '<button class="btn ghost" data-action="next" data-fk="skip">I know this, skip</button></div></article>';
+    const pts = tp.lesson.summary;
+    const shown = lessonShown(tp);
+    const all = shown >= pts.length;
+    let html = '<article class="card qcard" aria-labelledby="qhead"><p class="eyebrow">Mini-lesson · ' + esc(tp.objective) + '</p>' +
+      '<h1 class="h2" id="qhead">' + esc(tp.title) + '</h1>';
+    html += vocabPanel(termList(pts), false);
+    html += '<ul class="bullets steps">' + pts.slice(0, shown).map(function (b, i) {
+      return '<li' + (i === shown - 1 && shown > 1 ? ' class="latest"' : "") + '>' + leadBold(b) + '</li>';
+    }).join("") + '</ul>';
+    html += '<p class="tiny muted">Point ' + shown + ' of ' + pts.length + '</p>';
+    if (all) {
+      const open = ui["sprint-more"] === tp.id;
+      if (tp.lesson.more && tp.lesson.more.length) {
+        html += '<button class="btn ghost small" aria-expanded="' + open + '" data-action="toggle-lesson-more" data-key="sprint-more" data-topic="' + esc(tp.id) + '" data-fk="lm">' + (open ? "Show less" : "Explain more") + '</button>';
+        if (open) html += '<ul class="bullets more">' + tp.lesson.more.map(function (b) { return '<li>' + leadBold(b) + '</li>'; }).join("") + '</ul>';
+      }
+      html += '<p class="tiny muted">Revisit: ' + esc(pageRef(tp.lesson.pages)) + '</p>';
+    }
+    html += '<div class="actions"><button class="btn primary big" data-action="next" data-fk="next" data-autofocus>' + (all ? "Got it, show me a question" : "Next point") + '</button>' +
+      '<button class="btn ghost" data-action="next" data-skip="1" data-fk="skip">I know this, skip</button></div></article>';
+    return html;
   }
 
   function viewActivity(a, cur, step) {
     const tp = topicOf(a.id);
     let html = '<article class="card qcard" aria-labelledby="qhead">';
     html += '<p class="eyebrow">' + esc(a.format) + (step.review ? ' · <span class="chip soft">Review</span>' : "") + ' · ' + esc(tp.title) + '</p>';
-    html += '<h1 class="h2 prompt" id="qhead" tabindex="-1"' + (cur.answered || (a.type === "recall" && !cur.revealed) ? "" : " data-autofocus") + '>' + esc(a.type === "recall" ? a.front : a.prompt) + '</h1>';
+    html += '<h1 class="h2 prompt" id="qhead" tabindex="-1"' + (cur.answered || (a.type === "recall" && !cur.revealed) ? "" : " data-autofocus") + '>' + markTerms(a.type === "recall" ? a.front : a.prompt) + '</h1>';
     if (a.artifact) {
       html += '<figure class="artifact"><figcaption>' + esc(a.artifact.title || "Sample") + ' <span class="tiny muted">(simulated)</span></figcaption><pre tabindex="0">' + esc(a.artifact.body) + '</pre></figure>';
     }
+    html += vocabPanel(activityTerms(a, cur), !cur.answered);
     if (a.type === "choice" || a.type === "multi") html += viewOptions(a, cur);
     else if (a.type === "match") html += viewMatch(a, cur);
     else if (a.type === "order") html += viewOrder(a, cur);
@@ -319,7 +447,7 @@
       } else if (chosen) cls += " chosen";
       html += '<button class="' + cls + '" data-action="pick" data-i="' + orig + '" data-fk="opt-' + orig + '" aria-pressed="' + chosen + '"' + (cur.answered ? " disabled" : "") + '>' +
         '<span class="key">' + (pos + 1) + '</span><span class="otext">' + esc(o.t) +
-        (cur.answered ? '<span class="why">' + (chosen && !o.ok ? "You picked this. " : chosen && o.ok ? "You picked this. " : "") + esc(o.why) + '</span>' : "") +
+        (cur.answered && (o.ok || chosen) ? '<span class="why">' + (chosen ? '<strong>' + (o.ok ? "Your pick, and right. " : "Your pick. ") + '</strong>' : '<strong>Why this is right: </strong>') + esc(o.why) + '</span>' : "") +
         '</span>' + mark + '</button>';
     });
     html += '</div>';
@@ -390,21 +518,39 @@
   function viewFeedback(a, cur, tp) {
     const r = cur.result;
     const s = state.session;
-    let head;
+    let verdict, head;
     if (a.type === "recall") {
+      verdict = r.outcome === "correct" ? "✓ Got it" : r.outcome === "assisted" ? "◐ Partly" : "↻ Not yet";
       head = r.outcome === "correct" ? "Great recall." : r.outcome === "assisted" ? "Partly is progress. It'll come back soon." : "No problem. It'll come back in a few minutes.";
-    } else if (r.correct) head = pick(PRAISE) + (cur.hintShown ? " (with a hint, which still counts as learning)" : "");
-    else head = pick(GENTLE) + (r.score > 0 && r.score < 1 ? " You got " + Math.round(r.score * 100) + "% of it." : "");
+    } else if (r.correct) {
+      verdict = "✓ Correct";
+      head = pick(PRAISE) + (cur.hintShown ? " (with a hint, which still counts as learning)" : cur.vocabUsed ? " (after checking key terms, which still counts as learning)" : "");
+    } else if (r.score > 0 && r.score < 1) {
+      verdict = "◐ Partly right";
+      head = "You got " + Math.round(r.score * 100) + "% of it. " + pick(GENTLE);
+    } else {
+      verdict = "✗ Not quite";
+      head = pick(GENTLE);
+    }
     const moreText = a.more || null;
     const open = ui.feedbackMore === a.id;
     let html = '<div class="feedback ' + (r.correct ? "good" : r.outcome === "assisted" ? "mid" : "low") + '" role="status" aria-live="polite">';
-    html += '<p class="fhead">' + esc(head) + '</p>';
-    if (a.explain) html += '<p>' + esc(a.explain) + '</p>';
+    html += '<p class="verdict">' + esc(verdict) + '</p><p class="fhead">' + esc(head) + '</p>';
+    if (a.explain) html += '<div class="keyidea"><p class="klabel">Key idea</p><p>' + esc(a.explain) + '</p></div>';
+    if (a.type === "choice" || a.type === "multi") {
+      const sel = a.type === "multi" ? (cur.response.selected || []) : [cur.response.selected];
+      const others = cur.layout.optionOrder.filter(function (i) { return !a.options[i].ok && sel.indexOf(i) < 0; });
+      if (others.length) {
+        const oOpen = ui.others === a.id;
+        html += '<button class="btn ghost small" aria-expanded="' + oOpen + '" data-action="others" data-fk="others">' + (oOpen ? "Hide the other options" : "Why not the others? (" + others.length + ")") + '</button>';
+        if (oOpen) html += '<ul class="others">' + others.map(function (i) { return '<li><strong>' + esc(a.options[i].t) + '</strong><span class="block">' + esc(a.options[i].why) + '</span></li>'; }).join("") + '</ul>';
+      }
+    }
     if (moreText || (tp.lesson.more && tp.lesson.more.length)) {
       html += '<button class="btn ghost small" aria-expanded="' + open + '" data-action="feedback-more" data-fk="fmore">' + (open ? "Show less" : "Explain more") + '</button>';
       if (open) {
         html += moreText ? '<p class="more">' + esc(moreText) + '</p>'
-          : '<ul class="bullets more">' + tp.lesson.more.map(function (b) { return '<li>' + esc(b) + '</li>'; }).join("") + '</ul>';
+          : '<ul class="bullets more">' + tp.lesson.more.map(function (b) { return '<li>' + leadBold(b) + '</li>'; }).join("") + '</ul>';
       }
     }
     html += '<p class="tiny muted">Source: ' + esc(pageRef(a.pages)) + ' · +' + r.xpGained + ' XP</p>';
@@ -619,6 +765,25 @@
         ui[key] = ui[key] === el.getAttribute("data-topic") ? null : el.getAttribute("data-topic");
         render(); break;
       }
+      case "vocab": case "term": {
+        if (!s) return;
+        const key = vocabKey();
+        const g = action === "term" ? +el.getAttribute("data-g") : null;
+        if (action === "vocab" && ui.vocab && ui.vocab.key === key) ui.vocab = null;
+        else {
+          ui.vocab = { key: key, focus: g };
+          if (cur && !cur.answered && s.steps[s.index].kind === "activity") cur.vocabUsed = true;
+        }
+        save(); render();
+        const f = document.querySelector(".vterm.focus") || (ui.vocab && document.getElementById("vocabpanel"));
+        if (f) f.scrollIntoView({ block: "nearest" });
+        break;
+      }
+      case "others": {
+        const id = s.steps[s.index].id;
+        ui.others = ui.others === id ? null : id;
+        render(); break;
+      }
       case "toggle-focus": state.prefs.focusMode = !state.prefs.focusMode; save(); render(); break;
       case "pause": s.updatedAt = t; save(); go("home"); break;
       case "pick": {
@@ -651,13 +816,13 @@
         if (!cur || cur.answered) return;
         const a = idx.activities[s.steps[s.index].id];
         if (!canCheck(a, cur)) return;
-        E.submitCurrent(state, idx, t); ui.feedbackMore = null; save(); render(); break;
+        E.submitCurrent(state, idx, t); ui.feedbackMore = null; ui.others = null; save(); render(); break;
       }
       case "reveal": if (cur) { cur.revealed = true; save(); render(); } break;
       case "rate": {
         if (!cur || cur.answered) return;
         cur.response = { rating: el.getAttribute("data-r") };
-        E.submitCurrent(state, idx, t); ui.feedbackMore = null; save(); render(); break;
+        E.submitCurrent(state, idx, t); ui.feedbackMore = null; ui.others = null; save(); render(); break;
       }
       case "unsure": E.flagUnsure(state, t); save(); render(); break;
       case "feedback-more": {
@@ -670,7 +835,12 @@
         if (!s) return;
         const step = s.steps[s.index];
         if (step.kind === "activity" && !cur.answered) return;
-        ui["sprint-more"] = null; ui.feedbackMore = null;
+        if (step.kind === "lesson" && !(el && el.getAttribute("data-skip"))) {
+          const tp = idx.topicById[step.topicId];
+          const shown = lessonShown(tp);
+          if (shown < tp.lesson.summary.length) { ui.lesson = { key: vocabKey(), shown: shown + 1 }; render(); break; }
+        }
+        ui["sprint-more"] = null; ui.feedbackMore = null; ui.others = null; ui.vocab = null; ui.lesson = null;
         E.advance(state, idx, t);
         save(); render(); window.scrollTo(0, 0); break;
       }
