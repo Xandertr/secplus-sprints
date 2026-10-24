@@ -185,6 +185,7 @@ window.SECPLUS = window.SECPLUS || {};
           "The message itself doesn't have to be encrypted for a signature to work."
         ],
         more: [
+          "The notes' encyclopedia example: hash an 8.1 MB encyclopedia file, change a single character, and the hash comes out completely different. That's how a hash exposes changed data.",
           "Verifying works like this: decrypt the signature with the sender's public key to get the original hash, hash the received message yourself, and compare. If they match, the message is unchanged and came from the private key holder.",
           "QA analogy: a signed Git commit or a signed container image. You check who produced it, not just that it's unchanged."
         ],

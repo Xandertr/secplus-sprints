@@ -1991,6 +1991,7 @@ window.SECPLUS = window.SECPLUS || {};
           "Mitigate privilege escalation: patch quickly, keep anti-malware updated, use Data Execution Prevention and address space layout randomization (ASLR).",
           "The notes' example: CVE-2023-29336, a Win32k elevation of privilege bug that gave SYSTEM access.",
           "Cross-site requests themselves are normal: a page loading video or images from other sites. CSRF abuses that for authenticated actions.",
+          "Client side versus server side: client-side code (HTML, JavaScript) renders the page in your browser, and server-side code carries out the requests, like transferring money or posting a video. CSRF targets those server-side actions.",
           "The CSRF diagram: attacker builds a funds transfer request, sends it as a link to someone already logged into the bank, the visitor clicks it, and the bank processes the transfer.",
           "QA angle: a test that calls GET /files?name=../../etc/passwd is a directory traversal check."
         ],

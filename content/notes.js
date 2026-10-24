@@ -41,5 +41,36 @@ window.SECPLUS.source = {
     { pages: [50], text: "Mitigation Techniques says auto-update is 'not always the best option' without saying why. The recall card offers a likely reason from the OS vulnerabilities page (patches can break things) and says so." },
     { pages: [51], text: "PDF 51 holds the end of 2.5 Hardening Techniques and the start of 3.1 Cloud Infrastructures. Domain 2 activities only use its 2.5 content." },
     { pages: [52, 105], text: "Domains 3-5: text was extracted and mapped to sections, but not yet read in detail or turned into lessons. The headings listed in the coverage view were extracted automatically and may miss diagram-only content." }
+  ],
+  // Sub-headings whose content is taught under different words. tests/coverage.test.js checks
+  // that every taughtAs term really appears in that section's topic.
+  headingAliases: [
+    { page: 13, heading: "AAA framework", taughtAs: ["identification", "authentication", "authorization", "accounting"] },
+    { page: 14, heading: "Compare and contrast", taughtAs: ["compare the current state", "weaknesses"] },
+    { page: 14, heading: "Planes of operation", taughtAs: ["data plane", "control plane"] },
+    { page: 14, heading: "Controlling trust", taughtAs: ["adaptive identity", "threat scope reduction", "policy-driven access control"] },
+    { page: 16, heading: "Video surveillance", taughtAs: ["cctv", "motion", "object detection"] },
+    { page: 20, heading: "Transport encryption", taughtAs: ["https", "vpn", "ipsec"] },
+    { page: 20, heading: "Cryptographic keys", taughtAs: ["the key is the secret", "algorithms are usually public"] },
+    { page: 20, heading: "Real-time encryption/decryption", taughtAs: ["session key", "ephemeral", "unpredictable"] },
+    { page: 21, heading: "Keeping data private", taughtAs: ["secure enclave"] },
+    { page: 29, heading: "Tricks and misdirection", taughtAs: ["typosquatting", "pretexting"] },
+    { page: 29, heading: "Phishing with different bait", taughtAs: ["vishing", "smishing"] },
+    { page: 30, heading: "Because that’s where the money is", taughtAs: ["bank"] },
+    { page: 33, heading: "Software updates", taughtAs: ["known-good backup"] },
+    { page: 34, heading: "Hacking a Subaru", taughtAs: ["subaru"] },
+    { page: 36, heading: "VM escape protection", taughtAs: ["vm escape"] },
+    { page: 36, heading: "Security in the cloud", taughtAs: ["mfa"] },
+    { page: 39, heading: "Your data is valuable", taughtAs: ["personal data"] },
+    { page: 41, heading: "Real-world logic bombs", taughtAs: ["south korea"] },
+    { page: 43, heading: "It started as a normal day", taughtAs: ["deauthentication"] },
+    { page: 46, heading: "The client and the server", taughtAs: ["client"] },
+    { page: 49, heading: "Published/documented", taughtAs: ["published"] },
+    { page: 51, heading: "Finding intrusions", taughtAs: ["hips"] }
+  ],
+  // Sub-headings deliberately not taught, with the reason.
+  coverageSkips: [
+    { page: 30, heading: "Treasury intending your serious attention.”", reason: "Not a real heading. It's the tail of a sample spam message on the Phishing page that text extraction picked up as a heading." },
+    { page: 48, heading: "A hash example", reason: "The notes show no actual hash value here (already flagged). The point that SHA-256 is widely used is taught in the password attacks topic." }
   ]
 };

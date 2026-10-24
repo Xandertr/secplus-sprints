@@ -1,0 +1,890 @@
+{
+"10": {
+"Security controls": "1.1 Security Controls",
+"Control categories": "1.1 Security Controls",
+"Preventive control types": "1.1 Security Controls",
+"Deterrent control types": "1.1 Security Controls",
+"Detective control types": "1.1 Security Controls",
+"Corrective control types": "1.1 Security Controls",
+"Compensating control types": "1.1 Security Controls",
+"Directive control types": "1.1 Security Controls"
+},
+"11": {
+"Managing security controls": "1.1 Security Controls",
+"The CIA Triad": "1.2 The CIA Triad",
+"Confidentiality": "1.2 The CIA Triad",
+"Integrity": "1.2 The CIA Triad",
+"Availability": "1.2 The CIA Triad"
+},
+"12": {
+"Hashing the encyclopedia": "1.2 Non-repudiation",
+"Proof of origin": "1.2 Non-repudiation",
+"Non-repudiation": "1.2 Non-repudiation",
+"Proof of integrity": "1.2 Non-repudiation"
+},
+"13": {
+"AAA framework": "1.2 Authentication, Authorization, and Accounting",
+"Authenticating systems": "1.2 Authentication, Authorization, and Accounting",
+"Certificate authentication": "1.2 Authentication, Authorization, and Accounting",
+"Authorization models": "1.2 Authentication, Authorization, and Accounting",
+"No authorization model": "1.2 Authentication, Authorization, and Accounting",
+"Using an authorization model": "1.2 Authentication, Authorization, and Accounting"
+},
+"14": {
+"Gap Analysis": "1.2 Gap Analysis",
+"Choosing the framework": "1.2 Gap Analysis",
+"Evaluate people and processes": "1.2 Gap Analysis",
+"Compare and contrast": "1.2 Gap Analysis",
+"The analysis and report": "1.2 Gap Analysis",
+"Zero trust": "1.2 Zero Trust",
+"Planes of operation": "1.2 Zero Trust",
+"Controlling trust": "1.2 Zero Trust",
+"Policy enforcement point": "1.2 Zero Trust"
+},
+"15": {
+"Applying trust in the planes": "1.2 Zero Trust",
+"Security zones": "1.2 Zero Trust"
+},
+"16": {
+"Barricades / bollards": "1.2 Physical Security",
+"Access control vestibules": "1.2 Physical Security",
+"Fencing": "1.2 Physical Security",
+"Video surveillance": "1.2 Physical Security",
+"Guards and access badges": "1.2 Physical Security",
+"Lighting": "1.2 Physical Security",
+"Sensors": "1.2 Physical Security",
+"Honeypots": "1.2 Deception and Disruption",
+"Honeynets": "1.2 Deception and Disruption",
+"Honeyfiles": "1.2 Deception and Disruption",
+"Honeytokens": "1.2 Deception and Disruption"
+},
+"17": {
+"Change management": "1.3 Change Management",
+"Change approval process": "1.3 Change Management",
+"Ownership": "1.3 Change Management",
+"Stakeholders": "1.3 Change Management",
+"Impact analysis": "1.3 Change Management",
+"Test results": "1.3 Change Management",
+"Backout plan": "1.3 Change Management",
+"Maintenance window": "1.3 Change Management",
+"Standard operating procedure": "1.3 Change Management"
+},
+"18": {
+"Technical change management": "1.3 Technical Change Management",
+"Allow list / deny list": "1.3 Technical Change Management",
+"Restricted activities": "1.3 Technical Change Management",
+"Downtime": "1.3 Technical Change Management",
+"Restarts": "1.3 Technical Change Management",
+"Legacy applications": "1.3 Technical Change Management",
+"Dependencies": "1.3 Technical Change Management",
+"Documentation": "1.3 Technical Change Management",
+"Version control": "1.3 Technical Change Management"
+},
+"19": {
+"Public Key Infrastructure (PKI)": "1.4 Public Key Infrastructure",
+"Symmetric encryption": "1.4 Public Key Infrastructure",
+"Asymmetric encryption": "1.4 Public Key Infrastructure",
+"The key pair": "1.4 Public Key Infrastructure",
+"Key escrow": "1.4 Public Key Infrastructure",
+"It’s all about the process": "1.4 Public Key Infrastructure"
+},
+"20": {
+"Encrypting stored data": "1.4 Encrypting Data",
+"Database encryption": "1.4 Encrypting Data",
+"Transport encryption": "1.4 Encrypting Data",
+"Encryption algorithms": "1.4 Encrypting Data",
+"Cryptographic keys": "1.4 Encrypting Data",
+"Key lengths": "1.4 Encrypting Data",
+"Key stretching": "1.4 Encrypting Data",
+"Key exchange": "1.4 Key Exchange",
+"Real-time encryption/decryption": "1.4 Key Exchange",
+"Symmetric key from asymmetric keys": "1.4 Key Exchange"
+},
+"21": {
+"Trusted Platform Module (TPM)": "1.4 Encryption Technologies",
+"Hardware Security Module (HSM)": "1.4 Encryption Technologies",
+"Key management system": "1.4 Encryption Technologies",
+"Keeping data private": "1.4 Encryption Technologies",
+"Secure enclave": "1.4 Encryption Technologies"
+},
+"22": {
+"Obfuscation": "1.4 Obfuscation",
+"Steganography": "1.4 Obfuscation",
+"Common steganography techniques": "1.4 Obfuscation",
+"Other steganography types": "1.4 Obfuscation",
+"Tokenization": "1.4 Obfuscation",
+"Data masking": "1.4 Obfuscation"
+},
+"23": {
+"Hashes": "1.4 Hashing and Digital Signatures",
+"Collision": "1.4 Hashing and Digital Signatures",
+"Practical hashing": "1.4 Hashing and Digital Signatures",
+"Adding some salt": "1.4 Hashing and Digital Signatures",
+"Salting the hash": "1.4 Hashing and Digital Signatures",
+"Digital signatures": "1.4 Hashing and Digital Signatures"
+},
+"24": {
+"Blockchain": "1.4 Blockchain Technology"
+},
+"25": {
+"Digital certificates": "1.4 Certificates",
+"Root of trust": "1.4 Certificates",
+"Certificate Authorities": "1.4 Certificates",
+"Third-party certificate authorities": "1.4 Certificates",
+"Certificate signing requests": "1.4 Certificates",
+"Private certificate authorities": "1.4 Certificates",
+"Self-signed certificates": "1.4 Certificates",
+"Wildcard certificates": "1.4 Certificates",
+"Key revocation": "1.4 Certificates"
+},
+"26": {
+"OCSP stapling": "1.4 Certificates",
+"Getting revocation details to the browser": "1.4 Certificates"
+},
+"27": {
+"Threat Actors": "2.1 Threat Actors",
+"Attributes of threat actors": "2.1 Threat Actors",
+"Motivations of threat actors": "2.1 Threat Actors",
+"Nation states": "2.1 Threat Actors",
+"Unskilled attackers": "2.1 Threat Actors",
+"Hacktivist": "2.1 Threat Actors",
+"Insider threat": "2.1 Threat Actors",
+"Organized crime": "2.1 Threat Actors",
+"Shadow IT": "2.1 Threat Actors"
+},
+"28": {
+"Threat vectors": "2.2 Common Threat Vectors",
+"Message-based vectors": "2.2 Common Threat Vectors",
+"Image-based vectors": "2.2 Common Threat Vectors",
+"File-based vectors": "2.2 Common Threat Vectors",
+"Voice call vectors": "2.2 Common Threat Vectors",
+"Removable device vectors": "2.2 Common Threat Vectors"
+},
+"29": {
+"Vulnerable software vectors": "2.2 Common Threat Vectors",
+"Unsupported systems vectors": "2.2 Common Threat Vectors",
+"Unsecure network vectors": "2.2 Common Threat Vectors",
+"Open service ports": "2.2 Common Threat Vectors",
+"Default credentials": "2.2 Common Threat Vectors",
+"Supply chain vectors": "2.2 Common Threat Vectors",
+"Phishing": "2.2 Phishing",
+"Business email compromise": "2.2 Phishing",
+"Tricks and misdirection": "2.2 Phishing",
+"Phishing with different bait": "2.2 Phishing"
+},
+"30": {
+"The pretext": "2.2 Impersonation",
+"Treasury intending your serious attention.”": "2.2 Impersonation",
+"Impersonation": "2.2 Impersonation",
+"Eliciting information": "2.2 Impersonation",
+"Identity fraud": "2.2 Impersonation",
+"Protect against impersonation": "2.2 Impersonation",
+"Watering hole attack": "2.2 Watering Hole Attacks",
+"Executing the watering hole attack": "2.2 Watering Hole Attacks",
+"Because that’s where the money is": "2.2 Watering Hole Attacks",
+"Watching the watering hole": "2.2 Watering Hole Attacks"
+},
+"31": {
+"Misinformation/disinformation": "2.2 Other Social Engineering Attacks",
+"Brand impersonation": "2.2 Other Social Engineering Attacks",
+"Finding malware": "2.3 Memory Injections",
+"Memory injection": "2.3 Memory Injections",
+"DLL injection": "2.3 Memory Injections"
+},
+"32": {
+"Buffer overflows": "2.3 Buffer Overflows",
+"Race condition": "2.3 Race Conditions"
+},
+"33": {
+"Software updates": "2.3 Malicious Updates",
+"Downloading and updating": "2.3 Malicious Updates",
+"Automatic updates": "2.3 Malicious Updates",
+"Operating systems": "2.3 Operating System Vulnerabilities",
+"A month of OS updates": "2.3 Operating System Vulnerabilities",
+"Best practices for OS vulnerabilities": "2.3 Operating System Vulnerabilities"
+},
+"34": {
+"Code injection": "2.3 SQL Injection",
+"SQL injection": "2.3 SQL Injection",
+"Cross-site scripting": "2.3 Cross-site Scripting",
+"Non-persistent (reflected) XSS attack": "2.3 Cross-site Scripting",
+"Persistent (stored) XSS attack": "2.3 Cross-site Scripting",
+"Hacking a Subaru": "2.3 Cross-site Scripting",
+"Protecting against XSS": "2.3 Cross-site Scripting"
+},
+"35": {
+"Hardware vulnerabilities": "2.3 Hardware Vulnerabilities",
+"Firmware": "2.3 Hardware Vulnerabilities",
+"End-of-life": "2.3 Hardware Vulnerabilities",
+"Legacy platforms": "2.3 Hardware Vulnerabilities"
+},
+"36": {
+"Virtualization security": "2.3 Virtualization Vulnerabilities",
+"VM escape protection": "2.3 Virtualization Vulnerabilities",
+"Escaping the VM": "2.3 Virtualization Vulnerabilities",
+"Resource reuse": "2.3 Virtualization Vulnerabilities",
+"Security in the cloud": "2.3 Cloud-specific Vulnerabilities",
+"Attack the service": "2.3 Cloud-specific Vulnerabilities"
+},
+"37": {
+"Supply chain risk": "2.3 Supply Chain Vulnerabilities",
+"Service providers": "2.3 Supply Chain Vulnerabilities",
+"Target service provider attack": "2.3 Supply Chain Vulnerabilities",
+"Hardware providers": "2.3 Supply Chain Vulnerabilities",
+"Software providers": "2.3 Supply Chain Vulnerabilities",
+"Solarwinds supply chain attack": "2.3 Supply Chain Vulnerabilities",
+"Open permissions": "2.3 Misconfiguration Vulnerabilities",
+"Unsecured admin accounts": "2.3 Misconfiguration Vulnerabilities"
+},
+"38": {
+"Insecure protocols": "2.3 Misconfiguration Vulnerabilities",
+"Default settings": "2.3 Misconfiguration Vulnerabilities",
+"Open ports and services": "2.3 Misconfiguration Vulnerabilities",
+"Mobile device security": "2.3 Mobile Device Vulnerabilities",
+"Jailbreaking/rooting": "2.3 Mobile Device Vulnerabilities",
+"Sideloading": "2.3 Mobile Device Vulnerabilities",
+"Vulnerabilities": "2.3 Zero-day Vulnerabilities",
+"Zero-day attacks": "2.3 Zero-day Vulnerabilities",
+"Zero-day attacks in the wild": "2.3 Zero-day Vulnerabilities"
+},
+"39": {
+"Malware": "2.4 An Overview of Malware",
+"Malware types and methods": "2.4 An Overview of Malware",
+"How you get malware": "2.4 An Overview of Malware",
+"Your data is valuable": "2.4 An Overview of Malware",
+"Ransomware": "2.4 An Overview of Malware",
+"Protecting against ransomware": "2.4 An Overview of Malware",
+"Virus": "2.4 Viruses and Worms",
+"Virus types": "2.4 Viruses and Worms",
+"Fileless virus": "2.4 Viruses and Worms",
+"Worms": "2.4 Viruses and Worms"
+},
+"40": {
+"Spyware": "2.4 Spyware and Bloatware",
+"Protecting against spyware": "2.4 Spyware and Bloatware",
+"Bloatware": "2.4 Spyware and Bloatware",
+"Removing bloatware": "2.4 Spyware and Bloatware"
+},
+"41": {
+"Keyloggers": "2.4 Other Malware Types",
+"Logic bomb": "2.4 Other Malware Types",
+"Real-world logic bombs": "2.4 Other Malware Types",
+"Preventing a logic bomb": "2.4 Other Malware Types",
+"Rootkits": "2.4 Other Malware Types",
+"Finding and removing rootkits": "2.4 Other Malware Types",
+"Physical attacks": "2.4 Physical Attacks",
+"Brute force": "2.4 Physical Attacks",
+"RFID cloning": "2.4 Physical Attacks",
+"Environmental attacks": "2.4 Physical Attacks"
+},
+"42": {
+"Denial of service": "2.4 Denial of Service",
+"A “friendly” DoS": "2.4 Denial of Service",
+"Distributed Denial of Service (DDoS)": "2.4 Denial of Service",
+"DDoS reflection and amplification": "2.4 Denial of Service",
+"DNS poisoning": "2.4 DNS Attacks",
+"Domain hijacking": "2.4 DNS Attacks",
+"URL hijacking": "2.4 DNS Attacks",
+"Types of URL hijacking": "2.4 DNS Attacks"
+},
+"43": {
+"It started as a normal day": "2.4 Wireless Attacks",
+"802.11 management frames": "2.4 Wireless Attacks",
+"Protecting against deauth attacks": "2.4 Wireless Attacks",
+"Radio frequency (RF) jamming": "2.4 Wireless Attacks",
+"Wireless jamming": "2.4 Wireless Attacks",
+"On-path network attack": "2.4 On-path Attacks",
+"On-path browser attack": "2.4 On-path Attacks"
+},
+"44": {
+"Browser cookies and session IDs": "2.4 Replay Attacks",
+"Replay attack": "2.4 Replay Attacks"
+},
+"45": {
+"Header manipulation": "2.4 Replay Attacks",
+"Prevent session hijacking": "2.4 Replay Attacks",
+"Exploiting a vulnerability": "2.4 Malicious Code",
+"Malicious code": "2.4 Malicious Code",
+"Malicious code examples": "2.4 Malicious Code",
+"Injection attacks": "2.4 Application Attacks",
+"SQL injection": "2.4 Application Attacks",
+"Buffer overflows": "2.4 Application Attacks",
+"Replay attack": "2.4 Application Attacks"
+},
+"46": {
+"Privilege escalation": "2.4 Application Attacks",
+"Mitigating privilege escalation": "2.4 Application Attacks",
+"Cross-site requests": "2.4 Application Attacks",
+"The client and the server": "2.4 Application Attacks",
+"Cross-site request forgery": "2.4 Application Attacks",
+"Directory traversal": "2.4 Application Attacks"
+},
+"47": {
+"Cryptographic attacks": "2.4 Cryptographic Attacks",
+"Birthday attack": "2.4 Cryptographic Attacks",
+"Collisions": "2.4 Cryptographic Attacks",
+"Downgrade attack": "2.4 Cryptographic Attacks"
+},
+"48": {
+"Plaintext / unencrypted passwords": "2.4 Password Attacks",
+"Hashing a password": "2.4 Password Attacks",
+"A hash example": "2.4 Password Attacks",
+"The password file": "2.4 Password Attacks",
+"Spraying attack": "2.4 Password Attacks",
+"Brute force": "2.4 Password Attacks",
+"Indicators of compromise (IOC)": "2.4 Indicators of Compromise",
+"Account lockout": "2.4 Indicators of Compromise",
+"Concurrent session usage": "2.4 Indicators of Compromise",
+"Blocked content": "2.4 Indicators of Compromise"
+},
+"49": {
+"Impossible travel": "2.4 Indicators of Compromise",
+"Resource consumption": "2.4 Indicators of Compromise",
+"Out-of-cycle logging": "2.4 Indicators of Compromise",
+"Missing logs": "2.4 Indicators of Compromise",
+"Published/documented": "2.4 Indicators of Compromise",
+"Segmenting the network": "2.5 Segmentation and Access Control",
+"Access control lists (ACLs)": "2.5 Segmentation and Access Control",
+"Access control lists": "2.5 Segmentation and Access Control",
+"Examples of allow and deny lists": "2.5 Segmentation and Access Control"
+},
+"50": {
+"Patching": "2.5 Mitigation Techniques",
+"Encryption": "2.5 Mitigation Techniques",
+"Monitoring": "2.5 Mitigation Techniques",
+"Least privilege": "2.5 Mitigation Techniques",
+"Configuration enforcement": "2.5 Mitigation Techniques",
+"Decommissioning": "2.5 Mitigation Techniques",
+"System hardening": "2.5 Hardening Techniques"
+},
+"51": {
+"The endpoint": "2.5 Hardening Techniques",
+"Endpoint detection and response (EDR)": "2.5 Hardening Techniques",
+"Host-based firewall": "2.5 Hardening Techniques",
+"Finding intrusions": "2.5 Hardening Techniques",
+"Open ports and services": "2.5 Hardening Techniques",
+"Default password changes": "2.5 Hardening Techniques",
+"Removal of unnecessary software": "2.5 Hardening Techniques",
+"Cloud responsibility matrix": "3.1 Cloud Infrastructures",
+"Hybrid considerations": "3.1 Cloud Infrastructures"
+},
+"52": {
+"Third-party vendors in the cloud": "3.1 Cloud Infrastructures",
+"Infrastructure as code": "3.1 Cloud Infrastructures",
+"Serverless architecture": "3.1 Cloud Infrastructures",
+"Microservices and APIs": "3.1 Cloud Infrastructures"
+},
+"53": {
+"Physical isolation": "3.1 Network Infrastructure Concepts",
+"Physical segmentation": "3.1 Network Infrastructure Concepts",
+"Logical segmentation with VLANs": "3.1 Network Infrastructure Concepts",
+"SDN (Software Defined Networking)": "3.1 Network Infrastructure Concepts",
+"Attacks can happen anywhere": "3.1 Other Infrastructure Concepts",
+"On-premises security": "3.1 Other Infrastructure Concepts",
+"Centralized vs. decentralized": "3.1 Other Infrastructure Concepts",
+"Virtualization": "3.1 Other Infrastructure Concepts",
+"Application containerization": "3.1 Other Infrastructure Concepts",
+"IoT (Internet of Things)": "3.1 Other Infrastructure Concepts"
+},
+"54": {
+"Embedded systems": "3.1 Other Infrastructure Concepts",
+"High availability": "3.1 Other Infrastructure Concepts",
+"SCADA / ICS": "3.1 Other Infrastructure Concepts",
+"RTOS (Real-Time Operating System)": "3.1 Other Infrastructure Concepts",
+"Availability": "3.1 Infrastructure Considerations",
+"Resilience": "3.1 Infrastructure Considerations"
+},
+"55": {
+"Cost": "3.1 Infrastructure Considerations",
+"Responsiveness": "3.1 Infrastructure Considerations",
+"Scalability": "3.1 Infrastructure Considerations",
+"Ease of deployment": "3.1 Infrastructure Considerations",
+"Risk transference": "3.1 Infrastructure Considerations",
+"Ease of recovery": "3.1 Infrastructure Considerations",
+"Patch availability": "3.1 Infrastructure Considerations",
+"Inability to patch": "3.1 Infrastructure Considerations",
+"Power": "3.1 Infrastructure Considerations",
+"Compute": "3.1 Infrastructure Considerations"
+},
+"56": {
+"Device placement": "3.2 Secure Infrastructures",
+"Security zones": "3.2 Secure Infrastructures",
+"Attack surface": "3.2 Secure Infrastructures",
+"Connectivity": "3.2 Secure Infrastructures"
+},
+"57": {
+"Failure modes": "3.2 Intrusion Prevention",
+"Device connections": "3.2 Intrusion Prevention",
+"1": "3.2 Intrusion Prevention",
+"Intrusion Prevention System (IPS)": "3.2 Intrusion Prevention",
+"Jump server": "3.2 Network Appliances",
+"Proxies": "3.2 Network Appliances",
+"(explicit)": "3.2 Network Appliances"
+},
+"58": {
+"Forward Proxy": "3.2 Network Appliances",
+"Reverse Proxy": "3.2 Network Appliances",
+"Open Proxy": "3.2 Network Appliances",
+"Application proxies": "3.2 Network Appliances",
+"Forward proxy": "3.2 Network Appliances",
+"Reverse proxy": "3.2 Network Appliances",
+"Open proxy": "3.2 Network Appliances"
+},
+"59": {
+"Balancing the load": "3.2 Network Appliances",
+"Active/active load balancing": "3.2 Network Appliances",
+"Active/passive load balancing": "3.2 Network Appliances",
+"Sensors and collectors": "3.2 Network Appliances",
+"Port security": "3.2 Port Security",
+"EAP": "3.2 Port Security",
+"IEEE 802.1X": "3.2 Port Security",
+"IEEE 802.1X and EAP": "3.2 Port Security",
+"The universal security control": "3.2 Firewall Types",
+"Network-based firewalls": "3.2 Firewall Types"
+},
+"60": {
+"UTM / All-in-one security appliance": "3.2 Firewall Types",
+"Next-generation firewall (NGFW)": "3.2 Firewall Types",
+"NGFWs": "3.2 Firewall Types",
+"Web application firewall (WAF)": "3.2 Firewall Types",
+"VPNs": "3.2 Secure Communication",
+"Encrypted tunnel": "3.2 Secure Communication",
+"SSL/TLS VPN (Secure Sockets Layer VPN)": "3.2 Secure Communication",
+"SSL/TLS VPN": "3.2 Secure Communication",
+"Site-to-site IPsec VPN": "3.2 Secure Communication",
+"SD-WAN": "3.2 Secure Communication",
+"Secure Access Service Edge (SASE)": "3.2 Secure Communication"
+},
+"61": {
+"Selection of effective controls": "3.2 Secure Communication",
+"SSL/TLS VPN": "3.2 Secure Communication"
+},
+"62": {
+"Data types": "3.3 Data Types and Classifications",
+"Classifying sensitive data": "3.3 Data Types and Classifications",
+"Data classifications": "3.3 Data Types and Classifications",
+"Data at rest": "3.3 States of Data",
+"Data in transit": "3.3 States of Data",
+"Data in use": "3.3 States of Data"
+},
+"63": {
+"Data sovereignty": "3.3 States of Data",
+"Geolocation": "3.3 States of Data",
+"Geographic restrictions": "3.3 Protecting Data",
+"Protecting data": "3.3 Protecting Data",
+"Encryption": "3.3 Protecting Data",
+"Hashing": "3.3 Protecting Data",
+"Obfuscation": "3.3 Protecting Data",
+"Masking": "3.3 Protecting Data"
+},
+"64": {
+"Tokenization": "3.3 Protecting Data",
+"Segmentation": "3.3 Protecting Data",
+"Permission restrictions": "3.3 Protecting Data",
+"High availability": "3.4 Resiliency",
+"Server clustering": "3.4 Resiliency",
+"Load balancing": "3.4 Resiliency",
+"Site resiliency": "3.4 Resiliency",
+"Hot site": "3.4 Resiliency",
+"Cold site": "3.4 Resiliency"
+},
+"65": {
+"Warm site": "3.4 Resiliency",
+"Geographic dispersion": "3.4 Resiliency",
+"Platform diversity": "3.4 Resiliency",
+"Multi-cloud systems": "3.4 Resiliency",
+"Continuity of operations planning (COOP)": "3.4 Resiliency",
+"Capacity planning": "3.4 Capacity Planning",
+"People": "3.4 Capacity Planning",
+"Technology": "3.4 Capacity Planning",
+"Infrastructure": "3.4 Capacity Planning"
+},
+"66": {
+"Recovery testing": "3.4 Recovery Testing",
+"Tabletop exercises": "3.4 Recovery Testing",
+"Fail over": "3.4 Recovery Testing",
+"Simulation": "3.4 Recovery Testing",
+"Parallel processing": "3.4 Recovery Testing",
+"Backups": "3.4 Backups",
+"Onsite vs. offsite backups": "3.4 Backups",
+"Frequency": "3.4 Backups",
+"Encryption": "3.4 Backups"
+},
+"67": {
+"Snapshots": "3.4 Backups",
+"Recovery testing": "3.4 Backups",
+"Replication": "3.4 Backups",
+"Journaling": "3.4 Backups",
+"Power resiliency": "3.4 Power Resiliency",
+"UPS": "3.4 Power Resiliency",
+"Generators": "3.4 Power Resiliency"
+},
+"68": {
+"Secure baselines": "4.1 Secure Baselines",
+"Establish baselines": "4.1 Secure Baselines",
+"Deploy baselines": "4.1 Secure Baselines",
+"Maintain baselines": "4.1 Secure Baselines",
+"Hardening targets": "4.1 Hardening Targets",
+"Mobile devices": "4.1 Hardening Targets",
+"Workstations": "4.1 Hardening Targets",
+"Network infrastructure devices": "4.1 Hardening Targets",
+"Cloud infrastructure": "4.1 Hardening Targets"
+},
+"69": {
+"Servers": "4.1 Hardening Targets",
+"SCADA / ICS": "4.1 Hardening Targets",
+"Embedded systems": "4.1 Hardening Targets",
+"RTOS (Real-Time Operating System)": "4.1 Hardening Targets",
+"IoT devices": "4.1 Hardening Targets",
+"Site surveys": "4.1 Securing Wireless and Mobile",
+"Wireless survey tools": "4.1 Securing Wireless and Mobile",
+"Mobile Device Management (MDM)": "4.1 Securing Wireless and Mobile",
+"BYOD": "4.1 Securing Wireless and Mobile"
+},
+"70": {
+"COPE": "4.1 Securing Wireless and Mobile",
+"Cellular networks": "4.1 Securing Wireless and Mobile",
+"Wi-Fi": "4.1 Securing Wireless and Mobile",
+"Bluetooth": "4.1 Securing Wireless and Mobile",
+"Securing a wireless network": "4.1 Wireless Security Settings",
+"The WPA2 PSK problem": "4.1 Wireless Security Settings",
+"WPA3 and GCMP": "4.1 Wireless Security Settings",
+"SAE": "4.1 Wireless Security Settings"
+},
+"71": {
+"Wireless authentication methods": "4.1 Wireless Security Settings",
+"Wireless security modes": "4.1 Wireless Security Settings",
+"AAA framework": "4.1 Wireless Security Settings",
+"RADIUS (Remote Authentication Dial-in User Service)": "4.1 Wireless Security Settings",
+"IEEE 802.1X": "4.1 Wireless Security Settings",
+"EAP": "4.1 Wireless Security Settings",
+"IEEE 802.1X and EAP": "4.1 Wireless Security Settings",
+"Secure coding concepts": "4.1 Application Security",
+"Input validation": "4.1 Application Security",
+"Secure cookies": "4.1 Application Security"
+},
+"72": {
+"Static code analyzers": "4.1 Application Security",
+"Code signing": "4.1 Application Security",
+"Sandboxing": "4.1 Application Security",
+"Application security monitoring": "4.1 Application Security",
+"Acquisition/procurement process": "4.2 Asset Management",
+"Assignment/accounting": "4.2 Asset Management",
+"Monitoring / asset tracking": "4.2 Asset Management"
+},
+"73": {
+"Physical destruction": "4.2 Asset Management",
+"Certificate of destruction": "4.2 Asset Management",
+"Data retention": "4.2 Asset Management",
+"Vulnerability scanning": "4.3 Vulnerability Scanning",
+"Static code analyzers": "4.3 Vulnerability Scanning",
+"Dynamic analysis (fuzzing)": "4.3 Vulnerability Scanning",
+"Fuzzing engines and frameworks": "4.3 Vulnerability Scanning",
+"Package monitoring": "4.3 Vulnerability Scanning"
+},
+"74": {
+"Threat intelligence": "4.3 Threat Intelligence",
+"Open-source intelligence (OSINT)": "4.3 Threat Intelligence",
+"Proprietary/third-party intelligence": "4.3 Threat Intelligence",
+"Information-sharing organization": "4.3 Threat Intelligence",
+"Dark web intelligence": "4.3 Threat Intelligence",
+"Penetration testing": "4.3 Penetration Testing",
+"Rules of engagement": "4.3 Penetration Testing",
+"Exploiting vulnerabilities": "4.3 Penetration Testing"
+},
+"75": {
+"The process": "4.3 Penetration Testing",
+"Responsible disclosure program": "4.3 Penetration Testing",
+"Dealing with false information": "4.3 Analyzing Vulnerabilities",
+"Prioritizing vulnerabilities": "4.3 Analyzing Vulnerabilities",
+"CVSS": "4.3 Analyzing Vulnerabilities",
+"CVE": "4.3 Analyzing Vulnerabilities",
+"Vulnerability classification": "4.3 Analyzing Vulnerabilities",
+"Exposure factor": "4.3 Analyzing Vulnerabilities"
+},
+"76": {
+"Environmental variables": "4.3 Analyzing Vulnerabilities",
+"Industry/organizational impact": "4.3 Analyzing Vulnerabilities",
+"Risk tolerance": "4.3 Analyzing Vulnerabilities",
+"Patching": "4.3 Vulnerability Remediation",
+"Insurance": "4.3 Vulnerability Remediation",
+"Segmentation": "4.3 Vulnerability Remediation",
+"Physical segmentation": "4.3 Vulnerability Remediation",
+"Logical segmentation with VLANs": "4.3 Vulnerability Remediation",
+"Compensating controls": "4.3 Vulnerability Remediation"
+},
+"77": {
+"Exceptions and exemptions": "4.3 Vulnerability Remediation",
+"Validation of remediation": "4.3 Vulnerability Remediation",
+"Reporting": "4.3 Vulnerability Remediation",
+"Security monitoring": "4.4 Security Monitoring",
+"Monitoring computing resources": "4.4 Security Monitoring",
+"Log aggregation": "4.4 Security Monitoring",
+"Scanning": "4.4 Security Monitoring",
+"Archiving": "4.4 Security Monitoring"
+},
+"78": {
+"Alerting": "4.4 Security Monitoring",
+"Alert response and remediation": "4.4 Security Monitoring",
+"Security Content Automation Protocol (SCAP)": "4.4 Security Tools",
+"Using SCAP": "4.4 Security Tools",
+"Benchmarks": "4.4 Security Tools",
+"Agents/agentless": "4.4 Security Tools",
+"SIEM": "4.4 Security Tools",
+"Anti-virus and anti-malware": "4.4 Security Tools"
+},
+"79": {
+"Data Loss Prevention (DLP)": "4.4 Security Tools",
+"SNMP": "4.4 Security Tools",
+"SNMP traps": "4.4 Security Tools",
+"NetFlow": "4.4 Security Tools",
+"Vulnerability scanners": "4.4 Security Tools",
+"Network-based firewalls": "4.5 Firewalls",
+"Next-generation Firewalls (NGFW)": "4.5 Firewalls",
+"Ports and protocols": "4.5 Firewalls"
+},
+"80": {
+"Firewall rules": "4.5 Firewalls",
+"Screened subnet": "4.5 Firewalls",
+"IPS rules": "4.5 Firewalls",
+"Content filtering": "4.5 Web Filtering",
+"URL scanning": "4.5 Web Filtering",
+"Agent based": "4.5 Web Filtering",
+"Proxies": "4.5 Web Filtering",
+"URL filtering, content scanning": "4.5 Web Filtering",
+"Forward proxy": "4.5 Web Filtering",
+"Block rules": "4.5 Web Filtering"
+},
+"81": {
+"Reputation": "4.5 Web Filtering",
+"High risk": "4.5 Web Filtering",
+"DNS filtering": "4.5 Web Filtering",
+"Active Directory": "4.5 Operating System Security",
+"Group Policy": "4.5 Operating System Security",
+"Security-Enhanced Linux (SELinux)": "4.5 Operating System Security",
+"Unencrypted network data": "4.5 Secure Protocols",
+"Protocol selection": "4.5 Secure Protocols",
+"Port selection": "4.5 Secure Protocols"
+},
+"82": {
+"Transport method": "4.5 Secure Protocols",
+"Email security challenges": "4.5 Email Security",
+"Mail gateway": "4.5 Email Security",
+"Sender Policy Framework (SPF)": "4.5 Email Security",
+"Domain Keys Identified Mail (DKIM)": "4.5 Email Security",
+"DMARC": "4.5 Email Security",
+"FIM (File Integrity Monitoring)": "4.5 Monitoring Data",
+"Data Loss Prevention (DLP)": "4.5 Monitoring Data",
+"Data Loss Prevention (DLP) systems": "4.5 Monitoring Data",
+"USB blocking": "4.5 Monitoring Data"
+},
+"83": {
+"Cloud-based DLP": "4.5 Monitoring Data",
+"DLP and email": "4.5 Monitoring Data",
+"Emailing a spreadsheet template": "4.5 Monitoring Data",
+"The endpoint": "4.5 Endpoint Security",
+"Edge vs. access control": "4.5 Endpoint Security",
+"Posture assessment": "4.5 Endpoint Security",
+"Health checks/posture assessment": "4.5 Endpoint Security",
+"Failing your assessment": "4.5 Endpoint Security",
+"Endpoint detection and response (EDR)": "4.5 Endpoint Security"
+},
+"84": {
+"Extended Detection and Response (XDR)": "4.5 Endpoint Security",
+"User behavior analytics": "4.5 Endpoint Security",
+"Identity and Access Management (IAM)": "4.6 Identity and Access Management",
+"Permission assignments": "4.6 Identity and Access Management",
+"Identity proofing": "4.6 Identity and Access Management",
+"(password, security questions, etc.)": "4.6 Identity and Access Management",
+"Single sign-on (SSO)": "4.6 Identity and Access Management"
+},
+"85": {
+"LDAP (Lightweight Directory Access Protocol)": "4.6 Identity and Access Management",
+"X.500 Directory Information Tree": "4.6 Identity and Access Management",
+"Security Assertion Markup Language (SAML)": "4.6 Identity and Access Management",
+"OAuth": "4.6 Identity and Access Management",
+"Federation": "4.6 Identity and Access Management",
+"Interoperability": "4.6 Identity and Access Management"
+},
+"86": {
+"Access control": "4.6 Access Controls",
+"Least privilege": "4.6 Access Controls",
+"Mandatory Access Control (MAC)": "4.6 Access Controls",
+"Discretionary Access Control (DAC)": "4.6 Access Controls",
+"Role-based access control (RBAC)": "4.6 Access Controls",
+"Rule-based access control": "4.6 Access Controls",
+"Attribute-based access control (ABAC)": "4.6 Access Controls",
+"Time-of-day restrictions": "4.6 Access Controls"
+},
+"87": {
+"Multifactor authentication": "4.6 Multifactor Authentication",
+"Something you know": "4.6 Multifactor Authentication",
+"Something you have": "4.6 Multifactor Authentication",
+"Something you are": "4.6 Multifactor Authentication",
+"Somewhere you are": "4.6 Multifactor Authentication",
+"Password complexity and length": "4.6 Password Security",
+"Password age and expiration": "4.6 Password Security",
+"Password managers": "4.6 Password Security",
+"Passwordless authentication": "4.6 Password Security"
+},
+"88": {
+"Just-in-time permissions": "4.6 Password Security",
+"Scripting and automation": "4.7 Scripting and Automation",
+"Automation benefits": "4.7 Scripting and Automation",
+"Cases for automation": "4.7 Scripting and Automation"
+},
+"89": {
+"Scripting considerations": "4.7 Scripting and Automation",
+"Security incidents": "4.8 Incident Response",
+"NIST SP800-61": "4.8 Incident Response",
+"Preparing for an incident": "4.8 Incident Response",
+"The challenge of detection": "4.8 Incident Response",
+"Analysis": "4.8 Incident Response",
+"Isolation and containment": "4.8 Incident Response"
+},
+"90": {
+"Recovery after an incident": "4.8 Incident Response",
+"Lessons learned": "4.8 Incident Response",
+"Answer the tough questions": "4.8 Incident Response",
+"Training for an incident": "4.8 Incident Response",
+"Exercising": "4.8 Incident Planning",
+"Tabletop exercises": "4.8 Incident Planning",
+"Simulation": "4.8 Incident Planning",
+"Root cause analysis": "4.8 Incident Planning",
+"Threat hunting": "4.8 Incident Planning"
+},
+"91": {
+"Digital forensics": "4.8 Digital Forensics",
+"Legal hold": "4.8 Digital Forensics",
+"Chain of custody": "4.8 Digital Forensics",
+"Acquisition": "4.8 Digital Forensics",
+"Reporting": "4.8 Digital Forensics",
+"Preservation": "4.8 Digital Forensics",
+"E-discovery": "4.8 Digital Forensics"
+},
+"92": {
+"Security log files": "4.9 Log Data",
+"Firewall logs": "4.9 Log Data",
+"Application logs": "4.9 Log Data",
+"Endpoint logs": "4.9 Log Data",
+"OS-specific security logs": "4.9 Log Data",
+"IPS/IDS logs": "4.9 Log Data",
+"Network logs": "4.9 Log Data",
+"Metadata": "4.9 Log Data",
+"Vulnerability scans": "4.9 Log Data"
+},
+"93": {
+"Automated reports": "4.9 Log Data",
+"Dashboards": "4.9 Log Data",
+"Packet captures": "4.9 Log Data",
+"Security policy guidelines": "5.1 Security Policies",
+"Information security policies": "5.1 Security Policies",
+"Acceptable use policies (AUP)": "5.1 Security Policies",
+"Business continuity": "5.1 Security Policies",
+"Disaster recovery plan": "5.1 Security Policies",
+"Security incidents": "5.1 Security Policies"
+},
+"94": {
+"Incident response roles": "5.1 Security Policies",
+"NIST SP800-61": "5.1 Security Policies",
+"Software development lifecycle (SDLC)": "5.1 Security Policies",
+"Change management": "5.1 Security Policies",
+"Security standards": "5.1 Security Standards",
+"Password": "5.1 Security Standards",
+"Access control": "5.1 Security Standards",
+"Physical security": "5.1 Security Standards",
+"Encryption": "5.1 Security Standards"
+},
+"95": {
+"Change management": "5.1 Security Procedures",
+"Change control": "5.1 Security Procedures",
+"Onboarding": "5.1 Security Procedures",
+"Offboarding": "5.1 Security Procedures",
+"Playbooks": "5.1 Security Procedures",
+"Monitoring and revision": "5.1 Security Procedures",
+"Governance structures": "5.1 Security Procedures"
+},
+"96": {
+"Regulatory": "5.1 Security Considerations",
+"Legal": "5.1 Security Considerations",
+"Industry": "5.1 Security Considerations",
+"Geographical security": "5.1 Security Considerations",
+"Data responsibilities": "5.1 Data Roles and Responsibilities",
+"Data roles": "5.1 Data Roles and Responsibilities"
+},
+"97": {
+"Risk identification": "5.2 Risk Management",
+"Performing a risk assessment": "5.2 Risk Management",
+"Ad hoc assessments": "5.2 Risk Management",
+"Recurring assessments": "5.2 Risk Management",
+"Qualitative risk assessment": "5.2 Risk Analysis",
+"Quantitative risk assessment": "5.2 Risk Analysis",
+"Impact": "5.2 Risk Analysis",
+"Likelihood and probability": "5.2 Risk Analysis"
+},
+"98": {
+"Risk appetite and tolerance": "5.2 Risk Analysis",
+"Risk register": "5.2 Risk Analysis",
+"Risk management strategies": "5.2 Risk Management Strategies",
+"Recovery": "5.2 Business Impact Analysis",
+"Risk reporting": "5.2 Business Impact Analysis"
+},
+"99": {
+"Third-party risk": "5.3 Third-party Risk Assessment",
+"Penetration testing": "5.3 Third-party Risk Assessment",
+"Right-to-audit clauses": "5.3 Third-party Risk Assessment",
+"Evidence of internal audits": "5.3 Third-party Risk Assessment",
+"Supply chain analysis": "5.3 Third-party Risk Assessment",
+"Independent assessments": "5.3 Third-party Risk Assessment",
+"Vendor selection process": "5.3 Third-party Risk Assessment",
+"Vendor monitoring": "5.3 Third-party Risk Assessment"
+},
+"100": {
+"Questionnaires": "5.3 Third-party Risk Assessment",
+"Rules of engagement": "5.3 Third-party Risk Assessment",
+"Common agreements": "5.3 Agreement Types",
+"Non-disclosure agreement (NDA)": "5.3 Agreement Types"
+},
+"101": {
+"Compliance": "5.4 Compliance",
+"Compliance reporting": "5.4 Compliance",
+"Regulatory compliance": "5.4 Compliance",
+"Protection Act of 2002": "5.4 Compliance",
+"HIPAA non-compliance fines and sanctions": "5.4 Compliance",
+"(Class 6 Felony)": "5.4 Compliance",
+"10 years in prison, or both. (Class 4 Felony)": "5.4 Compliance",
+"Reputational damage": "5.4 Compliance",
+"Other consequences": "5.4 Compliance",
+"Compliance monitoring": "5.4 Compliance"
+},
+"102": {
+"Privacy legal implications": "5.4 Privacy",
+"GDPR - General Data Protection Regulation": "5.4 Privacy",
+"Data subject": "5.4 Privacy",
+"Data responsibilities": "5.4 Privacy",
+"Data roles": "5.4 Privacy",
+"Data inventory and retention": "5.4 Privacy",
+"Audits and assessments": "5.5 Audits and Assessments",
+"Internal audits": "5.5 Audits and Assessments"
+},
+"103": {
+"External audits": "5.5 Audits and Assessments",
+"Physical penetration testing": "5.5 Penetration Tests",
+"Pentesting perspectives": "5.5 Penetration Tests",
+"Working knowledge": "5.5 Penetration Tests",
+"Reconnaissance": "5.5 Penetration Tests",
+"Passive reconnaissance": "5.5 Penetration Tests",
+"Active reconnaissance": "5.5 Penetration Tests"
+},
+"104": {
+"Phishing campaigns": "5.6 Security Awareness",
+"Anomalous behavior recognition": "5.6 Security Awareness",
+"Reporting and monitoring": "5.6 Security Awareness",
+"Development": "5.6 Security Awareness",
+"Execution": "5.6 Security Awareness"
+},
+"105": {
+"Security awareness training": "5.6 User Training",
+"User guidance and training": "5.6 User Training"
+}
+}
