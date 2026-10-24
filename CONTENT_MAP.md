@@ -93,39 +93,39 @@ Page numbers are PDF pages, with printed page numbers in brackets (printed = PDF
 | 3.4 | Backups | 66, 67 | ✅ built | 5 |
 | 3.4 | Power Resiliency | 67 | ✅ built | 3 |
 
-## 4.0 Security Operations (28%), PDF 68–93 [59–84]: not built yet
+## 4.0 Security Operations (28%), PDF 68–93 [59–84]: BUILT
 
 | Obj. | Section | PDF pages | Status | Activities |
 |---|---|---|---|---|
-| 4.1 | Secure Baselines | 68 | ⬜ not built yet | – |
-| 4.1 | Hardening Targets | 68, 69 | ⬜ not built yet | – |
-| 4.1 | Securing Wireless and Mobile | 69, 70 | ⬜ not built yet | – |
-| 4.1 | Wireless Security Settings | 70, 71 | ⬜ not built yet | – |
-| 4.1 | Application Security | 71, 72 | ⬜ not built yet | – |
-| 4.2 | Asset Management | 72, 73 | ⬜ not built yet | – |
-| 4.3 | Vulnerability Scanning | 73 | ⬜ not built yet | – |
-| 4.3 | Threat Intelligence | 74 | ⬜ not built yet | – |
-| 4.3 | Penetration Testing | 74, 75 | ⬜ not built yet | – |
-| 4.3 | Analyzing Vulnerabilities | 75, 76 | ⬜ not built yet | – |
-| 4.3 | Vulnerability Remediation | 76, 77 | ⬜ not built yet | – |
-| 4.4 | Security Monitoring | 77, 78 | ⬜ not built yet | – |
-| 4.4 | Security Tools | 78, 79 | ⬜ not built yet | – |
-| 4.5 | Firewalls | 79, 80 | ⬜ not built yet | – |
-| 4.5 | Web Filtering | 80, 81 | ⬜ not built yet | – |
-| 4.5 | Operating System Security | 81 | ⬜ not built yet | – |
-| 4.5 | Secure Protocols | 81, 82 | ⬜ not built yet | – |
-| 4.5 | Email Security | 82 | ⬜ not built yet | – |
-| 4.5 | Monitoring Data | 82, 83 | ⬜ not built yet | – |
-| 4.5 | Endpoint Security | 83, 84 | ⬜ not built yet | – |
-| 4.6 | Identity and Access Management | 84, 85 | ⬜ not built yet | – |
-| 4.6 | Access Controls | 86 | ⬜ not built yet | – |
-| 4.6 | Multifactor Authentication | 87 | ⬜ not built yet | – |
-| 4.6 | Password Security | 87, 88 | ⬜ not built yet | – |
-| 4.7 | Scripting and Automation | 88, 89 | ⬜ not built yet | – |
-| 4.8 | Incident Response | 89, 90 | ⬜ not built yet | – |
-| 4.8 | Incident Planning | 90 | ⬜ not built yet | – |
-| 4.8 | Digital Forensics | 91 | ⬜ not built yet | – |
-| 4.9 | Log Data | 92, 93 | ⬜ not built yet | – |
+| 4.1 | Secure Baselines | 68 | ✅ built | 4 |
+| 4.1 | Hardening Targets | 68, 69 | ✅ built | 5 |
+| 4.1 | Securing Wireless and Mobile | 69, 70 | ✅ built | 5 |
+| 4.1 | Wireless Security Settings | 70, 71 | ✅ built | 6 |
+| 4.1 | Application Security | 71, 72 | ✅ built | 5 |
+| 4.2 | Asset Management | 72, 73 | ✅ built | 5 |
+| 4.3 | Vulnerability Scanning | 73 | ✅ built | 4 |
+| 4.3 | Threat Intelligence | 74 | ✅ built | 3 |
+| 4.3 | Penetration Testing | 74, 75 | ✅ built | 5 |
+| 4.3 | Analyzing Vulnerabilities | 75, 76 | ✅ built | 5 |
+| 4.3 | Vulnerability Remediation | 76, 77 | ✅ built | 5 |
+| 4.4 | Security Monitoring | 77, 78 | ✅ built | 5 |
+| 4.4 | Security Tools | 78, 79 | ✅ built | 5 |
+| 4.5 | Firewalls | 79, 80 | ✅ built | 5 |
+| 4.5 | Web Filtering | 80, 81 | ✅ built | 4 |
+| 4.5 | Operating System Security | 81 | ✅ built | 3 |
+| 4.5 | Secure Protocols | 81, 82 | ✅ built | 5 |
+| 4.5 | Email Security | 82 | ✅ built | 4 |
+| 4.5 | Monitoring Data | 82, 83 | ✅ built | 5 |
+| 4.5 | Endpoint Security | 83, 84 | ✅ built | 6 |
+| 4.6 | Identity and Access Management | 84, 85 | ✅ built | 6 |
+| 4.6 | Access Controls | 86 | ✅ built | 4 |
+| 4.6 | Multifactor Authentication | 87 | ✅ built | 4 |
+| 4.6 | Password Security | 87, 88 | ✅ built | 5 |
+| 4.7 | Scripting and Automation | 88, 89 | ✅ built | 4 |
+| 4.8 | Incident Response | 89, 90 | ✅ built | 6 |
+| 4.8 | Incident Planning | 90 | ✅ built | 4 |
+| 4.8 | Digital Forensics | 91 | ✅ built | 5 |
+| 4.9 | Log Data | 92, 93 | ✅ built | 5 |
 
 ## 5.0 Security Program Management and Oversight (20%), PDF 93–105 [84–96]: not built yet
 
@@ -149,7 +149,7 @@ Page numbers are PDF pages, with printed page numbers in brackets (printed = PDF
 | 5.6 | Security Awareness | 104 | ⬜ not built yet | – |
 | 5.6 | User Training | 105 | ⬜ not built yet | – |
 
-**Sections built: 74 of 120.** Activities: 294. Glossary terms: 161.
+**Sections built: 103 of 120.** Activities: 431. Glossary terms: 213.
 
 ## Flags and unclear material
 
@@ -173,4 +173,9 @@ Page numbers are PDF pages, with printed page numbers in brackets (printed = PDF
 - 'Recovery testing' is both its own section (PDF 66) and a sub-heading inside Backups (PDF 67). The app treats the section as the main topic. (PDF 66, 67)
 - These Domain 3 pages contain diagrams. Labels were read from the text layer, and pages 52 and 56 were also checked as rendered images. (PDF 52, 54, 56, 57, 58, 61)
 - The IPS page's text layer contains stray fragments ('1', '(explicit)') from a diagram. They aren't separate topics. (PDF 57)
-- Domains 4-5: text was extracted and mapped to sections, but not yet read in detail or turned into lessons. The headings listed in the coverage view were extracted automatically and may miss diagram-only content. (PDF 68, 105)
+- Domain 4 repeats several blocks word for word: Static code analyzers (PDF 72 and 73), Vulnerability scanners (PDF 73 and 79), Data Loss Prevention (PDF 79 and 82), and Security incidents (PDF 89, repeated again on PDF 93 under 5.1). Each is taught in the topic for its section, with different questions. (PDF 72, 73, 79, 82, 89)
+- Hardening Targets (PDF 69) repeats SCADA/ICS, RTOS and embedded systems from 3.1, and Wireless Security Settings (PDF 71) repeats the AAA framework from 1.2. The Domain 4 topics ask about them from a hardening and wireless angle. (PDF 69, 71)
+- Secure Protocols has a table only in image form (Telnet/SSH, HTTP/HTTPS, IMAP/IMAPS, FTP/SFTP). It was read from the rendered page and turned into a match activity. Apart from this table, PDF 68-105 has no diagrams. (PDF 81)
+- Time-of-day restrictions: the example 'R&D databases are only after between 8 AM and 6 PM' looks garbled. It probably means they're only available between 8 AM and 6 PM. The app doesn't quiz on it. (PDF 86)
+- Incident Response: the precursor bullets ('An incident might occur in the future', web server log, exploit announcement, direct threats) sit under 'The challenge of detection' with no heading of their own. The app calls them precursors, the word the notes use on PDF 90. (PDF 89)
+- Domain 5: text was extracted and mapped to sections, but not yet read in detail or turned into lessons. (PDF 93, 105)
