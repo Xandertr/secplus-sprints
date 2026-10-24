@@ -70,28 +70,28 @@ Page numbers are PDF pages, with printed page numbers in brackets (printed = PDF
 | 2.5 | Mitigation Techniques | 50 | ✅ built | 4 |
 | 2.5 | Hardening Techniques | 50, 51 | ✅ built | 5 |
 
-## 3.0 Security Architecture (18%), PDF 51–67 [42–58]: not built yet
+## 3.0 Security Architecture (18%), PDF 51–67 [42–58]: BUILT
 
 | Obj. | Section | PDF pages | Status | Activities |
 |---|---|---|---|---|
-| 3.1 | Cloud Infrastructures | 51, 52 | ⬜ not built yet | – |
-| 3.1 | Network Infrastructure Concepts | 53 | ⬜ not built yet | – |
-| 3.1 | Other Infrastructure Concepts | 53, 54 | ⬜ not built yet | – |
-| 3.1 | Infrastructure Considerations | 54, 55 | ⬜ not built yet | – |
-| 3.2 | Secure Infrastructures | 56 | ⬜ not built yet | – |
-| 3.2 | Intrusion Prevention | 57 | ⬜ not built yet | – |
-| 3.2 | Network Appliances | 57, 58, 59 | ⬜ not built yet | – |
-| 3.2 | Port Security | 59 | ⬜ not built yet | – |
-| 3.2 | Firewall Types | 59, 60 | ⬜ not built yet | – |
-| 3.2 | Secure Communication | 60, 61 | ⬜ not built yet | – |
-| 3.3 | Data Types and Classifications | 62 | ⬜ not built yet | – |
-| 3.3 | States of Data | 62, 63 | ⬜ not built yet | – |
-| 3.3 | Protecting Data | 63, 64 | ⬜ not built yet | – |
-| 3.4 | Resiliency | 64, 65 | ⬜ not built yet | – |
-| 3.4 | Capacity Planning | 65 | ⬜ not built yet | – |
-| 3.4 | Recovery Testing | 66 | ⬜ not built yet | – |
-| 3.4 | Backups | 66, 67 | ⬜ not built yet | – |
-| 3.4 | Power Resiliency | 67 | ⬜ not built yet | – |
+| 3.1 | Cloud Infrastructures | 51, 52 | ✅ built | 6 |
+| 3.1 | Network Infrastructure Concepts | 53 | ✅ built | 4 |
+| 3.1 | Other Infrastructure Concepts | 53, 54 | ✅ built | 5 |
+| 3.1 | Infrastructure Considerations | 54, 55 | ✅ built | 5 |
+| 3.2 | Secure Infrastructures | 56 | ✅ built | 4 |
+| 3.2 | Intrusion Prevention | 57 | ✅ built | 4 |
+| 3.2 | Network Appliances | 57, 58, 59 | ✅ built | 6 |
+| 3.2 | Port Security | 59 | ✅ built | 3 |
+| 3.2 | Firewall Types | 59, 60 | ✅ built | 4 |
+| 3.2 | Secure Communication | 60, 61 | ✅ built | 4 |
+| 3.3 | Data Types and Classifications | 62 | ✅ built | 4 |
+| 3.3 | States of Data | 62, 63 | ✅ built | 4 |
+| 3.3 | Protecting Data | 63, 64 | ✅ built | 4 |
+| 3.4 | Resiliency | 64, 65 | ✅ built | 6 |
+| 3.4 | Capacity Planning | 65 | ✅ built | 3 |
+| 3.4 | Recovery Testing | 66 | ✅ built | 3 |
+| 3.4 | Backups | 66, 67 | ✅ built | 5 |
+| 3.4 | Power Resiliency | 67 | ✅ built | 3 |
 
 ## 4.0 Security Operations (28%), PDF 68–93 [59–84]: not built yet
 
@@ -149,7 +149,7 @@ Page numbers are PDF pages, with printed page numbers in brackets (printed = PDF
 | 5.6 | Security Awareness | 104 | ⬜ not built yet | – |
 | 5.6 | User Training | 105 | ⬜ not built yet | – |
 
-**Sections built: 56 of 120.** Activities: 217. Glossary terms: 136.
+**Sections built: 74 of 120.** Activities: 294. Glossary terms: 161.
 
 ## Flags and unclear material
 
@@ -167,4 +167,10 @@ Page numbers are PDF pages, with printed page numbers in brackets (printed = PDF
 - Password Attacks: 'A hash example' (SHA-256) and the brute force bullet 'The hash:' have no hash value shown in the text layer or the rendered page. The app doesn't invent an example hash. (PDF 48)
 - Mitigation Techniques says auto-update is 'not always the best option' without saying why. The recall card offers a likely reason from the OS vulnerabilities page (patches can break things) and says so. (PDF 50)
 - PDF 51 holds the end of 2.5 Hardening Techniques and the start of 3.1 Cloud Infrastructures. Domain 2 activities only use its 2.5 content. (PDF 51)
-- Domains 3-5: text was extracted and mapped to sections, but not yet read in detail or turned into lessons. The headings listed in the coverage view were extracted automatically and may miss diagram-only content. (PDF 52, 105)
+- PDF 51 starts 3.1 Cloud Infrastructures. The shared responsibility matrix on PDF 52 is a diagram, read as a rendered image: in SaaS the customer manages data, devices and accounts, and identity is shared; PaaS also shares applications and network controls; in IaaS the customer manages everything from the OS up. (PDF 51, 52)
+- The High availability bullets appear twice, in 3.1 Other Infrastructure Concepts (PDF 54) and 3.4 Resiliency (PDF 64). The app teaches them in both topics. (PDF 54, 64)
+- 3.3 Protecting Data repeats the hashing, masking and tokenization material from 1.4. The app gives it fresh questions with a data-protection angle rather than duplicating Domain 1's. (PDF 63, 64)
+- 'Recovery testing' is both its own section (PDF 66) and a sub-heading inside Backups (PDF 67). The app treats the section as the main topic. (PDF 66, 67)
+- These Domain 3 pages contain diagrams. Labels were read from the text layer, and pages 52 and 56 were also checked as rendered images. (PDF 52, 54, 56, 57, 58, 61)
+- The IPS page's text layer contains stray fragments ('1', '(explicit)') from a diagram. They aren't separate topics. (PDF 57)
+- Domains 4-5: text was extracted and mapped to sections, but not yet read in detail or turned into lessons. The headings listed in the coverage view were extracted automatically and may miss diagram-only content. (PDF 68, 105)

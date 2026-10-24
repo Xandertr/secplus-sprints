@@ -24,7 +24,7 @@ window.SECPLUS.source = {
     "107": "Back cover (image)"
   },
   // Pages read in detail, including rendered diagram images, to write built content.
-  deepRead: { d1: [10, 26], d2: [27, 51] },
+  deepRead: { d1: [10, 26], d2: [27, 51], d3: [51, 67] },
   flags: [
     { pages: [5, 8], text: "Domain names differ inside the notes. The table of contents says '4.0 - Operations and Incident Response' and '5.0 - Governance, Risk, and Compliance'. The introduction (PDF p.8) says 'Security Operations' and 'Security Program Management and Oversight'. This app uses the introduction's names." },
     { pages: [8], text: "Domain weights (12/22/18/28/20%) come from the introduction. The notes point to CompTIA's official objectives for the full list. The app hasn't checked against that external document." },
@@ -40,7 +40,13 @@ window.SECPLUS.source = {
     { pages: [48], text: "Password Attacks: 'A hash example' (SHA-256) and the brute force bullet 'The hash:' have no hash value shown in the text layer or the rendered page. The app doesn't invent an example hash." },
     { pages: [50], text: "Mitigation Techniques says auto-update is 'not always the best option' without saying why. The recall card offers a likely reason from the OS vulnerabilities page (patches can break things) and says so." },
     { pages: [51], text: "PDF 51 holds the end of 2.5 Hardening Techniques and the start of 3.1 Cloud Infrastructures. Domain 2 activities only use its 2.5 content." },
-    { pages: [52, 105], text: "Domains 3-5: text was extracted and mapped to sections, but not yet read in detail or turned into lessons. The headings listed in the coverage view were extracted automatically and may miss diagram-only content." }
+    { pages: [51, 52], text: "PDF 51 starts 3.1 Cloud Infrastructures. The shared responsibility matrix on PDF 52 is a diagram, read as a rendered image: in SaaS the customer manages data, devices and accounts, and identity is shared; PaaS also shares applications and network controls; in IaaS the customer manages everything from the OS up." },
+    { pages: [54, 64], text: "The High availability bullets appear twice, in 3.1 Other Infrastructure Concepts (PDF 54) and 3.4 Resiliency (PDF 64). The app teaches them in both topics." },
+    { pages: [63, 64], text: "3.3 Protecting Data repeats the hashing, masking and tokenization material from 1.4. The app gives it fresh questions with a data-protection angle rather than duplicating Domain 1's." },
+    { pages: [66, 67], text: "'Recovery testing' is both its own section (PDF 66) and a sub-heading inside Backups (PDF 67). The app treats the section as the main topic." },
+    { pages: [52, 54, 56, 57, 58, 61], text: "These Domain 3 pages contain diagrams. Labels were read from the text layer, and pages 52 and 56 were also checked as rendered images." },
+    { pages: [57], text: "The IPS page's text layer contains stray fragments ('1', '(explicit)') from a diagram. They aren't separate topics." },
+    { pages: [68, 105], text: "Domains 4-5: text was extracted and mapped to sections, but not yet read in detail or turned into lessons. The headings listed in the coverage view were extracted automatically and may miss diagram-only content." }
   ],
   // Sub-headings whose content is taught under different words. tests/coverage.test.js checks
   // that every taughtAs term really appears in that section's topic.
