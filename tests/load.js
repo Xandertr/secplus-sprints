@@ -2,7 +2,7 @@
 const path = require("path");
 module.exports = function load() {
   global.window = {};
-  for (const f of ["map.js", "notes.js", "glossary.js", "domain1.js", "domain2.js", "domain3.js", "domain4.js"]) {
+  for (const f of ["map.js", "notes.js", "glossary.js", "domain1.js", "domain2.js", "domain3.js", "domain4.js", "domain5.js"]) {
     const p = path.join(__dirname, "..", "content", f);
     delete require.cache[require.resolve(p)];
     require(p);

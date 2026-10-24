@@ -180,7 +180,7 @@ const log = (...a) => console.log("✓", ...a);
   await page.click('[data-action="pause"]');
 
   // 8. Library, topic, coverage, glossary, progress pages (mobile: no horizontal scroll)
-  for (const [route, text, shot] of [["library", "Not built yet", "07-library"], ["topic/d1-zerotrust", "Practice this topic", "08-topic"], ["coverage", "Flags and unclear spots", "09-coverage"], ["progress", "isn't a readiness score", "10-progress"], ["settings", "lives only in this browser", "11-settings"]]) {
+  for (const [route, text, shot] of [["library", "5.0 Security Program Management", "07-library"], ["topic/d1-zerotrust", "Practice this topic", "08-topic"], ["coverage", "Flags and unclear spots", "09-coverage"], ["progress", "isn't a readiness score", "10-progress"], ["settings", "lives only in this browser", "11-settings"]]) {
     await page.goto(URL_ + "#/" + route);
     await page.waitForSelector(`text=${text}`);
     await noHScroll(route);

@@ -19,4 +19,10 @@ for p in range(10, 106):
             continue
         if l in heads and l not in res[p]:
             res[p][l] = cur
+# Two-column pages whose text layer runs out of order, checked against the rendered page.
+OVERRIDES = {
+    98: {"Risk reporting": "5.2 Risk Management Strategies"},
+}
+for p, fix in OVERRIDES.items():
+    res[p].update(fix)
 json.dump(res, open(out, "w"), ensure_ascii=False, indent=0)

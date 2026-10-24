@@ -296,7 +296,7 @@ window.SECPLUS = window.SECPLUS || {};
             { t: "It sends the PSK across the network in encrypted form", why: "SAE creates a shared session key without sending it across the network." },
             { t: "It removes authentication so guests can join faster", why: "SAE adds mutual authentication." },
             { t: "Mutual authentication and a different session key per user, with no hash to brute force", ok: true, why: "A Diffie-Hellman derived exchange: the dragonfly handshake." },
-            { t: "It switches encryption from AES to RC4", why: "WPA3's GCMP uses AES." }
+            { t: "It keeps the four-way handshake but uses a longer pre-shared key so brute force takes more time", why: "SAE removes the four-way handshake entirely, so there's no captured hash to brute force." }
           ],
           hint: "Dragonfly, Diffie-Hellman.",
           explain: "SAE means no four-way handshake, no hashes, and no offline brute force.",
@@ -380,7 +380,7 @@ window.SECPLUS = window.SECPLUS || {};
             { t: "Input validation that checks and normalizes the expected format", ok: true, why: "Validate actual vs. expected input and fix improper data." },
             { t: "Code signing for the form's JavaScript", why: "Signing proves origin, not that input is valid." },
             { t: "A Secure attribute on the session cookie", why: "That protects the cookie in transit, not form input." },
-            { t: "A larger database column to fit whatever arrives", why: "That accepts bad input instead of rejecting it." }
+            { t: "Accept any input and clean it up later in a nightly batch job, so users are never blocked at signup", why: "That accepts bad input instead of rejecting it." }
           ],
           hint: "Actual vs. expected.",
           explain: "Document inputs, validate and normalize them, and assume fuzzers will test what you skipped.",
@@ -572,7 +572,7 @@ window.SECPLUS = window.SECPLUS || {};
           options: [
             { t: "Confirm it's from a trusted source with no added malware or embedded vulnerabilities", ok: true, why: "Package monitoring protects supply chain integrity." },
             { t: "Deploy it and wait for user bug reports", why: "Verify the contents before deployment." },
-            { t: "Fuzz the package manager instead", why: "The concern is the package's legitimacy." },
+            { t: "Deploy it now and rely on the next quarterly vulnerability scan to catch any problem in the package", why: "Confirm a safe package before deployment, not after." },
             { t: "Remove all tests that use it", why: "That hides problems instead of checking the package." }
           ],
           hint: "Supply chain.",
@@ -841,7 +841,7 @@ window.SECPLUS = window.SECPLUS || {};
           prompt: "A vulnerable service can't be patched for three weeks. Which response is a compensating control?",
           options: [
             { t: "Disable the problematic service or limit external access until the patch", ok: true, why: "These provide coverage until a patch is deployed." },
-            { t: "Mark the finding as a false positive", why: "It's a real vulnerability." },
+            { t: "Mark the finding as a false positive so it stops appearing in reports until the patch is ready", why: "It's a real vulnerability." },
             { t: "Wait three weeks and do nothing", why: "Compensating controls exist so you don't wait unprotected." },
             { t: "Buy insurance and consider it remediated", why: "Insurance transfers some cost but doesn't cover the gap." }
           ],
@@ -937,7 +937,7 @@ window.SECPLUS = window.SECPLUS || {};
           prompt: "Why do the notes recommend archiving security data for an extended period?",
           options: [
             { t: "Because dashboards only show the last hour", why: "Not the reason given." },
-            { t: "To make SIEM correlation faster", why: "Not the reason given." },
+            { t: "Because a SIEM can only correlate events once they are at least a year old and fully archived", why: "Not the reason given." },
             { t: "Breaches take about nine months on average to identify and contain", ok: true, why: "You'll need old data during that long investigation." },
             { t: "So alerts can be sent by SMS", why: "Unrelated to archiving." }
           ],
@@ -1211,7 +1211,7 @@ window.SECPLUS = window.SECPLUS || {};
             { t: "Explicit proxies encrypt everything; transparent ones don't", why: "That's not the distinction." },
             { t: "Applications must be configured for an explicit proxy; a transparent proxy is invisible to them", ok: true, why: "That's how the notes define them." },
             { t: "Transparent proxies can't cache content", why: "Caching is a general proxy feature." },
-            { t: "There is no difference", why: "The notes distinguish them." }
+            { t: "A transparent proxy must be configured in every application, while an explicit proxy is invisible to the apps", why: "Reversed: explicit proxies need app configuration; transparent ones are invisible." }
           ],
           hint: "Does the app know the proxy is there?",
           explain: "Explicit: the app knows. Transparent: the app doesn't.",
@@ -1306,7 +1306,7 @@ window.SECPLUS = window.SECPLUS || {};
           options: [
             { t: "Accept it, because 443 always means HTTPS", why: "The port number doesn't guarantee security." },
             { t: "Confirm the security features are enabled, using a packet capture if needed", ok: true, why: "Verify, don't assume." },
-            { t: "Move it to port 80", why: "Port 80 is in-the-clear HTTP." },
+            { t: "Move it to port 80, since traffic on the standard HTTP port is easier for the firewall to inspect", why: "Port 80 is in-the-clear HTTP, which makes things worse." },
             { t: "Disable the firewall to test it", why: "That isn't a verification step." }
           ],
           hint: "Trust the capture, not the number.",
@@ -1483,7 +1483,7 @@ window.SECPLUS = window.SECPLUS || {};
           id: "d4-monitordata-a3", type: "choice", format: "Compare",
           prompt: "What lesson does the notes' Boeing spreadsheet incident teach?",
           options: [
-            { t: "Hidden spreadsheet columns are safe to email", why: "That's exactly what leaked." },
+            { t: "Hidden spreadsheet columns are safe to email because recipients can't see them when the file opens", why: "That's exactly what leaked." },
             { t: "Having DLP software doesn't help if it isn't applied to the email that leaks", ok: true, why: "Boeing only used its DLP for classified work." },
             { t: "USB drives are the only real DLP risk", why: "This leak was by email." },
             { t: "DLP only matters for classified data", why: "Personal data of 36,000 employees leaked." }
@@ -1556,7 +1556,7 @@ window.SECPLUS = window.SECPLUS || {};
           options: [
             { t: "Give it full access but log the failure", why: "It's too dangerous to allow access." },
             { t: "Put it on a quarantine network with just enough access to fix it, then reassess", ok: true, why: "That's the notes' flow." },
-            { t: "Permanently ban the contractor", why: "The notes say fix it and try again." },
+            { t: "Allow full access, since contractors are covered by the vendor's own security policies anyway", why: "A failed assessment means it's too dangerous to allow access." },
             { t: "Turn off the posture check for contractors", why: "That removes the control." }
           ],
           hint: "Fix it, then try again.",
@@ -1569,7 +1569,7 @@ window.SECPLUS = window.SECPLUS || {};
           options: [
             { t: "It removes the endpoint agent entirely", why: "XDR still uses endpoint data." },
             { t: "It relies only on signatures", why: "EDR already moved beyond signatures." },
-            { t: "It turns off automatic response", why: "Not what XDR does." },
+            { t: "It replaces endpoint agents with yearly manual audits of every laptop, server and phone", why: "Not what XDR does." },
             { t: "Network-based detection and correlation of endpoint, network and cloud data", ok: true, why: "Attacks involve more than the endpoint." }
           ],
           hint: "Extended beyond the endpoint.",
@@ -1637,7 +1637,7 @@ window.SECPLUS = window.SECPLUS || {};
             { t: "OAuth is an authentication protocol that replaces passwords", why: "The notes stress it's not an authentication protocol." },
             { t: "OAuth handles authorization between applications; OpenID Connect handles authentication", ok: true, why: "That's the split in the notes." },
             { t: "OAuth was designed by the ITU for X.500 directories", why: "That's X.500. OAuth came from Twitter, Google and others." },
-            { t: "OAuth only works inside a single company", why: "It's widely used across the industry." }
+            { t: "OAuth only works inside a single company, so federation with partners always needs SAML instead", why: "It's widely used across the industry." }
           ],
           hint: "OAuth = authorization.",
           explain: "OAuth decides what an app may access. OpenID Connect proves who you are.",
@@ -2043,7 +2043,7 @@ window.SECPLUS = window.SECPLUS || {};
           prompt: "Your web server logs show a vulnerability scanner probing your site, but nothing has been exploited. What is this?",
           options: [
             { t: "A precursor: a heads-up that an incident might occur", ok: true, why: "The notes list scanner activity in web logs as a heads-up." },
-            { t: "Proof of a successful breach", why: "Nothing was exploited yet." },
+            { t: "Proof of a successful breach that must be contained right away", why: "Nothing was exploited yet." },
             { t: "A false negative", why: "It was detected." },
             { t: "Post-incident activity", why: "There's been no incident yet." }
           ],
@@ -2055,7 +2055,7 @@ window.SECPLUS = window.SECPLUS || {};
           id: "d4-ir-a3", type: "choice", format: "Compare",
           prompt: "Why can isolating an infected machine sometimes be risky?",
           options: [
-            { t: "Isolation always spreads the malware further", why: "Not always; usually it contains it." },
+            { t: "Isolation always spreads the malware further, because cutting the cable forces it onto Wi-Fi networks", why: "Not always; usually it contains it." },
             { t: "Some malware monitors connectivity and destroys or encrypts data when it's cut off", ok: true, why: "The notes warn about this." },
             { t: "Sandboxes can't run malware", why: "Running malware safely is what sandboxes are for." },
             { t: "NIST forbids isolation", why: "Containment is part of the lifecycle." }
@@ -2196,7 +2196,7 @@ window.SECPLUS = window.SECPLUS || {};
           prompt: "A laptop with suspected malware is still running, and its disk is encrypted. Why might investigators collect data before powering it off?",
           options: [
             { t: "Data may be encrypted or difficult to collect after powering down", ok: true, why: "That's why live collection is an important skill." },
-            { t: "Powering off is always illegal", why: "Not the reason." },
+            { t: "Powering off the laptop would automatically void the chain of custody for every file on it", why: "Not the reason." },
             { t: "RAM contents are written to disk at shutdown", why: "Memory contents are lost, not saved." },
             { t: "Chain of custody only starts after shutdown", why: "Chain of custody covers all handling." }
           ],
@@ -2235,7 +2235,7 @@ window.SECPLUS = window.SECPLUS || {};
           prompt: "Why do forensic analysts work from copies of evidence?",
           options: [
             { t: "So the original can be analyzed later without any alterations", ok: true, why: "Preservation protects the original." },
-            { t: "Because copies are always faster to read", why: "Speed isn't the reason given." },
+            { t: "Because copies are always faster to read and courts prefer evidence that has been converted", why: "Speed isn't the reason given." },
             { t: "Because originals can't be hashed", why: "Originals can be hashed." },
             { t: "To skip the chain of custody", why: "Copies don't remove that requirement." }
           ],

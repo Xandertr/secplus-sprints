@@ -127,29 +127,29 @@ Page numbers are PDF pages, with printed page numbers in brackets (printed = PDF
 | 4.8 | Digital Forensics | 91 | ✅ built | 5 |
 | 4.9 | Log Data | 92, 93 | ✅ built | 5 |
 
-## 5.0 Security Program Management and Oversight (20%), PDF 93–105 [84–96]: not built yet
+## 5.0 Security Program Management and Oversight (20%), PDF 93–105 [84–96]: BUILT
 
 | Obj. | Section | PDF pages | Status | Activities |
 |---|---|---|---|---|
-| 5.1 | Security Policies | 93, 94 | ⬜ not built yet | – |
-| 5.1 | Security Standards | 94 | ⬜ not built yet | – |
-| 5.1 | Security Procedures | 95 | ⬜ not built yet | – |
-| 5.1 | Security Considerations | 96 | ⬜ not built yet | – |
-| 5.1 | Data Roles and Responsibilities | 96 | ⬜ not built yet | – |
-| 5.2 | Risk Management | 97 | ⬜ not built yet | – |
-| 5.2 | Risk Analysis | 97, 98 | ⬜ not built yet | – |
-| 5.2 | Risk Management Strategies | 98 | ⬜ not built yet | – |
-| 5.2 | Business Impact Analysis | 98 | ⬜ not built yet | – |
-| 5.3 | Third-party Risk Assessment | 99, 100 | ⬜ not built yet | – |
-| 5.3 | Agreement Types | 100 | ⬜ not built yet | – |
-| 5.4 | Compliance | 101 | ⬜ not built yet | – |
-| 5.4 | Privacy | 102 | ⬜ not built yet | – |
-| 5.5 | Audits and Assessments | 102, 103 | ⬜ not built yet | – |
-| 5.5 | Penetration Tests | 103 | ⬜ not built yet | – |
-| 5.6 | Security Awareness | 104 | ⬜ not built yet | – |
-| 5.6 | User Training | 105 | ⬜ not built yet | – |
+| 5.1 | Security Policies | 93, 94 | ✅ built | 5 |
+| 5.1 | Security Standards | 94 | ✅ built | 3 |
+| 5.1 | Security Procedures | 95 | ✅ built | 5 |
+| 5.1 | Security Considerations | 96 | ✅ built | 3 |
+| 5.1 | Data Roles and Responsibilities | 96 | ✅ built | 3 |
+| 5.2 | Risk Management | 97 | ✅ built | 3 |
+| 5.2 | Risk Analysis | 97, 98 | ✅ built | 6 |
+| 5.2 | Risk Management Strategies | 98 | ✅ built | 4 |
+| 5.2 | Business Impact Analysis | 98 | ✅ built | 4 |
+| 5.3 | Third-party Risk Assessment | 99, 100 | ✅ built | 5 |
+| 5.3 | Agreement Types | 100 | ✅ built | 4 |
+| 5.4 | Compliance | 101 | ✅ built | 5 |
+| 5.4 | Privacy | 102 | ✅ built | 4 |
+| 5.5 | Audits and Assessments | 102, 103 | ✅ built | 3 |
+| 5.5 | Penetration Tests | 103 | ✅ built | 4 |
+| 5.6 | Security Awareness | 104 | ✅ built | 4 |
+| 5.6 | User Training | 105 | ✅ built | 4 |
 
-**Sections built: 103 of 120.** Activities: 431. Glossary terms: 213.
+**Sections built: 120 of 120.** Activities: 500. Glossary terms: 243.
 
 ## Flags and unclear material
 
@@ -178,4 +178,6 @@ Page numbers are PDF pages, with printed page numbers in brackets (printed = PDF
 - Secure Protocols has a table only in image form (Telnet/SSH, HTTP/HTTPS, IMAP/IMAPS, FTP/SFTP). It was read from the rendered page and turned into a match activity. Apart from this table, PDF 68-105 has no diagrams. (PDF 81)
 - Time-of-day restrictions: the example 'R&D databases are only after between 8 AM and 6 PM' looks garbled. It probably means they're only available between 8 AM and 6 PM. The app doesn't quiz on it. (PDF 86)
 - Incident Response: the precursor bullets ('An incident might occur in the future', web server log, exploit announcement, direct threats) sit under 'The challenge of detection' with no heading of their own. The app calls them precursors, the word the notes use on PDF 90. (PDF 89)
-- Domain 5: text was extracted and mapped to sections, but not yet read in detail or turned into lessons. (PDF 93, 105)
+- Risk Management Strategies and Business Impact Analysis share a two-column page, and the text layer puts Avoid, Mitigate and Risk reporting after the Business Impact Analysis heading. The rendered page shows they belong to Risk Management Strategies, which is how the app teaches them (and how the coverage check maps them). (PDF 98)
+- HIPAA non-compliance fines: the notes label the civil fines tier 'Class 3 Felony', which looks inconsistent with it being a civil penalty. The app mentions the fine amounts only as the notes' figures and doesn't quiz on the felony classes. (PDF 101)
+- Domain 5 repeats several blocks from elsewhere: Security incidents and NIST SP800-61 (from 4.8), Change management (PDF 94 and 95), penetration testing and rules of engagement (from 4.3, on PDF 99-100), SOX and HIPAA (PDF 96 and 101), and data responsibilities and roles (PDF 96 and 102). Each is taught once in depth and mentioned where it repeats. (PDF 93, 94, 95, 96, 99, 100, 101, 102)

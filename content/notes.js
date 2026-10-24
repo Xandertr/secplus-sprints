@@ -24,7 +24,7 @@ window.SECPLUS.source = {
     "107": "Back cover (image)"
   },
   // Pages read in detail, including rendered diagram images, to write built content.
-  deepRead: { d1: [10, 26], d2: [27, 51], d3: [51, 67], d4: [68, 93] },
+  deepRead: { d1: [10, 26], d2: [27, 51], d3: [51, 67], d4: [68, 93], d5: [93, 105] },
   flags: [
     { pages: [5, 8], text: "Domain names differ inside the notes. The table of contents says '4.0 - Operations and Incident Response' and '5.0 - Governance, Risk, and Compliance'. The introduction (PDF p.8) says 'Security Operations' and 'Security Program Management and Oversight'. This app uses the introduction's names." },
     { pages: [8], text: "Domain weights (12/22/18/28/20%) come from the introduction. The notes point to CompTIA's official objectives for the full list. The app hasn't checked against that external document." },
@@ -51,7 +51,9 @@ window.SECPLUS.source = {
     { pages: [81], text: "Secure Protocols has a table only in image form (Telnet/SSH, HTTP/HTTPS, IMAP/IMAPS, FTP/SFTP). It was read from the rendered page and turned into a match activity. Apart from this table, PDF 68-105 has no diagrams." },
     { pages: [86], text: "Time-of-day restrictions: the example 'R&D databases are only after between 8 AM and 6 PM' looks garbled. It probably means they're only available between 8 AM and 6 PM. The app doesn't quiz on it." },
     { pages: [89], text: "Incident Response: the precursor bullets ('An incident might occur in the future', web server log, exploit announcement, direct threats) sit under 'The challenge of detection' with no heading of their own. The app calls them precursors, the word the notes use on PDF 90." },
-    { pages: [93, 105], text: "Domain 5: text was extracted and mapped to sections, but not yet read in detail or turned into lessons." }
+    { pages: [98], text: "Risk Management Strategies and Business Impact Analysis share a two-column page, and the text layer puts Avoid, Mitigate and Risk reporting after the Business Impact Analysis heading. The rendered page shows they belong to Risk Management Strategies, which is how the app teaches them (and how the coverage check maps them)." },
+    { pages: [101], text: "HIPAA non-compliance fines: the notes label the civil fines tier 'Class 3 Felony', which looks inconsistent with it being a civil penalty. The app mentions the fine amounts only as the notes' figures and doesn't quiz on the felony classes." },
+    { pages: [93, 94, 95, 96, 99, 100, 101, 102], text: "Domain 5 repeats several blocks from elsewhere: Security incidents and NIST SP800-61 (from 4.8), Change management (PDF 94 and 95), penetration testing and rules of engagement (from 4.3, on PDF 99-100), SOX and HIPAA (PDF 96 and 101), and data responsibilities and roles (PDF 96 and 102). Each is taught once in depth and mentioned where it repeats." }
   ],
   // Sub-headings whose content is taught under different words. tests/coverage.test.js checks
   // that every taughtAs term really appears in that section's topic.
