@@ -116,7 +116,7 @@ window.SECPLUS = window.SECPLUS || {};
         ],
         more: [
           "Images: SVG files are XML, so they can carry HTML injection or JavaScript. Browsers need input validation.",
-          "Files: PDFs contain other objects, archives contain many files, Office documents can carry macros and add-ins.",
+          "Files: PDFs contain other objects, archives (ZIP, RAR or any compression type) contain many files, Office documents can carry macros and add-ins.",
           "Voice: vishing, spam over IP, war dialing, call tampering.",
           "USB: gets around the firewall, can infect air-gapped networks, can pose as a keyboard, and can carry data out with zero bandwidth used.",
           "Software: client-based apps need constant updates. Agentless apps run from the server, so a compromised server affects every user.",
